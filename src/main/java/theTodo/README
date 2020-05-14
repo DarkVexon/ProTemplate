@@ -1,1 +1,9 @@
-This is an example template for the more experienced Slay the Spire modder.
+This is an example character template for the more experienced Slay the Spire modder.
+It contains the basics of an empty character, as well as:
+-an improved X cost framework action
+-a card abstract filled with shortcuts (it will also automatically load beta art if you don't have art provided, to prevent crashes!)
+-Strike and Defend examples of abstract
+-a relic abstract that auto-loads images and defaults to a rock to prevent crashes
+-empty relic example
+-an extra damage variable and magicnumber variable (called Silly) for your cards!)
+-TODOs in places you'll need to change stuff
