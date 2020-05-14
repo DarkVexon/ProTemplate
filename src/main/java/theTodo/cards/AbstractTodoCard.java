@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeCardPath;
 
-public abstract class AbstractTodoCard extends CustomCard implements BranchingUpgradesCard {
+public abstract class AbstractTodoCard extends CustomCard {
 
     protected final CardStrings cardStrings;
     protected final String NAME;

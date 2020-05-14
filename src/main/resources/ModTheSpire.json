@@ -6,7 +6,6 @@
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
-  "dependencies": ["basemod", "stslib"],
-  "update_json": "https://api.github.com/repos/DarkVexon/TheBandit/releases/latest"
+  "dependencies": ["basemod", "stslib"]
 }
 

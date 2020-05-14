@@ -23,6 +23,7 @@ public abstract class AbstractTodoRelic extends CustomRelic {
         this.color = color;
 
         String imgName = getBaseImagePath();
+        System.out.println(imgName);
 
         loadImages((TodoMod.getModID() + "Resources/"), imgName);
         if (img == null || outlineImg == null) {
@@ -30,17 +31,14 @@ public abstract class AbstractTodoRelic extends CustomRelic {
         }
     }
 
+    protected String getBaseImagePath() {
+        String id = relicId.replaceFirst(TodoMod.getModID() + ":", "");
+        return id + ".png";
+    }
+
     protected void loadImages(String basePath, String imgName) {
         img = ImageMaster.loadImage(basePath + "images/relics/" + imgName);
         outlineImg = ImageMaster.loadImage(basePath + "images/relics/outline/" + imgName);
-    }
-
-    protected String getBaseImagePath() {
-        String id = relicId.replaceFirst("^" + TodoMod.getModID(), "");
-        char c[] = id.toCharArray();
-        c[0] = Character.toLowerCase(c[0]);
-        id = new String(c);
-        return id + ".png";
     }
 
     protected void att(AbstractGameAction action) {
@@ -53,5 +51,10 @@ public abstract class AbstractTodoRelic extends CustomRelic {
 
     public static String makeID(String blah) {
         return getModID() + ":" + blah;
+    }
+
+    @Override
+    public String getUpdatedDescription() {
+        return DESCRIPTIONS[0];
     }
 }
