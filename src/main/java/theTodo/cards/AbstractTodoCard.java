@@ -1,8 +1,6 @@
 package theTodo.cards;
 
 import basemod.abstracts.CustomCard;
-import com.badlogic.gdx.Gdx;
-import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.BranchingUpgradesCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,16 +17,12 @@ import theTodo.TheTodo;
 
 import java.util.ArrayList;
 
-import static theTodo.TodoMod.getModID;
-import static theTodo.TodoMod.makeCardPath;
+import static theTodo.TodoMod.makeID;
+import static theTodo.util.TextureLoader.getCardTextureString;
 
 public abstract class AbstractTodoCard extends CustomCard {
 
     protected final CardStrings cardStrings;
-    protected final String NAME;
-    protected final String DESCRIPTION;
-    protected final String UPGRADE_DESCRIPTION;
-    protected final String[] EXTENDED_DESCRIPTION;
 
     public int silly;
     public int baseSilly;
@@ -40,48 +34,19 @@ public abstract class AbstractTodoCard extends CustomCard {
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
 
-    public AbstractTodoCard(final String id, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
-        super(id, "ERROR", getCorrectPlaceholderImage(type, id),
-                cost, "ERROR", type, TheTodo.Enums.TODO_COLOR, rarity, target);
-        cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
-        name = NAME = cardStrings.NAME;
-        originalName = NAME;
-        rawDescription = DESCRIPTION = cardStrings.DESCRIPTION;
-        UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-        EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
-        initializeTitle();
-        initializeDescription();
+    public AbstractTodoCard(final String cardname, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
+        this(cardname, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
     }
 
-    public AbstractTodoCard(final String id, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
-        super(id, "ERROR", getCorrectPlaceholderImage(type, id),
+    public AbstractTodoCard(final String cardname, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
+        super(makeID(cardname), "ERROR", getCardTextureString(cardname, type),
                 cost, "ERROR", type, color, rarity, target);
-        cardStrings = CardCrawlGame.languagePack.getCardStrings(id);
-        name = NAME = cardStrings.NAME;
-        originalName = NAME;
-        rawDescription = DESCRIPTION = cardStrings.DESCRIPTION;
-        UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-        EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
+        cardStrings = CardCrawlGame.languagePack.getCardStrings(cardID);
+        rawDescription = cardStrings.DESCRIPTION;
+        originalName = cardStrings.NAME;
+        name = originalName;
         initializeTitle();
         initializeDescription();
-    }
-
-    public static String getCorrectPlaceholderImage(CardType type, String id) {
-        String img = makeCardPath(id.replaceAll((getModID() + ":"), "") + ".png");
-        if ((!Gdx.files.internal(img).exists()))
-            switch (type) {
-                case ATTACK:
-                    return makeCardPath("Attack.png");
-                case SKILL:
-                    return makeCardPath("Skill.png");
-                case POWER:
-                    return makeCardPath("Power.png");
-            }
-        return img;
-    }
-
-    public static String makeID(String blah) {
-        return getModID() + ":" + blah;
     }
 
     @Override
@@ -140,23 +105,15 @@ public abstract class AbstractTodoCard extends CustomCard {
         addToTop(action);
     }
 
-    protected DamageInfo makeInfo() {
-        return makeInfo(damageTypeForTurn);
+    protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
+        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
     }
 
-    private DamageInfo makeInfo(DamageInfo.DamageType type) {
-        return new DamageInfo(AbstractDungeon.player, damage, type);
-    }
-
-    public void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
-        atb(new DamageAction(m, makeInfo(), fx));
-    }
-
-    public void allDmg(AbstractGameAction.AttackEffect fx) {
+    protected void allDmg(AbstractGameAction.AttackEffect fx) {
         atb(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
     }
 
-    public void blck() {
+    protected void blck() {
         atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
     }
 
@@ -164,54 +121,54 @@ public abstract class AbstractTodoCard extends CustomCard {
         atb(new MakeTempCardInHandAction(c, i));
     }
 
-    public void makeInHand(AbstractCard c) {
+    protected void makeInHand(AbstractCard c) {
         makeInHand(c, 1);
     }
 
-    private void shuffleIn(AbstractCard c, int i) {
+    protected void shuffleIn(AbstractCard c, int i) {
         atb(new MakeTempCardInDrawPileAction(c, i, true, true));
     }
 
-    public void shuffleIn(AbstractCard c) {
+    protected void shuffleIn(AbstractCard c) {
         shuffleIn(c, 1);
     }
 
-    public void topDeck(AbstractCard c, int i) {
+    protected void topDeck(AbstractCard c, int i) {
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(c, i, false, true));
     }
 
-    public void topDeck(AbstractCard c) {
+    protected void topDeck(AbstractCard c) {
         topDeck(c, 1);
     }
 
-    public ArrayList<AbstractMonster> monsterList() {
+    protected ArrayList<AbstractMonster> monsterList() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
         monsters.removeIf(AbstractCreature::isDeadOrEscaped);
         return monsters;
     }
 
-    public void applyToEnemy(AbstractMonster m, AbstractPower po) {
+    protected void applyToEnemy(AbstractMonster m, AbstractPower po) {
         atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
     }
 
-    public void applyToSelf(AbstractPower po) {
+    protected void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
+        att(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
+    }
+
+    protected void applyToSelf(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
     }
 
-    WeakPower autoWeak(AbstractMonster m, int i) {
+    protected void applyToSelfTop(AbstractPower po) {
+        att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+    }
+
+    protected WeakPower autoWeak(AbstractMonster m, int i) {
         return new WeakPower(m, i, false);
     }
 
-    VulnerablePower autoVuln(AbstractMonster m, int i) {
+    protected VulnerablePower autoVuln(AbstractMonster m, int i) {
         return new VulnerablePower(m, i, false);
-    }
-
-    public void weaken(AbstractMonster m, int i) {
-        applyToEnemy(m, autoWeak(m, i));
-    }
-
-    public void expose(AbstractMonster m, int i) {
-        applyToEnemy(m, autoVuln(m, i));
     }
 
     public void resetAttributes() {

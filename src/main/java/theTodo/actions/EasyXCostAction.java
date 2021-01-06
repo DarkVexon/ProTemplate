@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.util.function.BiFunction;
 
-public class XCostAction extends AbstractGameAction {
+public class EasyXCostAction extends AbstractGameAction {
     protected int baseValue;
     protected boolean freeToPlayOnce;
     private boolean firstUpdate = true;
@@ -19,13 +19,11 @@ public class XCostAction extends AbstractGameAction {
     public int[] params;
 
     /**
-     *
-     * @param card The card played. Usually should simply be "this".
+     * @param card          The card played. Usually should simply be "this".
      * @param xActionUpdate A BiFunction that receives an integer for the energy amount (includes Chem X) and any number of integer parameters in the form of an array. The return value of this function is isDone.
-     * @param params Any number of integer parameters. These will be passed to the update function to avoid possible value changes between the creation of this action and when it is updated.
+     * @param params        Any number of integer parameters. These will be passed to the update function to avoid possible value changes between the creation of this action and when it is updated.
      */
-    public XCostAction(AbstractCard card, BiFunction<Integer, int[], Boolean> xActionUpdate, int... params)
-    {
+    public EasyXCostAction(AbstractCard card, BiFunction<Integer, int[], Boolean> xActionUpdate, int... params) {
         this.baseValue = card.energyOnUse;
         this.freeToPlayOnce = card.freeToPlayOnce;
         this.xActionUpdate = xActionUpdate;
@@ -35,8 +33,7 @@ public class XCostAction extends AbstractGameAction {
 
     @Override
     public void update() {
-        if (firstUpdate)
-        {
+        if (firstUpdate) {
             effect = EnergyPanel.totalCount;
             if (this.baseValue != -1) {
                 effect = this.baseValue;
@@ -53,9 +50,7 @@ public class XCostAction extends AbstractGameAction {
             if (!this.freeToPlayOnce) {
                 AbstractDungeon.player.energy.use(EnergyPanel.totalCount);
             }
-        }
-        else
-        {
+        } else {
             isDone = xActionUpdate.apply(effect, params) || duration < 0.0f;
         }
     }

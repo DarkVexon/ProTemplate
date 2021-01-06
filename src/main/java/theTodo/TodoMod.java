@@ -22,7 +22,7 @@ import theTodo.util.SillyVariable;
 
 import java.nio.charset.StandardCharsets;
 
-@SuppressWarnings({"ConstantConditions", "unused", "WeakerAccess"})
+@SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
 public class TodoMod implements
         EditCardsSubscriber,
@@ -64,20 +64,27 @@ public class TodoMod implements
 
     }
 
-    public static String makeCardPath(String resourcePath) {
-        return getModID() + "Resources/images/cards/" + resourcePath;
+    //makePaths
+    public static String makePath(String resourcePath) {
+        return modID + "/" + resourcePath;
     }
-
+    public static String makeImagePath(String resourcePath) {
+        return modID + "/images/" + resourcePath;
+    }
     public static String makeRelicPath(String resourcePath) {
-        return getModID() + "Resources/images/relics/" + resourcePath;
+        return modID + "/images/relics/" + resourcePath;
     }
-
-    public static String makeRelicOutlinePath(String resourcePath) {
-        return getModID() + "Resources/images/relics/outline/" + resourcePath;
-    }
-
     public static String makePowerPath(String resourcePath) {
-        return getModID() + "Resources/images/powers/" + resourcePath;
+        return modID + "/images/powers/" + resourcePath;
+    }
+    public static String makeCardPath(String resourcePath) {
+        return modID + "/images/cards/" + resourcePath;
+    }
+    public static String makeCharacterPath(String resourcePath) {
+        return modID + "/images/character/" + resourcePath;
+    }
+    public static String makeEffectPath(String resourcePath) {
+        return modID + "/images/effects/" + resourcePath;
     }
 
     public static String getModID() {

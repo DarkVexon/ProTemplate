@@ -2,13 +2,16 @@ package theTodo.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import theTodo.TodoMod;
+import theTodo.util.TextureLoader;
 
 import static theTodo.TodoMod.getModID;
+import static theTodo.TodoMod.makeRelicPath;
 
 public abstract class AbstractTodoRelic extends CustomRelic {
     public AbstractCard.CardColor color;
@@ -18,27 +21,9 @@ public abstract class AbstractTodoRelic extends CustomRelic {
     }
 
     public AbstractTodoRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
-        super(setId, "", tier, sfx);
-
+        super(setId, TextureLoader.getTexture(makeRelicPath(setId + ".png")), tier, sfx);
+        outlineImg = TextureLoader.getTexture(makeRelicPath(setId + "Outline.png"));
         this.color = color;
-
-        String imgName = getBaseImagePath();
-        System.out.println(imgName);
-
-        loadImages((TodoMod.getModID() + "Resources/"), imgName);
-        if (img == null || outlineImg == null) {
-            loadImages("", "test5.png");
-        }
-    }
-
-    protected String getBaseImagePath() {
-        String id = relicId.replaceFirst(TodoMod.getModID() + ":", "");
-        return id + ".png";
-    }
-
-    protected void loadImages(String basePath, String imgName) {
-        img = ImageMaster.loadImage(basePath + "images/relics/" + imgName);
-        outlineImg = ImageMaster.loadImage(basePath + "images/relics/outline/" + imgName);
     }
 
     protected void att(AbstractGameAction action) {
@@ -47,6 +32,14 @@ public abstract class AbstractTodoRelic extends CustomRelic {
 
     protected void atb(AbstractGameAction action) {
         AbstractDungeon.actionManager.addToBottom(action);
+    }
+
+    protected void applyToEnemy(AbstractMonster m, AbstractPower po) {
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
+    }
+
+    protected void applyToSelf(AbstractPower po) {
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
     }
 
     public static String makeID(String blah) {
