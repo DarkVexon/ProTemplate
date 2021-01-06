@@ -169,7 +169,7 @@ public abstract class AbstractTodoCard extends CustomCard {
     }
 
     private void shuffleIn(AbstractCard c, int i) {
-        atb(new MakeTempCardInDrawPileAction(c, i, false, true));
+        atb(new MakeTempCardInDrawPileAction(c, i, true, true));
     }
 
     public void shuffleIn(AbstractCard c) {
