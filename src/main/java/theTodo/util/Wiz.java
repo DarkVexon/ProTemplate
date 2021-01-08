@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
@@ -21,7 +20,7 @@ public class Wiz {
     }
 
     public static <T> T getRandomItem(ArrayList<T> list) {
-        return list.isEmpty() ? null : list.get(AbstractDungeon.cardRandomRng.random(list.size()-1));
+        return list.isEmpty() ? null : list.get(AbstractDungeon.cardRandomRng.random(list.size() - 1));
     }
 
     public static boolean isInCombat() {
