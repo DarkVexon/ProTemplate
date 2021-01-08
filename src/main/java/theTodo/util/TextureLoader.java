@@ -29,28 +29,6 @@ public class TextureLoader {
         return textures.get(textureString);
     }
 
-    public static Texture getTexture(final String textureString, boolean linear) {
-        if (textures.get(textureString) == null) {
-            try {
-                loadTexture(textureString, linear);
-            } catch (GdxRuntimeException e) {
-                return getTexture(makeImagePath("missing.png"));
-            }
-        }
-        return textures.get(textureString);
-    }
-
-    public static Texture getTextureNull(final String textureString) {
-        if (textures.get(textureString) == null) {
-            try {
-                loadTexture(textureString);
-            } catch (GdxRuntimeException e) {
-                return null;
-            }
-        }
-        return textures.get(textureString);
-    }
-
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
         String textureString;
 
@@ -85,27 +63,6 @@ public class TextureLoader {
                     textureString = makeImagePath("missing.png");
                     break;
             }
-        }
-
-        return textureString;
-    }
-
-    public static String getUncheckedTextureString(final String cardName, final AbstractCard.CardType cardType) {
-        String textureString;
-
-        switch (cardType) {
-            case ATTACK:
-                textureString = makeImagePath("cards/attacks/" + cardName + ".png");
-                break;
-            case SKILL:
-                textureString = makeImagePath("cards/skills/" + cardName + ".png");
-                break;
-            case POWER:
-                textureString = makeImagePath("cards/powers/" + cardName + ".png");
-                break;
-            default:
-                textureString = makeImagePath("missing.png");
-                break;
         }
 
         return textureString;
