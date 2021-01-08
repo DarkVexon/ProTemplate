@@ -1,11 +1,11 @@
 package theTodo.cards;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import theTodo.powers.AbstractLambdaPower;
-import theTodo.powers.AbstractStartOfTurnPower;
 import theTodo.powers.LosePowerPower;
 
 import static theTodo.TodoMod.makeID;
@@ -25,17 +25,7 @@ public class Strike extends AbstractTodoCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new AbstractLambdaPower("Daily Flex", AbstractPower.PowerType.BUFF, p, 2) {
-            public void atStartOfTurn() {
-                applyToSelf(new StrengthPower(owner, amount));
-                applyToSelf(new LosePowerPower(owner, StrengthPower.POWER_ID, amount));
-            }
-
-            @Override
-            public void updateDescription() {
-                description = "At the start of your turn, gain #b" + amount + " temporary #yStrength.";
-            }
-        });
+        dmg(m, AbstractGameAction.AttackEffect.NONE);
     }
 
     public void upp() {
