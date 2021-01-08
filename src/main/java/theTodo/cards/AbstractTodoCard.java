@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import static theTodo.TodoMod.makeID;
 import static theTodo.util.TextureLoader.getCardTextureString;
+import static theTodo.util.Wiz.*;
 
 public abstract class AbstractTodoCard extends CustomCard {
 
@@ -97,14 +98,6 @@ public abstract class AbstractTodoCard extends CustomCard {
 
     public abstract void upp();
 
-    protected void atb(AbstractGameAction action) {
-        addToBot(action);
-    }
-
-    protected void att(AbstractGameAction action) {
-        addToTop(action);
-    }
-
     protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
         atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
     }
@@ -139,12 +132,6 @@ public abstract class AbstractTodoCard extends CustomCard {
 
     protected void topDeck(AbstractCard c) {
         topDeck(c, 1);
-    }
-
-    protected ArrayList<AbstractMonster> monsterList() {
-        ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
-        monsters.removeIf(AbstractCreature::isDeadOrEscaped);
-        return monsters;
     }
 
     protected void applyToEnemy(AbstractMonster m, AbstractPower po) {

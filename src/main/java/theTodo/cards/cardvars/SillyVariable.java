@@ -1,4 +1,4 @@
-package theTodo.util;
+package theTodo.cards.cardvars;
 
 import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;

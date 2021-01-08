@@ -16,8 +16,8 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import theTodo.cards.AbstractTodoCard;
 import theTodo.relics.*;
-import theTodo.util.SecondDamage;
-import theTodo.util.SillyVariable;
+import theTodo.cards.cardvars.SecondDamage;
+import theTodo.cards.cardvars.SillyVariable;
 
 import java.nio.charset.StandardCharsets;
 
