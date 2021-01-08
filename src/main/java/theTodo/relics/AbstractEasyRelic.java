@@ -25,22 +25,6 @@ public abstract class AbstractEasyRelic extends CustomRelic {
         this.color = color;
     }
 
-    protected void att(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToTop(action);
-    }
-
-    protected void atb(AbstractGameAction action) {
-        AbstractDungeon.actionManager.addToBottom(action);
-    }
-
-    protected void applyToEnemy(AbstractMonster m, AbstractPower po) {
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-    }
-
-    protected void applyToSelf(AbstractPower po) {
-        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
-
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }

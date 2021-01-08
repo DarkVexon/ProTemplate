@@ -42,16 +42,4 @@ public abstract class AbstractEasyPower extends AbstractPower {
 
         this.updateDescription();
     }
-
-    public void atb(AbstractGameAction a) {
-        addToBot(a);
-    }
-
-    public void att(AbstractGameAction a) {
-        addToTop(a);
-    }
-
-    public void applyToSelf(AbstractPower po) {
-        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
 }
