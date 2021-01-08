@@ -4,12 +4,16 @@ import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
-public class LosePowerPower extends AbstractLambdaPower {
-    private String idToLose;
+import static theTodo.TodoMod.makeID;
 
-    public LosePowerPower(AbstractCreature owner, String idToLose, int amount) {
-        super("Lose" + idToLose, PowerType.DEBUFF, owner, amount);
-        this.idToLose = idToLose;
+public class LosePowerPower extends AbstractTodoPower {
+    private String idToLose;
+    private String nameToLose;
+
+    public LosePowerPower(AbstractCreature owner, String nameToLose, int amount) {
+        super("Lose " + nameToLose, PowerType.DEBUFF, false, owner, amount);
+        this.nameToLose = nameToLose;
+        this.idToLose = makeID(nameToLose);
     }
 
     @Override
@@ -17,5 +21,10 @@ public class LosePowerPower extends AbstractLambdaPower {
         flash();
         addToBot(new ReducePowerAction(owner, owner, idToLose, amount));
         addToBot(new RemoveSpecificPowerAction(owner, owner, this.ID));
+    }
+
+    @Override
+    public void updateDescription() {
+        description = "At the end of your turn, lose #b" + amount + " " + nameToLose + ".";
     }
 }
