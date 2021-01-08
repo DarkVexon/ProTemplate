@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import theTodo.cards.AbstractTodoCard;
 import theTodo.relics.*;
@@ -108,8 +107,8 @@ public class TodoMod implements
     @Override
     public void receiveEditRelics() {
         new AutoAdd(artifactID)
-                .packageFilter(AbstractTodoRelic.class)
-                .any(AbstractTodoRelic.class, (info, relic) -> {
+                .packageFilter(AbstractEasyRelic.class)
+                .any(AbstractEasyRelic.class, (info, relic) -> {
                     if (relic.color == null) {
                         BaseMod.addRelic(relic, RelicType.SHARED);
                     } else {

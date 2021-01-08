@@ -17,9 +17,9 @@ import java.util.Map;
 import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeID;
 
-public abstract class AbstractTodoPower extends AbstractPower {
+public abstract class AbstractEasyPower extends AbstractPower {
 
-    public AbstractTodoPower(String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
+    public AbstractEasyPower(String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this.ID = makeID(NAME);
         this.isTurnBased = isTurnBased;
 

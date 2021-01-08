@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 
 import static theTodo.TodoMod.makeID;
 
-public class LosePowerPower extends AbstractTodoPower {
+public class LosePowerPower extends AbstractEasyPower {
     private String idToLose;
     private String nameToLose;
 

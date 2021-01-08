@@ -2,7 +2,7 @@ package theTodo.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
-public abstract class AbstractLambdaPower extends AbstractTodoPower {
+public abstract class AbstractLambdaPower extends AbstractEasyPower {
     public AbstractLambdaPower(String name, PowerType powerType, AbstractCreature owner, int amount) {
         super(name, powerType, true, owner, amount);
     }

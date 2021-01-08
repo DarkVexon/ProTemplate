@@ -3,10 +3,6 @@ package theTodo.cards;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import theTodo.powers.AbstractLambdaPower;
-import theTodo.powers.LosePowerPower;
 
 import static theTodo.TodoMod.makeID;
 

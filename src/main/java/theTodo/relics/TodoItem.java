@@ -2,7 +2,9 @@ package theTodo.relics;
 
 import theTodo.TheTodo;
 
-public class TodoItem extends AbstractTodoRelic {
+import static theTodo.TodoMod.makeID;
+
+public class TodoItem extends AbstractEasyRelic {
     public static final String ID = makeID("TodoItem");
 
     public TodoItem() {
