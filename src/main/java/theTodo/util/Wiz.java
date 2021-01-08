@@ -1,8 +1,12 @@
 package theTodo.util;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,11 +24,23 @@ public class Wiz {
         return list.isEmpty() ? null : list.get(AbstractDungeon.cardRandomRng.random(list.size()-1));
     }
 
+    public static boolean isInCombat() {
+        return CardCrawlGame.isInARun() && AbstractDungeon.currMapNode != null && AbstractDungeon.getCurrRoom().phase != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT;
+    }
+
     public static void atb(AbstractGameAction action) {
         AbstractDungeon.actionManager.addToBottom(action);
     }
 
     public static void att(AbstractGameAction action) {
         AbstractDungeon.actionManager.addToTop(action);
+    }
+
+    public static void vfx(AbstractGameEffect gameEffect) {
+        atb(new VFXAction(gameEffect));
+    }
+
+    public static void vfx(AbstractGameEffect gameEffect, float duration) {
+        atb(new VFXAction(gameEffect, duration));
     }
 }
