@@ -42,11 +42,6 @@ public abstract class AbstractTodoRelic extends CustomRelic {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
     }
 
-    public static String makeID(String blah) {
-        return getModID() + ":" + blah;
-    }
-
-    @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }

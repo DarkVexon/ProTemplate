@@ -3,6 +3,8 @@ package theTodo.cards;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import static theTodo.TodoMod.makeID;
+
 public class Defend extends AbstractTodoCard {
 
     public final static String ID = makeID("Defend");
@@ -20,6 +22,7 @@ public class Defend extends AbstractTodoCard {
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
+
     }
 
     public void upp() {
