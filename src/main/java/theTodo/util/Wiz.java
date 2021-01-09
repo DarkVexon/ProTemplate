@@ -53,8 +53,13 @@ public class Wiz {
         }
     }
 
+    public static AbstractCard returnTrulyRandomPrediCardInCombat(Predicate<AbstractCard> pred, boolean allCards) {
+        return getRandomItem(getCardsMatchingPredicate(pred, allCards));
+    }
+
+
     public static AbstractCard returnTrulyRandomPrediCardInCombat(Predicate<AbstractCard> pred) {
-        return getRandomItem(getCardsMatchingPredicate(pred, false));
+        return returnTrulyRandomPrediCardInCombat(pred, false);
     }
 
     public static <T> T getRandomItem(ArrayList<T> list) {
@@ -123,11 +128,11 @@ public class Wiz {
 
     public static void applyToEnemyTemp(AbstractMonster m, AbstractPower po) {
         atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, new LosePowerPower(po.owner, po.name, po.amount)));
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, new LosePowerPower(po.owner, po, po.amount)));
     }
 
     public static void applyToSelfTemp(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(po.owner, po.name, po.amount)));
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(po.owner, po, po.amount)));
     }
 }

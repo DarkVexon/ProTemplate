@@ -9,7 +9,6 @@ import theTodo.cards.AbstractTodoCard;
 import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.*;
 
-@AutoAdd.Ignore
 public class TemporaryPowerDemo extends AbstractTodoCard {
 
     public final static String ID = makeID("TemporaryPowerDemo");

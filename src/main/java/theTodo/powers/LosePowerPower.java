@@ -3,28 +3,30 @@ package theTodo.powers;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-
-import static theTodo.TodoMod.makeID;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LosePowerPower extends AbstractEasyPower {
-    private String idToLose;
-    private String nameToLose;
+    private AbstractPower powerToLose;
 
-    public LosePowerPower(AbstractCreature owner, String nameToLose, int amount) {
-        super("Lose " + nameToLose, PowerType.DEBUFF, false, owner, amount);
-        this.nameToLose = nameToLose;
-        this.idToLose = makeID(nameToLose);
+    public LosePowerPower(AbstractCreature owner, AbstractPower powerToLose, int amount) {
+        super("Lose " + powerToLose.name, PowerType.DEBUFF, false, owner, amount);
+        this.powerToLose = powerToLose;
+        updateDescription();
     }
 
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         flash();
-        addToBot(new ReducePowerAction(owner, owner, idToLose, amount));
+        addToBot(new ReducePowerAction(owner, owner, powerToLose.ID, amount));
         addToBot(new RemoveSpecificPowerAction(owner, owner, this.ID));
     }
 
     @Override
     public void updateDescription() {
-        description = "At the end of your turn, lose #b" + amount + " " + nameToLose + ".";
+        if (powerToLose == null) {
+            description = "???";
+        } else {
+            description = "At the end of your turn, lose #b" + amount + " " + powerToLose.name + ".";
+        }
     }
 }
