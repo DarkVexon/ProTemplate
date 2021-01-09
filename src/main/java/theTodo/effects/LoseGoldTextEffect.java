@@ -12,19 +12,27 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 public class LoseGoldTextEffect extends AbstractGameEffect {
-    private static final UIStrings uiStrings;
     public static final String[] TEXT;
+    private static final UIStrings uiStrings;
+    private static final float WAIT_TIME = 1.0F;
+    private static final float FADE_Y_SPEED;
+    private static final float TEXT_DURATION = 3.0F;
     private static int totalGold;
+
+    static {
+        uiStrings = CardCrawlGame.languagePack.getUIString("GainGoldTextEffect");
+        TEXT = uiStrings.TEXT;
+        totalGold = 0;
+        FADE_Y_SPEED = 100.0F * Settings.scale;
+    }
+
     private int gold = 0;
     private boolean reachedCenter = false;
     private float x;
     private float y;
     private float destinationY;
-    private static final float WAIT_TIME = 1.0F;
     private float waitTimer = 1.0F;
     private float fadeTimer = 1.0F;
-    private static final float FADE_Y_SPEED;
-    private static final float TEXT_DURATION = 3.0F;
 
     public LoseGoldTextEffect(int startingAmount) {
         this.x = AbstractDungeon.player.hb.cX;
@@ -77,17 +85,10 @@ public class LoseGoldTextEffect extends AbstractGameEffect {
 
     public void render(SpriteBatch sb) {
         if (!this.isDone) {
-            FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, "- " + Integer.toString(this.gold) + TEXT[0], this.x, this.y, this.color);
+            FontHelper.renderFontCentered(sb, FontHelper.buttonLabelFont, "- " + this.gold + TEXT[0], this.x, this.y, this.color);
         }
     }
 
     public void dispose() {
-    }
-
-    static {
-        uiStrings = CardCrawlGame.languagePack.getUIString("GainGoldTextEffect");
-        TEXT = uiStrings.TEXT;
-        totalGold = 0;
-        FADE_Y_SPEED = 100.0F * Settings.scale;
     }
 }
