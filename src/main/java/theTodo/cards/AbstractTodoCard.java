@@ -88,76 +88,6 @@ public abstract class AbstractTodoCard extends CustomCard {
         } else super.calculateCardDamage(mo);
     }
 
-    @Override
-    public void upgrade() {
-        if (!upgraded) {
-            upgradeName();
-            upp();
-        }
-    }
-
-    public abstract void upp();
-
-    protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
-        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
-    }
-
-    protected void allDmg(AbstractGameAction.AttackEffect fx) {
-        atb(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
-    }
-
-    protected void blck() {
-        atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
-    }
-
-    public void makeInHand(AbstractCard c, int i) {
-        atb(new MakeTempCardInHandAction(c, i));
-    }
-
-    protected void makeInHand(AbstractCard c) {
-        makeInHand(c, 1);
-    }
-
-    protected void shuffleIn(AbstractCard c, int i) {
-        atb(new MakeTempCardInDrawPileAction(c, i, true, true));
-    }
-
-    protected void shuffleIn(AbstractCard c) {
-        shuffleIn(c, 1);
-    }
-
-    protected void topDeck(AbstractCard c, int i) {
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(c, i, false, true));
-    }
-
-    protected void topDeck(AbstractCard c) {
-        topDeck(c, 1);
-    }
-
-    protected void applyToEnemy(AbstractMonster m, AbstractPower po) {
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-    }
-
-    protected void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
-        att(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-    }
-
-    protected void applyToSelf(AbstractPower po) {
-        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
-
-    protected void applyToSelfTop(AbstractPower po) {
-        att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-    }
-
-    protected WeakPower autoWeak(AbstractMonster m, int i) {
-        return new WeakPower(m, i, false);
-    }
-
-    protected VulnerablePower autoVuln(AbstractMonster m, int i) {
-        return new VulnerablePower(m, i, false);
-    }
-
     public void resetAttributes() {
         super.resetAttributes();
         silly = baseSilly;
@@ -188,5 +118,28 @@ public abstract class AbstractTodoCard extends CustomCard {
         baseSecondDamage += amount;
         secondDamage = baseSecondDamage;
         upgradedSecondDamage = true;
+    }
+
+    public void upgrade() {
+        if (!upgraded) {
+            upgradeName();
+            upp();
+        }
+    }
+
+    public void upp() {
+
+    }
+
+    protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
+        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
+    }
+
+    protected void allDmg(AbstractGameAction.AttackEffect fx) {
+        atb(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
+    }
+
+    protected void blck() {
+        atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
     }
 }
