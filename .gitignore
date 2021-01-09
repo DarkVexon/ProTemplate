@@ -1,0 +1,10 @@
+.idea
+target
+*.psd
+pom.xml
+*.iml
+
+.classpath
+
+.project
+*.DS_Store*
