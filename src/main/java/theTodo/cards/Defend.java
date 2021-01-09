@@ -22,7 +22,6 @@ public class Defend extends AbstractTodoCard {
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
-
     }
 
     public void upp() {

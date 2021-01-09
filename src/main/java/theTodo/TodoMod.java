@@ -65,25 +65,25 @@ public class TodoMod implements
 
     //makePaths
     public static String makePath(String resourcePath) {
-        return modID + "/" + resourcePath;
+        return modID + "Resources/" + resourcePath;
     }
     public static String makeImagePath(String resourcePath) {
-        return modID + "/images/" + resourcePath;
+        return modID + "Resources/images/" + resourcePath;
     }
     public static String makeRelicPath(String resourcePath) {
-        return modID + "/images/relics/" + resourcePath;
+        return modID + "Resources/images/relics/" + resourcePath;
     }
     public static String makePowerPath(String resourcePath) {
-        return modID + "/images/powers/" + resourcePath;
+        return modID + "Resources/images/powers/" + resourcePath;
     }
     public static String makeCardPath(String resourcePath) {
-        return modID + "/images/cards/" + resourcePath;
+        return modID + "Resources/images/cards/" + resourcePath;
     }
     public static String makeCharacterPath(String resourcePath) {
-        return modID + "/images/character/" + resourcePath;
+        return modID + "Resources/images/character/" + resourcePath;
     }
     public static String makeEffectPath(String resourcePath) {
-        return modID + "/images/effects/" + resourcePath;
+        return modID + "Resources/images/effects/" + resourcePath;
     }
 
     public static String getModID() {

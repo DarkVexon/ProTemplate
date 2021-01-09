@@ -2,24 +2,19 @@ package theTodo.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 import theTodo.TheTodo;
 
-import java.util.ArrayList;
-
-import static theTodo.TodoMod.makeID;
+import static theTodo.TodoMod.getModID;
 import static theTodo.util.TextureLoader.getCardTextureString;
-import static theTodo.util.Wiz.*;
+import static theTodo.util.Wiz.atb;
 
 public abstract class AbstractTodoCard extends CustomCard {
 
@@ -35,17 +30,16 @@ public abstract class AbstractTodoCard extends CustomCard {
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
 
-    public AbstractTodoCard(final String cardname, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
-        this(cardname, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
+    public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
+        this(cardID, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
     }
 
-    public AbstractTodoCard(final String cardname, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
-        super(makeID(cardname), "", getCardTextureString(cardname, type),
+    public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
+        super(cardID, "", getCardTextureString(cardID.replace(getModID() + ":", ""), type),
                 cost, "", type, color, rarity, target);
-        cardStrings = CardCrawlGame.languagePack.getCardStrings(cardID);
+        cardStrings = CardCrawlGame.languagePack.getCardStrings(this.cardID);
         rawDescription = cardStrings.DESCRIPTION;
-        originalName = cardStrings.NAME;
-        name = originalName;
+        name = originalName = cardStrings.NAME;
         initializeTitle();
         initializeDescription();
     }

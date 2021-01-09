@@ -34,13 +34,13 @@ public class TextureLoader {
 
         switch (cardType) {
             case ATTACK:
-                textureString = makeImagePath("cards/attacks/" + cardName + ".png");
+                textureString = makeImagePath("cards/" + cardName + ".png");
                 break;
             case SKILL:
-                textureString = makeImagePath("cards/skills/" + cardName + ".png");
+                textureString = makeImagePath("cards/" + cardName + ".png");
                 break;
             case POWER:
-                textureString = makeImagePath("cards/powers/" + cardName + ".png");
+                textureString = makeImagePath("cards/" + cardName + ".png");
                 break;
             default:
                 textureString = makeImagePath("missing.png");
@@ -51,13 +51,13 @@ public class TextureLoader {
         if (!h.exists()) {
             switch (cardType) {
                 case ATTACK:
-                    textureString = makeImagePath("cards/attacks/default.png");
+                    textureString = makeImagePath("cards/Attack.png");
                     break;
                 case SKILL:
-                    textureString = makeImagePath("cards/skills/default.png");
+                    textureString = makeImagePath("cards/Skill.png");
                     break;
                 case POWER:
-                    textureString = makeImagePath("cards/powers/default.png");
+                    textureString = makeImagePath("cards/Power.png");
                     break;
                 default:
                     textureString = makeImagePath("missing.png");
