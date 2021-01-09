@@ -121,9 +121,7 @@ public abstract class AbstractTodoCard extends CustomCard {
         }
     }
 
-    public void upp() {
-
-    }
+    public abstract void upp();
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
     protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
