@@ -6,8 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class ${NAME} extends AbstractTodoCard {
 
     public final static String ID = makeID("${NAME}");
-
-    //stupid intellij stuff ${TYPE}, ${TARGET}, ${RARITY}
+    // intellij stuff ${TYPE}, ${TARGET}, ${RARITY}
 
     #if (${DAMAGE} != "")    private static final int DAMAGE = ${DAMAGE};
 #end#if (${UPGRADE_DAMAGE} != "")    private static final int UPG_DAMAGE = ${UPGRADE_DAMAGE};
@@ -19,7 +18,7 @@ public class ${NAME} extends AbstractTodoCard {
 #end#if (${UPGRADE_MAGIC} != "")    private static final int UPG_MAGIC = ${UPGRADE_MAGIC};
 #end
     public ${NAME}() {
-        super(ID, ${COST},  CardType.#if ( ${TYPE.equals( "POWER" )} )POWER#elseif ( ${TYPE.equals( "SKILL" )} )SKILL#else ATTACK#end, CardRarity.#if ( ${RARITY.equals( "BASIC" )} )BASIC#elseif ( ${RARITY.equals( "COMMON" )} )COMMON#elseif ( ${RARITY.equals( "UNCOMMON" )} )UNCOMMON#elseif ( ${RARITY.equals( "RARE" )} )RARE #else SPECIAL#end, CardTarget.#if ( ${TARGET.equals( "ALL_ENEMY" )} )ALL_ENEMY#elseif ( ${TARGET.equals( "SELF" )} )SELF#elseif ( ${TARGET.equals( "ALL" )} )ALL#else ENEMY#end);
+        super(ID, ${COST},  CardType.#if ( ${TYPE.equals( "power" )} )POWER#elseif ( ${TYPE.equals( "skill" )} )SKILL#else ATTACK#end, CardRarity.#if ( ${RARITY.equals( "basic" )} )BASIC#elseif ( ${RARITY.equals( "common" )} )COMMON#elseif ( ${RARITY.equals( "uncommon" )} )UNCOMMON#elseif ( ${RARITY.equals( "rare" )} )RARE #else SPECIAL#end, CardTarget.#if ( ${TARGET.equals( "all_enemy" )} )ALL_ENEMY#elseif ( ${TARGET.equals( "self" )} )SELF#elseif ( ${TARGET.equals( "all" )} )ALL#elseif ( ${TARGET.equals( "none" )} )NONE#else  ENEMY#end);
         #if (${DAMAGE} != "")        baseDamage = DAMAGE;#else#end
         #if (${BLOCK} != "")        baseBlock = BLOCK;#else#end
         #if (${MAGIC} != "")        baseMagicNumber = magicNumber = MAGIC;#else#end
