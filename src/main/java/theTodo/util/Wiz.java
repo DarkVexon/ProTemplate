@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import theTodo.powers.LosePowerPower;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
@@ -23,6 +25,36 @@ public class Wiz {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
         monsters.removeIf(m -> m.isDead || m.isDying);
         return monsters;
+    }
+
+    public static ArrayList<AbstractCard> getCardsMatchingPredicate(Predicate<AbstractCard> pred) {
+        return getCardsMatchingPredicate(pred, false);
+    }
+
+    public static ArrayList<AbstractCard> getCardsMatchingPredicate(Predicate<AbstractCard> pred, boolean allcards) {
+        if (allcards) {
+            ArrayList<AbstractCard> cardsList = new ArrayList<>();
+            for (AbstractCard c : CardLibrary.getAllCards()) {
+                if (pred.test(c)) cardsList.add(c);
+            }
+            return cardsList;
+        } else {
+            ArrayList<AbstractCard> cardsList = new ArrayList<>();
+            for (AbstractCard c : AbstractDungeon.srcCommonCardPool.group) {
+                if (pred.test(c)) cardsList.add(c);
+            }
+            for (AbstractCard c : AbstractDungeon.srcUncommonCardPool.group) {
+                if (pred.test(c)) cardsList.add(c);
+            }
+            for (AbstractCard c : AbstractDungeon.srcRareCardPool.group) {
+                if (pred.test(c)) cardsList.add(c);
+            }
+            return cardsList;
+        }
+    }
+
+    public static AbstractCard returnTrulyRandomPrediCardInCombat(Predicate<AbstractCard> pred) {
+        return getRandomItem(getCardsMatchingPredicate(pred, false));
     }
 
     public static <T> T getRandomItem(ArrayList<T> list) {
