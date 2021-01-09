@@ -23,7 +23,7 @@ public class TextureLoader {
             try {
                 loadTexture(textureString, true);
             } catch (GdxRuntimeException e) {
-                return getTexture(makeImagePath("missing.png"));
+                return getTexture(makeImagePath("ui/missing.png"));
             }
         }
         return textures.get(textureString);
@@ -43,7 +43,7 @@ public class TextureLoader {
                 textureString = makeImagePath("cards/" + cardName + ".png");
                 break;
             default:
-                textureString = makeImagePath("missing.png");
+                textureString = makeImagePath("ui/missing.png");
                 break;
         }
 
@@ -60,7 +60,7 @@ public class TextureLoader {
                     textureString = makeImagePath("cards/Power.png");
                     break;
                 default:
-                    textureString = makeImagePath("missing.png");
+                    textureString = makeImagePath("ui/missing.png");
                     break;
             }
         }
