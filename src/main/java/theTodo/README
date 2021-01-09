@@ -1,9 +1,10 @@
 This is an example character template for the more experienced Slay the Spire modder.
 It contains the basics of an empty character, as well as:
--an improved X cost framework action
--a card abstract filled with shortcuts (it will also automatically load beta art if you don't have art provided, to prevent crashes!)
--Strike and Defend examples of abstract
--a relic abstract that auto-loads images and defaults to a rock to prevent crashes
--empty relic example
--an extra damage variable and magicnumber variable (called Silly) for your cards!)
--TODOs in places you'll need to change stuff
+- Improved X cost action framework (Alchyr)
+- General action use wizard for any effects (GK + my own stuff)
+- Lambda power support (mine)
+- Automatic ability to apply TempPowers. Make any power a Flex! (me)
+- AbstractRelic, Power and Card with improved image loading and other shortcuts (alchyr + mine)
+- AbstractCard comes with secondary variable and secondary damage (me + Kio)
+- IntelliJ template to easily make lots of cards (me + GK)
+- Hopefully more! Let me know if there's something you'd want added!!
