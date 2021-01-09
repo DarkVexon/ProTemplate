@@ -40,8 +40,8 @@ public abstract class AbstractTodoCard extends CustomCard {
     }
 
     public AbstractTodoCard(final String cardname, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
-        super(makeID(cardname), "ERROR", getCardTextureString(cardname, type),
-                cost, "ERROR", type, color, rarity, target);
+        super(makeID(cardname), "", getCardTextureString(cardname, type),
+                cost, "", type, color, rarity, target);
         cardStrings = CardCrawlGame.languagePack.getCardStrings(cardID);
         rawDescription = cardStrings.DESCRIPTION;
         originalName = cardStrings.NAME;
