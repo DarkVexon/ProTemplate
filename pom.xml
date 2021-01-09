@@ -3,15 +3,22 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>TheTodo</groupId>
     <artifactId>TheTodo</artifactId>
-    <version>0.4.8</version>
-    <name>TheTodo</name>
+    <version>0.0.1</version>
+    <name>The Todo</name>
+    <description>TODO: Change this description</description>
+    <!--TODO: Change ALL OF THIS!!! -->
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <SlayTheSpire.version>2.0</SlayTheSpire.version>
         <ModTheSpire.version>3.8.0</ModTheSpire.version>
+        <ModID>todomod</ModID>
+        <JarName>TheTodo</JarName>
+
+        <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
         <Steam.path>C:/Program Files (x86)/Steam/steamapps/</Steam.path>
+
     </properties>
 
     <dependencies>
@@ -47,7 +54,7 @@
 
 
     <build>
-        <finalName>TheTodo</finalName>
+        <finalName>${JarName}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -58,8 +65,8 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <copy file="target/TheTodo.jar"
-                                      tofile="${Steam.path}/common/SlayTheSpire/mods/TheTodo.jar"/>
+                                <copy file="target/${JarName}.jar"
+                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${JarName}.jar"/>
                             </target>
                         </configuration>
                         <goals>
@@ -91,6 +98,4 @@
         </resources>
 
     </build>
-
-    <description>TODO: change this description</description>
 </project>

@@ -1,5 +1,5 @@
 {
-  "todomod:theTodo": {
+  "${ModID}:theTodo": {
     "NAMES": [
       "The Todo",
       "the Todo"

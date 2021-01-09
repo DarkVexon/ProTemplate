@@ -31,17 +31,17 @@ import static theTodo.TodoMod.*;
 
 public class TheTodo extends CustomPlayer {
     private static final String[] orbTextures = {
-            "todomodResources/images/char/mainChar/orb/layer1.png",
-            "todomodResources/images/char/mainChar/orb/layer2.png",
-            "todomodResources/images/char/mainChar/orb/layer3.png",
-            "todomodResources/images/char/mainChar/orb/layer4.png",
-            "todomodResources/images/char/mainChar/orb/layer5.png",
-            "todomodResources/images/char/mainChar/orb/layer6.png",
-            "todomodResources/images/char/mainChar/orb/layer1d.png",
-            "todomodResources/images/char/mainChar/orb/layer2d.png",
-            "todomodResources/images/char/mainChar/orb/layer3d.png",
-            "todomodResources/images/char/mainChar/orb/layer4d.png",
-            "todomodResources/images/char/mainChar/orb/layer5d.png",};
+            getModID() + "Resources/images/char/mainChar/orb/layer1.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer2.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer3.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer4.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer5.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer6.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer1d.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer2d.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer3d.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer4d.png",
+            getModID() + "Resources/images/char/mainChar/orb/layer5d.png",};
     private static final String ID = makeID("theTodo");
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     private static final String[] NAMES = characterStrings.NAMES;
@@ -49,8 +49,8 @@ public class TheTodo extends CustomPlayer {
 
 
     public TheTodo(String name, PlayerClass setClass) {
-        super(name, setClass, new CustomEnergyOrb(orbTextures, "todomodResources/images/char/mainChar/orb/vfx.png", null), new SpriterAnimation(
-                "todomodResources/images/char/mainChar/static.scml"));
+        super(name, setClass, new CustomEnergyOrb(orbTextures, getModID() + "Resources/images/char/mainChar/orb/vfx.png", null), new SpriterAnimation(
+                getModID() + "Resources/images/char/mainChar/static.scml"));
         initializeClass(null,
                 SHOULDER1,
                 SHOULDER2,

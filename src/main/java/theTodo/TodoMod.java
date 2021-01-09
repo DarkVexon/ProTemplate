@@ -52,7 +52,7 @@ public class TodoMod implements
 
         BaseMod.subscribe(this);
 
-        modID = "todomod"; //TODO: Change this!
+        modID = "todomod"; //TODO: Change this, but make sure it matches the ModID in your pom.
         artifactID = "TheTodo"; //TODO: Change this, but make sure it matches the ArtifactID in your pom.
 
         BaseMod.addColor(TheTodo.Enums.TODO_COLOR, todoColor, todoColor, todoColor,

@@ -1,5 +1,5 @@
 {
-  "modid": "${project.artifactId}",
+  "modid": "${ModID}",
   "name": "${project.name}",
   "author_list": ["Vex'd"],
   "description": "${project.description}",

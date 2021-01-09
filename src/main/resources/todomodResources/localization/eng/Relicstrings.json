@@ -1,5 +1,5 @@
 {
-  "todomod:TodoItem": {
+  "${ModID}:TodoItem": {
     "NAME": "Todo Item",
     "FLAVOR": "TODO: make this a sweet relic.",
     "DESCRIPTIONS": [
