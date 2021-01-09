@@ -2,19 +2,10 @@ package theTodo.powers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import theTodo.util.TextureLoader;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeID;
 
 public abstract class AbstractEasyPower extends AbstractPower {

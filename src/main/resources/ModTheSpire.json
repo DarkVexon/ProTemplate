@@ -1,11 +1,16 @@
 {
   "modid": "${ModID}",
   "name": "${project.name}",
-  "author_list": ["Vex'd"],
+  "author_list": [
+    "Vex'd"
+  ],
   "description": "${project.description}",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
-  "dependencies": ["basemod", "stslib"]
+  "dependencies": [
+    "basemod",
+    "stslib"
+  ]
 }
 

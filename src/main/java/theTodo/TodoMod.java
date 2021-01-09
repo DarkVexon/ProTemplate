@@ -15,9 +15,9 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import theTodo.cards.AbstractTodoCard;
-import theTodo.relics.*;
 import theTodo.cards.cardvars.SecondDamage;
 import theTodo.cards.cardvars.SillyVariable;
+import theTodo.relics.AbstractEasyRelic;
 
 import java.nio.charset.StandardCharsets;
 
@@ -29,6 +29,7 @@ public class TodoMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber {
+    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); //TODO: Set this to your character's favorite color!
     private static String modID = "todomod";//TODO: Change this, but make sure it matches the ModID in your pom.
     public static final String SHOULDER1 = getModID() + "Resources/images/char/mainChar/shoulder.png";
     public static final String SHOULDER2 = getModID() + "Resources/images/char/mainChar/shoulder2.png";
@@ -45,8 +46,6 @@ public class TodoMod implements
     private static final String CHARSELECT_BUTTON = getModID() + "Resources/images/charSelect/charButton.png";
     private static final String CHARSELECT_PORTRAIT = getModID() + "Resources/images/charSelect/charBG.png";
 
-    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); //TODO: Set this to your character's favorite color!
-
     public TodoMod() {
         BaseMod.subscribe(this);
 
@@ -61,21 +60,27 @@ public class TodoMod implements
     public static String makePath(String resourcePath) {
         return modID + "Resources/" + resourcePath;
     }
+
     public static String makeImagePath(String resourcePath) {
         return modID + "Resources/images/" + resourcePath;
     }
+
     public static String makeRelicPath(String resourcePath) {
         return modID + "Resources/images/relics/" + resourcePath;
     }
+
     public static String makePowerPath(String resourcePath) {
         return modID + "Resources/images/powers/" + resourcePath;
     }
+
     public static String makeCardPath(String resourcePath) {
         return modID + "Resources/images/cards/" + resourcePath;
     }
+
     public static String makeCharacterPath(String resourcePath) {
         return modID + "Resources/images/character/" + resourcePath;
     }
+
     public static String makeEffectPath(String resourcePath) {
         return modID + "Resources/images/effects/" + resourcePath;
     }

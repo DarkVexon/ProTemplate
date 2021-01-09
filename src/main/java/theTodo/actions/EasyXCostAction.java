@@ -9,14 +9,12 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import java.util.function.BiFunction;
 
 public class EasyXCostAction extends AbstractGameAction {
-    protected int baseValue;
-    protected boolean freeToPlayOnce;
-    private boolean firstUpdate = true;
-
-    protected int effect;
-
     public BiFunction<Integer, int[], Boolean> xActionUpdate;
     public int[] params;
+    protected int baseValue;
+    protected boolean freeToPlayOnce;
+    protected int effect;
+    private boolean firstUpdate = true;
 
     /**
      * @param card          The card played. Usually should simply be "this".
