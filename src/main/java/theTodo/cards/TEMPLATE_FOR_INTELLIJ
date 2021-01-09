@@ -2,6 +2,10 @@ Go to New -> Edit file templates... and add:
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import theTodo.cards.AbstractTodoCard;
+
+import static theTodo.TodoMod.makeID;
+import static theTodo.util.Wiz.*;
 
 public class ${NAME} extends AbstractTodoCard {
 
