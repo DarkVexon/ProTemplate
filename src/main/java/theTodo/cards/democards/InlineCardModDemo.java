@@ -1,9 +1,11 @@
 package theTodo.cards.democards;
 
 import basemod.helpers.CardModifierManager;
+import com.megacrit.cardcrawl.actions.common.InstantKillAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.beyond.Spiker;
 import theTodo.cardmods.LambdaMod;
@@ -26,11 +28,10 @@ public class InlineCardModDemo extends AbstractTodoCard {
         AbstractCard q = returnTrulyRandomPrediCardInCombat(c -> c.hasTag(CardTags.STRIKE) && c.rarity != CardRarity.BASIC, true);
         CardModifierManager.addModifier(q, new LambdaMod() {
             @Override
-            public float modifyDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
+            public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
                 if (target instanceof Spiker) {
-                    return 999;
+                    addToBot(new InstantKillAction(target));
                 }
-                return damage;
             }
 
             @Override
