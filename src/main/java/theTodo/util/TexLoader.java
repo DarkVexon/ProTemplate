@@ -3,6 +3,7 @@ package theTodo.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 import static theTodo.TodoMod.makeImagePath;
 
-public class TextureLoader {
+public class TexLoader {
     private static HashMap<String, Texture> textures = new HashMap<>();
 
     /**
@@ -84,5 +85,10 @@ public class TextureLoader {
 
     public static boolean testTexture(String filePath) {
         return Gdx.files.internal(filePath).exists();
+    }
+
+    public static TextureAtlas.AtlasRegion getTextureAsAtlasRegion(String textureString) {
+        Texture texture = getTexture(textureString);
+        return new TextureAtlas.AtlasRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
     }
 }

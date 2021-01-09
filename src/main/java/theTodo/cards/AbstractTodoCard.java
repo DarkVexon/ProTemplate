@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theTodo.TheTodo;
 
 import static theTodo.TodoMod.getModID;
-import static theTodo.util.TextureLoader.getCardTextureString;
+import static theTodo.util.TexLoader.getCardTextureString;
 import static theTodo.util.Wiz.atb;
 
 public abstract class AbstractTodoCard extends CustomCard {

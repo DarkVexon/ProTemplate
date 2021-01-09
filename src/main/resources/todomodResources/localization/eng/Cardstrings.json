@@ -20,7 +20,11 @@
     "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust."
   },
   "${ModID}:InlineCardModDemo": {
-    "NAME": "Inline Card Mods - Master Deck",
+    "NAME": "Inline Card Mods",
     "DESCRIPTION": "Add a random Strike of any color to your hand. NL Enchant it with \"Kills Spikers.\""
+  },
+  "${ModID}:NextTurnPowerDemo": {
+    "NAME": "Auto-Generated Next Turn Power",
+    "DESCRIPTION": "Next turn, gain !M! Thorns."
   }
 }

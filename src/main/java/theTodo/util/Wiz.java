@@ -168,7 +168,7 @@ public class Wiz {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(AbstractDungeon.player, po, po.amount)));
     }
 
-    public static void nextTurnPowerApplySelf(AbstractPower po) {
+    public static void applyToSelfNextTurn(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnPowerPower(AbstractDungeon.player, po)));
     }
 }
