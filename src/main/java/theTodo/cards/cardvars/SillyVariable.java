@@ -4,12 +4,14 @@ import basemod.abstracts.DynamicVariable;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import theTodo.cards.AbstractTodoCard;
 
+import static theTodo.TodoMod.makeID;
+
 public class SillyVariable extends DynamicVariable {
 
     @Override
     public String key() {
-        return "todo";
-    } //TODO: Change this so your mod doesn't conflict!
+        return makeID("si");
+    } //TODO: Change this, if you want. It's already modID prefixed, so no worries about conflicts (ASSUMING YOU CHANGED YOUR MODID!)
 
     @Override
     public boolean isModified(AbstractCard card) {

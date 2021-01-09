@@ -44,7 +44,6 @@ public class TodoMod implements
     private static final String CHARSELECT_BUTTON = "todomodResources/images/charSelect/charButton.png";
     private static final String CHARSELECT_PORTRAIT = "todomodResources/images/charSelect/charBG.png";
     private static String modID;
-    private static String artifactID;
 
     public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); //TODO: Set this to your character's favorite color!
 
@@ -53,7 +52,6 @@ public class TodoMod implements
         BaseMod.subscribe(this);
 
         modID = "todomod"; //TODO: Change this, but make sure it matches the ModID in your pom.
-        artifactID = "TheTodo"; //TODO: Change this, but make sure it matches the ArtifactID in your pom.
 
         BaseMod.addColor(TheTodo.Enums.TODO_COLOR, todoColor, todoColor, todoColor,
                 todoColor, todoColor, todoColor, todoColor,
@@ -105,7 +103,7 @@ public class TodoMod implements
 
     @Override
     public void receiveEditRelics() {
-        new AutoAdd(artifactID)
+        new AutoAdd(modID)
                 .packageFilter(AbstractEasyRelic.class)
                 .any(AbstractEasyRelic.class, (info, relic) -> {
                     if (relic.color == null) {
@@ -123,7 +121,7 @@ public class TodoMod implements
     public void receiveEditCards() {
         BaseMod.addDynamicVariable(new SillyVariable());
         BaseMod.addDynamicVariable(new SecondDamage());
-        new AutoAdd(artifactID)
+        new AutoAdd(modID)
                 .packageFilter(AbstractTodoCard.class)
                 .setDefaultSeen(true)
                 .cards();
