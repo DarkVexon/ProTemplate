@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import theTodo.powers.LosePowerPower;
+import theTodo.powers.NextTurnPowerPower;
 
 import java.util.ArrayList;
 import java.util.function.Consumer;
@@ -164,6 +165,10 @@ public class Wiz {
 
     public static void applyToSelfTemp(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
-        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(po.owner, po, po.amount)));
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(AbstractDungeon.player, po, po.amount)));
+    }
+
+    public static void nextTurnPowerApplySelf(AbstractPower po) {
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnPowerPower(AbstractDungeon.player, po)));
     }
 }
