@@ -14,5 +14,9 @@
   "${ModID}:InlinePowerDemo": {
     "NAME": "Inline Power",
     "DESCRIPTION": "Strikes deal !M! more damage. NL At the end of your turn, gain !M! Block."
+  },
+  "${ModID}:SelectCardsPlusCardMods": {
+    "NAME": "Card Parsing, Card Selection, Card Mods",
+    "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust."
   }
 }

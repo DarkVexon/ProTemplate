@@ -35,19 +35,19 @@ public class Wiz {
         if (allcards) {
             ArrayList<AbstractCard> cardsList = new ArrayList<>();
             for (AbstractCard c : CardLibrary.getAllCards()) {
-                if (pred.test(c)) cardsList.add(c);
+                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
             }
             return cardsList;
         } else {
             ArrayList<AbstractCard> cardsList = new ArrayList<>();
             for (AbstractCard c : AbstractDungeon.srcCommonCardPool.group) {
-                if (pred.test(c)) cardsList.add(c);
+                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
             }
             for (AbstractCard c : AbstractDungeon.srcUncommonCardPool.group) {
-                if (pred.test(c)) cardsList.add(c);
+                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
             }
             for (AbstractCard c : AbstractDungeon.srcRareCardPool.group) {
-                if (pred.test(c)) cardsList.add(c);
+                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
             }
             return cardsList;
         }
