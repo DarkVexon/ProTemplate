@@ -63,7 +63,6 @@ public class TodoMod implements
 
     }
 
-    //makePaths
     public static String makePath(String resourcePath) {
         return modID + "Resources/" + resourcePath;
     }
