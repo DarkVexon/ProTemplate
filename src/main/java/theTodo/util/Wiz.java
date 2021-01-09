@@ -46,6 +46,12 @@ public class Wiz {
         return masterCardsList;
     }
 
+    public static void forAllMonstersLiving(Consumer<AbstractMonster> consumer) {
+        for (AbstractMonster m : monsterList()) {
+            consumer.accept(m);
+        }
+    }
+
     public static ArrayList<AbstractMonster> monsterList() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
         monsters.removeIf(m -> m.isDead || m.isDying);
