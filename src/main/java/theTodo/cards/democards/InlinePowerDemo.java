@@ -44,7 +44,7 @@ public class InlinePowerDemo extends AbstractTodoCard {
 
             @Override
             public void updateDescription() {
-                description = "#yStrikes deal #b" + amount + " damage. At the end of your turn, gain #b" + amount + " #yBlock.";
+                description = "#yStrikes deal #b" + amount + " additional damage. At the end of your turn, gain #b" + amount + " #yBlock.";
             }
         });
     }
