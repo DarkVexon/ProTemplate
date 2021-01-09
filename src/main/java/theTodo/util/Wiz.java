@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import theTodo.powers.LosePowerPower;
 
 import java.util.ArrayList;
 
@@ -52,39 +53,49 @@ public class Wiz {
         atb(new MakeTempCardInHandAction(c, i));
     }
 
-    protected void makeInHand(AbstractCard c) {
+    public void makeInHand(AbstractCard c) {
         makeInHand(c, 1);
     }
 
-    protected void shuffleIn(AbstractCard c, int i) {
+    public void shuffleIn(AbstractCard c, int i) {
         atb(new MakeTempCardInDrawPileAction(c, i, true, true));
     }
 
-    protected void shuffleIn(AbstractCard c) {
+    public void shuffleIn(AbstractCard c) {
         shuffleIn(c, 1);
     }
 
-    protected void topDeck(AbstractCard c, int i) {
+    public void topDeck(AbstractCard c, int i) {
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(c, i, false, true));
     }
 
-    protected void topDeck(AbstractCard c) {
+    public void topDeck(AbstractCard c) {
         topDeck(c, 1);
     }
 
-    protected void applyToEnemy(AbstractMonster m, AbstractPower po) {
+    public void applyToEnemy(AbstractMonster m, AbstractPower po) {
         atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
     }
 
-    protected void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
+    public void applyToEnemyTop(AbstractMonster m, AbstractPower po) {
         att(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
     }
 
-    protected void applyToSelf(AbstractPower po) {
+    public void applyToSelf(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
     }
 
-    protected void applyToSelfTop(AbstractPower po) {
+    public void applyToSelfTop(AbstractPower po) {
         att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+    }
+
+    public void applyToEnemyTemp(AbstractMonster m, AbstractPower po) {
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
+        atb(new ApplyPowerAction(m, AbstractDungeon.player, new LosePowerPower(po.owner, po.name, po.amount)));
+    }
+
+    public void applyToSelfTemp(AbstractPower po) {
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+        atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(po.owner, po.name, po.amount)));
     }
 }
