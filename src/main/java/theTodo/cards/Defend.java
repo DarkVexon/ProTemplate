@@ -9,8 +9,6 @@ public class Defend extends AbstractTodoCard {
 
     public final static String ID = makeID("Defend");
 
-    //stupid intellij stuff SKILL, SELF, BASIC
-
     private static final int BLOCK = 5;
     private static final int UPG_BLOCK = 3;
 
