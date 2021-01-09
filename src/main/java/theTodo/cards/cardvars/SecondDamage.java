@@ -11,11 +11,14 @@ public class SecondDamage extends DynamicVariable {
     @Override
     public String key() {
         return makeID("sd");
-    } //TODO: change to something else!
+    } //TODO: change to something else, if you wish
 
     @Override
     public boolean isModified(AbstractCard card) {
-        return ((AbstractTodoCard) card).isSecondDamageModified;
+        if (card instanceof AbstractTodoCard) {
+            return ((AbstractTodoCard) card).isSecondDamageModified;
+        }
+        return false;
     }
 
     public void setIsModified(AbstractCard card, boolean v) {
@@ -26,16 +29,25 @@ public class SecondDamage extends DynamicVariable {
 
     @Override
     public int value(AbstractCard card) {
-        return ((AbstractTodoCard) card).secondDamage;
+        if (card instanceof AbstractTodoCard) {
+            return ((AbstractTodoCard) card).secondDamage;
+        }
+        return -1;
     }
 
     @Override
     public int baseValue(AbstractCard card) {
-        return ((AbstractTodoCard) card).baseSecondDamage;
+        if (card instanceof AbstractTodoCard) {
+            return ((AbstractTodoCard) card).baseSecondDamage;
+        }
+        return -1;
     }
 
     @Override
     public boolean upgraded(AbstractCard card) {
-        return ((AbstractTodoCard) card).upgradedSecondDamage;
+        if (card instanceof AbstractTodoCard) {
+            return ((AbstractTodoCard) card).upgradedSecondDamage;
+        }
+        return false;
     }
 }
