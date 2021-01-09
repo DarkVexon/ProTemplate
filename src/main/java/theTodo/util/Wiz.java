@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
@@ -16,10 +17,34 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import theTodo.powers.LosePowerPower;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
+
+    public static AbstractPlayer adp() {
+        return AbstractDungeon.player;
+    }
+
+    public static void forAllCardsInList(Consumer<AbstractCard> consumer, ArrayList<AbstractCard> cardsList) {
+        for (AbstractCard c : cardsList) {
+            consumer.accept(c);
+        }
+    }
+
+    public static ArrayList<AbstractCard> getAllCardsInCardGroups(boolean includeHand, boolean includeExhaust) {
+        ArrayList<AbstractCard> masterCardsList = new ArrayList<>();
+        masterCardsList.addAll(AbstractDungeon.player.drawPile.group);
+        masterCardsList.addAll(AbstractDungeon.player.discardPile.group);
+        if (includeHand) {
+            masterCardsList.addAll(AbstractDungeon.player.hand.group);
+        }
+        if (includeExhaust) {
+            masterCardsList.addAll(AbstractDungeon.player.exhaustPile.group);
+        }
+        return masterCardsList;
+    }
 
     public static ArrayList<AbstractMonster> monsterList() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
