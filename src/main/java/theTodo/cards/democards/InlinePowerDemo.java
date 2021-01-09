@@ -14,7 +14,6 @@ import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.applyToSelf;
 import static theTodo.util.Wiz.atb;
 
-@AutoAdd.Ignore
 public class InlinePowerDemo extends AbstractTodoCard {
 
     public final static String ID = makeID("InlinePowerDemo");
@@ -29,7 +28,7 @@ public class InlinePowerDemo extends AbstractTodoCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new AbstractLambdaPower("Strike Damage Up, End of Turn Block", AbstractPower.PowerType.BUFF, false, p, magicNumber) {
+        applyToSelf(new AbstractLambdaPower("Strike+, Block+", AbstractPower.PowerType.BUFF, false, p, magicNumber) {
             @Override
             public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
                 if (card.hasTag(CardTags.STRIKE)) {

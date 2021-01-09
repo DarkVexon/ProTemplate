@@ -1,13 +1,12 @@
 package theTodo.cards.democards;
 
-import basemod.AutoAdd;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.watcher.NirvanaPower;
 import theTodo.cards.AbstractTodoCard;
 
 import static theTodo.TodoMod.makeID;
-import static theTodo.util.Wiz.*;
+import static theTodo.util.Wiz.applyToSelfTemp;
 
 public class TemporaryPowerDemo extends AbstractTodoCard {
 

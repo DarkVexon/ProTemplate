@@ -1,13 +1,12 @@
 package theTodo.cardmods;
 
 import basemod.abstracts.AbstractCardModifier;
-import theTodo.cards.democards.InlineCardModDemo;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
-public class LambdaMod extends AbstractCardModifier {
+public abstract class LambdaMod extends AbstractCardModifier {
 
     public LambdaMod() {
 
