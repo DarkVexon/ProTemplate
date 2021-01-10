@@ -7,7 +7,7 @@
     <version>0.0.1</version>
     <name>The Todo</name>
     <description>TODO: Change this description</description>
-    <!--TODO: Change ALL OF THIS!!! -->
+    <!-- -->
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

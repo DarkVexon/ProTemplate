@@ -67,7 +67,6 @@ public class TheTodo extends CustomPlayer {
         return new CharSelectInfo(NAMES[0], TEXT[0],
                 80, 80, 0, 99, 5, this, getStartingRelics(),
                 getStartingDeck(), false);
-        //TODO: Change starting HP and Gold. Or don't
     }
 
     @Override
@@ -79,14 +78,12 @@ public class TheTodo extends CustomPlayer {
         for (int i = 0; i < 4; i++) {
             retVal.add(Defend.ID);
         }
-        //TODO: Change this to your specifications.
         return retVal;
     }
 
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(TodoItem.ID);
-        //TODO: Change this too.
         return retVal;
     }
 
@@ -95,12 +92,11 @@ public class TheTodo extends CustomPlayer {
         CardCrawlGame.sound.playA("UNLOCK_PING", MathUtils.random(-0.2F, 0.2F));
         CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW, ScreenShake.ShakeDur.SHORT,
                 false);
-        //TODO: Change this to a sound befitting your character.
     }
 
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
-        return "UNLOCK_PING"; //TODO: Change this to a sound befitting your character.
+        return "UNLOCK_PING";
     }
 
     @Override
@@ -131,7 +127,6 @@ public class TheTodo extends CustomPlayer {
     @Override
     public AbstractCard getStartCardForEvent() {
         return null;
-        //TODO: Change this to your character's special starting card.
     }
 
     @Override
@@ -165,7 +160,6 @@ public class TheTodo extends CustomPlayer {
     @Override
     public List<CutscenePanel> getCutscenePanels() {
         return super.getCutscenePanels();
-        //TODO: Override this if you want an alternate heart win comic
     }
 
     @Override

@@ -11,7 +11,7 @@ public class SillyVariable extends DynamicVariable {
     @Override
     public String key() {
         return makeID("si");
-    } //TODO: Change this, if you want. It's already modID prefixed, so no worries about conflicts (ASSUMING YOU CHANGED YOUR MODID!)
+    }
 
     @Override
     public boolean isModified(AbstractCard card) {

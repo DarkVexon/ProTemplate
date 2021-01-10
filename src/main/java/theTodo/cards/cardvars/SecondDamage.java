@@ -11,7 +11,7 @@ public class SecondDamage extends DynamicVariable {
     @Override
     public String key() {
         return makeID("sd");
-    } //TODO: change to something else, if you wish
+    }
 
     @Override
     public boolean isModified(AbstractCard card) {

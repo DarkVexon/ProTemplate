@@ -29,8 +29,8 @@ public class TodoMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber {
-    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); //TODO: Set this to your character's favorite color!
-    private static String modID = "todomod";//TODO: Change this, but make sure it matches the ModID in your pom.
+    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
+    private static String modID = "todomod";
     public static final String SHOULDER1 = getModID() + "Resources/images/char/mainChar/shoulder.png";
     public static final String SHOULDER2 = getModID() + "Resources/images/char/mainChar/shoulder2.png";
     public static final String CORPSE = getModID() + "Resources/images/char/mainChar/corpse.png";
