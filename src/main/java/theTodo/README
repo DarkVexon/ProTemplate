@@ -8,3 +8,8 @@ It contains the basics of an empty character, as well as:
 - AbstractCard comes with secondary variable and secondary damage (me + Kio)
 - IntelliJ template to easily make lots of cards (me + GK)
 - Hopefully more! Let me know if there's something you'd want added!!
+
+Setup guide:
+-Change MODID in TodoMod.
+-Change details in pom.xml to match your mod locations.
+-Probably more, lemme test this
