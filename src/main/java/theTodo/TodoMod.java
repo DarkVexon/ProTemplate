@@ -29,8 +29,16 @@ public class TodoMod implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber {
-    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
+
     private static String modID = "todomod";
+    public static String getModID() {
+        return modID;
+    }
+    public static String makeID(String idText) {
+        return getModID() + ":" + idText;
+    }
+
+    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
     public static final String SHOULDER1 = getModID() + "Resources/images/char/mainChar/shoulder.png";
     public static final String SHOULDER2 = getModID() + "Resources/images/char/mainChar/shoulder2.png";
     public static final String CORPSE = getModID() + "Resources/images/char/mainChar/corpse.png";
@@ -84,21 +92,13 @@ public class TodoMod implements
         return modID + "Resources/images/effects/" + resourcePath;
     }
 
-    public static String getModID() {
-        return modID;
-    }
-
     public static void initialize() {
         TodoMod todoMod = new TodoMod();
     }
 
-    public static String makeID(String idText) {
-        return getModID() + ":" + idText;
-    }
-
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(new TheTodo("the Todo", TheTodo.Enums.THE_TODO),
+        BaseMod.addCharacter(new TheTodo(TheTodo.characterStrings.NAMES[1], TheTodo.Enums.THE_TODO),
                 CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, TheTodo.Enums.THE_TODO);
     }
 

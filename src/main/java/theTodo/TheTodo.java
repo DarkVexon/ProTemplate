@@ -42,10 +42,10 @@ public class TheTodo extends CustomPlayer {
             getModID() + "Resources/images/char/mainChar/orb/layer3d.png",
             getModID() + "Resources/images/char/mainChar/orb/layer4d.png",
             getModID() + "Resources/images/char/mainChar/orb/layer5d.png",};
-    private static final String ID = makeID("TemplatePlayer");
-    private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
-    private static final String[] NAMES = characterStrings.NAMES;
-    private static final String[] TEXT = characterStrings.TEXT;
+    static final String ID = makeID("TemplatePlayer");
+    static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
+    static final String[] NAMES = characterStrings.NAMES;
+    static final String[] TEXT = characterStrings.TEXT;
 
 
     public TheTodo(String name, PlayerClass setClass) {

@@ -10,6 +10,16 @@ It contains the basics of an empty character, as well as:
 - Hopefully more! Let me know if there's something you'd want added!!
 
 Setup guide:
--Change MODID in TodoMod.
--Change details in pom.xml to match your mod locations.
--Probably more, lemme test this
+1. Download the project. Create a folder named whatever you want your mod's main name to be (like TheGemcrafter) and put all the files in there.
+2. Rename project. (IntelliJ -> File -> Project Structure... -> Project Name)
+3. Change module name. (Right-click that main folder, Refactor -> Rename, and change the "module name" to match the new folder name.)
+4. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
+5. Rename the enclosing mod folder. (the folder just under Java, initially named theGemcrafter.)
+6. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources.)
+7. Rename the modded character file. (the class initially named TheTodo, not in a folder.)
+8. Rename the main mod file. (the class initially named TodoMod, not in a folder.)
+9. In the main mod file, change the modID to match the modID field in your pom.xml.
+
+10+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
+
+(You could also commission me to make the mod of your dreams at Vex'd#2468!)
