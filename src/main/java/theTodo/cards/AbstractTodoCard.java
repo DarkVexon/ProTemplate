@@ -102,16 +102,21 @@ public abstract class AbstractTodoCard extends CustomCard {
         }
     }
 
-    void upgradeSilly(int amount) {
+    protected void upgradeSilly(int amount) {
         baseSilly += amount;
         silly = baseSilly;
         upgradedSilly = true;
     }
 
-    void upgradeSecondDamage(int amount) {
+    protected void upgradeSecondDamage(int amount) {
         baseSecondDamage += amount;
         secondDamage = baseSecondDamage;
         upgradedSecondDamage = true;
+    }
+
+    protected void uDesc() {
+        rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+        initializeDescription();
     }
 
     public void upgrade() {

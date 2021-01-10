@@ -26,5 +26,10 @@
   "${ModID}:NextTurnPowerDemo": {
     "NAME": "Auto-Generated Next Turn Power",
     "DESCRIPTION": "Next turn, gain !M! Thorns."
+  },
+  "${ModID}:MultiPreviewDemoCard": {
+    "NAME": "Multiple Previews - One Card",
+    "DESCRIPTION": "Ethereal. NL Add a random *Stinky *Watcher *Buddy into your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Add a random Upgraded *Stinky *Watcher *Buddy into your hand. NL Exhaust."
   }
 }
