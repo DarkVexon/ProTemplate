@@ -12,7 +12,7 @@ It contains the basics of an empty character, as well as:
 Setup guide:
 1. Download the project. Create a folder named whatever you want your mod's main name to be (like TheGemcrafter) and put all the files in there.
 2. Rename project. (IntelliJ -> File -> Project Structure... -> Project Name)
-3. Change module name. (Right-click that main folder, Refactor -> Rename, and change the "module name" to match the new folder name.)
+3. Change module name. (Right-click that first folder you made, Refactor -> Rename, and change the "module name" to match the new folder name.)
 4. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
 5. Rename the enclosing mod folder. (the folder just under Java, initially named theGemcrafter.)
 6. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources.)
