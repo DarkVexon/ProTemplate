@@ -5,6 +5,8 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import java.util.HashMap;
@@ -91,4 +93,17 @@ public class TexLoader {
         Texture texture = getTexture(textureString);
         return new TextureAtlas.AtlasRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
     }
+
+
+    @SpirePatch(clz = Texture.class, method="dispose")
+    public static class DisposeListener {
+        @SpirePrefixPatch
+        public static void DisposeListenerPatch(final Texture __instance) {
+            textures.entrySet().removeIf(entry -> {
+                if (entry.getValue().equals(__instance)) System.out.println("TextureLoader | Removing Texture: " + entry.getKey());
+                return entry.getValue().equals(__instance);
+            });
+        }
+    }
+
 }
