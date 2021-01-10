@@ -1,47 +1,4 @@
-Go to New -> Edit file templates... and add one of the two following templates. One adds statics at the top that can make seeing the values of your cards clearer.
-I prefer the other for less lines total.
-
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import theTodo.cards.AbstractTodoCard;
-
-import static theTodo.TodoMod.makeID;
-import static theTodo.util.Wiz.*;
-
-public class ${NAME} extends AbstractTodoCard {
-
-    public final static String ID = makeID("${NAME}");
-    // intellij stuff ${TYPE}, ${TARGET}, ${RARITY}
-
-    #if (${DAMAGE} != "")    private static final int DAMAGE = ${DAMAGE};
-#end#if (${UPGRADE_DAMAGE} != "")    private static final int UPG_DAMAGE = ${UPGRADE_DAMAGE};
-
-#end#if (${BLOCK} != "")    private static final int BLOCK = ${BLOCK};
-#end#if (${UPGRADE_BLOCK} != "")    private static final int UPG_BLOCK = ${UPGRADE_BLOCK};
-
-#end#if (${MAGIC} != "")    private static final int MAGIC = ${MAGIC};
-#end#if (${UPGRADE_MAGIC} != "")    private static final int UPG_MAGIC = ${UPGRADE_MAGIC};
-#end
-    public ${NAME}() {
-        super(ID, ${COST},  CardType.#if ( ${TYPE.equals( "power" )} )POWER#elseif ( ${TYPE.equals( "skill" )} )SKILL#else ATTACK#end, CardRarity.#if ( ${RARITY.equals( "basic" )} )BASIC#elseif ( ${RARITY.equals( "common" )} )COMMON#elseif ( ${RARITY.equals( "uncommon" )} )UNCOMMON#elseif ( ${RARITY.equals( "rare" )} )RARE #else SPECIAL#end, CardTarget.#if ( ${TARGET.equals( "all_enemy" )} )ALL_ENEMY#elseif ( ${TARGET.equals( "self" )} )SELF#elseif ( ${TARGET.equals( "all" )} )ALL#elseif ( ${TARGET.equals( "none" )} )NONE#else  ENEMY#end);
-        #if (${DAMAGE} != "")        baseDamage = DAMAGE;#else#end
-        #if (${BLOCK} != "")        baseBlock = BLOCK;#else#end
-        #if (${MAGIC} != "")        baseMagicNumber = magicNumber = MAGIC;#else#end
-    }
-
-    public void use(AbstractPlayer p, AbstractMonster m) {
-
-    }
-
-    public void upp() {
-        #if (${UPGRADE_DAMAGE} != "")    upgradeDamage(UPG_DAMAGE);
-        #end#if (${UPGRADE_BLOCK} != "")    upgradeBlock(UPG_BLOCK);
-        #end#if (${UPGRADE_MAGIC} != "")    upgradeMagicNumber(UPG_MAGIC);
-        #end#if (${UPGRADE_COST} != "") upgradeBaseCost(${UPGRADE_COST});#end
-    }
-}
-
-//// My version.
+Go to New -> Edit file templates... and add the template. You can also customize it to make it clearer!
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
