@@ -8,7 +8,6 @@ import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.*;
 
 public class ${NAME} extends AbstractTodoCard {
-
     public final static String ID = makeID("${NAME}");
     // intellij stuff ${TYPE}, ${TARGET}, ${RARITY}, ${DAMAGE}, ${UPGRADE_DAMAGE},  ${BLOCK}, ${UPGRADE_BLOCK}, ${MAGIC}, ${UPGRADE_MAGIC}
 
