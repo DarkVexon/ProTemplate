@@ -54,7 +54,7 @@
 
 
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -65,8 +65,8 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <copy file="target/${artifactId}.jar"
-                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${artifactId}.jar"/>
+                                <copy file="target/${project.artifactId}.jar"
+                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${project.artifactId}.jar"/>
                             </target>
                         </configuration>
                         <goals>
