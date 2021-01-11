@@ -66,7 +66,7 @@
                         <configuration>
                             <target>
                                 <copy file="target/${artifactId}.jar"
-                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${artifactID}.jar"/>
+                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${artifactId}.jar"/>
                             </target>
                         </configuration>
                         <goals>
