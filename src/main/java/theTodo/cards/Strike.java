@@ -16,7 +16,7 @@ public class Strike extends AbstractTodoCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        dmg(m, AbstractGameAction.AttackEffect.FIRE);
+        dmg(m, AbstractGameAction.AttackEffect.NONE);
     }
 
     public void upp() {
