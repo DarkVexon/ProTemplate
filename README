@@ -14,7 +14,7 @@ Setup guide:
 2. Rename project. (IntelliJ -> File -> Project Structure... -> Project Name)
 3. Change module name. (Right-click that first folder you made, Refactor -> Rename, and change the "module name" to match the new folder name.)
 4. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
-5. Rename the enclosing mod folder. (the folder just under Java, initially named theGemcrafter.)
+5. Rename the enclosing mod folder. (the folder just under Java, initially named theTodo.)
 6. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources.)
 7. Rename the modded character file. (the class initially named TheTodo, not in a folder.)
 8. Rename the main mod file. (the class initially named TodoMod, not in a folder.)
