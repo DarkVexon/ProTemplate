@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>TheTodo</groupId>
+    <groupId>UnimportantInfo</groupId>
     <artifactId>TheTodo</artifactId>
     <version>0.0.1</version>
     <name>The Todo</name>
@@ -15,7 +15,6 @@
         <SlayTheSpire.version>12-22-2020</SlayTheSpire.version>
         <ModTheSpire.version>3.18.2</ModTheSpire.version>
         <ModID>todomod</ModID>
-        <JarName>TheTodo</JarName>
 
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
         <Steam.path>C:/Program Files (x86)/Steam/steamapps/</Steam.path>
@@ -55,7 +54,7 @@
 
 
     <build>
-        <finalName>${JarName}</finalName>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -66,8 +65,8 @@
                         <phase>package</phase>
                         <configuration>
                             <target>
-                                <copy file="target/${JarName}.jar"
-                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${JarName}.jar"/>
+                                <copy file="target/${artifactId}.jar"
+                                      tofile="${Steam.path}/common/SlayTheSpire/mods/${artifactIdJarName}.jar"/>
                             </target>
                         </configuration>
                         <goals>
