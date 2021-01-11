@@ -1,16 +1,20 @@
 package theTodo.cards;
 
 import basemod.abstracts.CustomCard;
+import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theTodo.TheTodo;
+
+import java.util.ArrayList;
 
 import static theTodo.TodoMod.getModID;
 import static theTodo.util.TexLoader.getCardTextureString;
@@ -29,6 +33,11 @@ public abstract class AbstractTodoCard extends CustomCard {
     public int baseSecondDamage;
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
+
+    private float rotationTimer = getRotationTimeNeeded();
+    private int previewIndex;
+    protected ArrayList<AbstractCard> cardToPreview = new ArrayList<>();
+
 
     public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
@@ -119,6 +128,12 @@ public abstract class AbstractTodoCard extends CustomCard {
         initializeDescription();
     }
 
+    protected void upgradeCardToPreview() {
+        for (AbstractCard q : cardToPreview) {
+            q.upgrade();
+        }
+    }
+
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
@@ -127,6 +142,36 @@ public abstract class AbstractTodoCard extends CustomCard {
     }
 
     public abstract void upp();
+
+    public void update() {
+        super.update();
+        if (!cardToPreview.isEmpty()) {
+            if (hb.hovered) {
+                if (rotationTimer <= 0F) {
+                    rotationTimer = getRotationTimeNeeded();
+                    cardsToPreview = cardToPreview.get(previewIndex);
+                    if (previewIndex == cardToPreview.size() - 1) {
+                        previewIndex = 0;
+                    } else {
+                        previewIndex++;
+                    }
+                } else {
+                    rotationTimer -= Gdx.graphics.getDeltaTime();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void unhover() {
+        super.unhover();
+        if (!cardToPreview.isEmpty())
+            cardsToPreview = null;
+    }
+
+    protected float getRotationTimeNeeded() {
+        return 2f;
+    }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
     protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
