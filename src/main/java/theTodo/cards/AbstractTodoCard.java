@@ -162,15 +162,6 @@ public abstract class AbstractTodoCard extends CustomCard {
         }
     }
 
-    @Override
-    public void unhover() {
-        super.unhover();
-        if (!cardToPreview.isEmpty()) {
-            cardsToPreview = null;
-            rotationTimer = 0f;
-        }
-    }
-
     protected float getRotationTimeNeeded() {
         return 1f;
     }
