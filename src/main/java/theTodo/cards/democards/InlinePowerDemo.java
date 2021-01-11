@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import theTodo.cards.AbstractTodoCard;
-import theTodo.powers.AbstractLambdaPower;
+import theTodo.powers.LambdaPower;
 
 import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.applyToSelf;
@@ -27,7 +27,7 @@ public class InlinePowerDemo extends AbstractTodoCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new AbstractLambdaPower("Strike+, Block+", AbstractPower.PowerType.BUFF, false, p, magicNumber) {
+        applyToSelf(new LambdaPower("Strike+, Block+", AbstractPower.PowerType.BUFF, false, p, magicNumber) {
             @Override
             public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
                 if (card.hasTag(CardTags.STRIKE)) {

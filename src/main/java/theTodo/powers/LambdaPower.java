@@ -2,8 +2,8 @@ package theTodo.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
-public abstract class AbstractLambdaPower extends AbstractEasyPower {
-    public AbstractLambdaPower(String name, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
+public abstract class LambdaPower extends AbstractEasyPower {
+    public LambdaPower(String name, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         super(name, powerType, isTurnBased, owner, amount);
     }
 
