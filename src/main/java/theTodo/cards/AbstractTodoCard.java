@@ -34,7 +34,7 @@ public abstract class AbstractTodoCard extends CustomCard {
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
 
-    private float rotationTimer = getRotationTimeNeeded();
+    private float rotationTimer = 0;
     private int previewIndex;
     protected ArrayList<AbstractCard> cardToPreview = new ArrayList<>();
 
@@ -170,7 +170,7 @@ public abstract class AbstractTodoCard extends CustomCard {
     }
 
     protected float getRotationTimeNeeded() {
-        return 2f;
+        return 1f;
     }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
