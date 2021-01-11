@@ -6,7 +6,6 @@ It contains the basics of an empty character, as well as:
 - Automatic ability to apply TempPowers. Make any power a Flex! (me)
 - AbstractRelic, Power and Card with improved image loading and other shortcuts (alchyr + mine)
 - AbstractCard comes with secondary variable and secondary damage (me + Kio)
-- IntelliJ template to easily make lots of cards (me + GK)
 - Hopefully more! Let me know if there's something you'd want added!!
 
 Setup guide:
