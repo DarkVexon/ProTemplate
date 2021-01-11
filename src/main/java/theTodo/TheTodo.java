@@ -19,6 +19,8 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import theTodo.cards.Defend;
+import theTodo.cards.Strike;
 import theTodo.relics.TodoItem;
 
 import java.util.ArrayList;
