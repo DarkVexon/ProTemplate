@@ -111,7 +111,7 @@ public class TheTodo extends CustomPlayer {
 
     @Override
     public Color getCardTrailColor() {
-        return todoColor.cpy();
+        return characterColor.cpy();
     }
 
     @Override
@@ -141,12 +141,12 @@ public class TheTodo extends CustomPlayer {
 
     @Override
     public Color getCardRenderColor() {
-        return todoColor.cpy();
+        return characterColor.cpy();
     }
 
     @Override
     public Color getSlashAttackColor() {
-        return todoColor.cpy();
+        return characterColor.cpy();
     }
 
     @Override

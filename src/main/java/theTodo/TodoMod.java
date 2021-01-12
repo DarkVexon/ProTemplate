@@ -38,7 +38,7 @@ public class TodoMod implements
         return getModID() + ":" + idText;
     }
 
-    public static Color todoColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
+    public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
     public static final String SHOULDER1 = getModID() + "Resources/images/char/mainChar/shoulder.png";
     public static final String SHOULDER2 = getModID() + "Resources/images/char/mainChar/shoulder2.png";
     public static final String CORPSE = getModID() + "Resources/images/char/mainChar/corpse.png";
@@ -57,8 +57,8 @@ public class TodoMod implements
     public TodoMod() {
         BaseMod.subscribe(this);
 
-        BaseMod.addColor(TheTodo.Enums.TODO_COLOR, todoColor, todoColor, todoColor,
-                todoColor, todoColor, todoColor, todoColor,
+        BaseMod.addColor(TheTodo.Enums.TODO_COLOR, characterColor, characterColor, characterColor,
+                characterColor, characterColor, characterColor, characterColor,
                 ATTACK_S_ART, SKILL_S_ART, POWER_S_ART, CARD_ENERGY_S,
                 ATTACK_L_ART, SKILL_L_ART, POWER_L_ART,
                 CARD_ENERGY_L, TEXT_ENERGY);
