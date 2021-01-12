@@ -9,16 +9,15 @@ It contains the basics of an empty character, as well as:
 - Hopefully more! Let me know if there's something you'd want added!!
 
 Setup guide:
-1. Download the project. Create a folder named whatever you want your mod's main name to be (like TheGemcrafter) and put all the files in there.
-2. Rename project. (IntelliJ -> File -> Project Structure... -> Project Name)
-3. Change module name. (Right-click that first folder you made, Refactor -> Rename, and change the "module name" to match the new folder name.)
-4. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
-5. Rename the enclosing mod folder. (the folder just under Java, initially named theTodo.)
-6. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources. The change needs to match your mod ID, plus "Resources". IE: if your modid is "blah", "blahResources".)
-7. Rename the modded character file. (the class initially named TheTodo, not in a folder.)
-8. Rename the main mod file. (the class initially named TodoMod, not in a folder.)
-9. In the main mod file, change the modID to match the modID field in your pom.xml.
+1. Clone the project with Github, preferably downloading with Github Desktop to make it so IntelliJ integration is easy!
+2. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
+3. Rename the enclosing mod folder. (the folder just under Java, initially named theTodo.)
+4. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources. The change needs to match your mod ID, plus "Resources". IE: if your modid is "blah", "blahResources".)
+5. Rename the modded character file. (the class initially named TheTodo, not in a folder.)
+6. In the modded character file, go to the Enums section at the bottom and change the PlayerClass and CardColor enums. They're also annotated with TODOs.
+7. Rename the main mod file. (the class initially named TodoMod, not in a folder.)
+8. In the main mod file, change the modID to match the modID field in your pom.xml.
 
-10+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
+9+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
 
 (You could also commission me to make the mod of your dreams at Vex'd#2468!)
