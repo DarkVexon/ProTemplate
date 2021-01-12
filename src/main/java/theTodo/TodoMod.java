@@ -84,14 +84,6 @@ public class TodoMod implements
         return modID + "Resources/images/cards/" + resourcePath;
     }
 
-    public static String makeCharacterPath(String resourcePath) {
-        return modID + "Resources/images/character/" + resourcePath;
-    }
-
-    public static String makeEffectPath(String resourcePath) {
-        return modID + "Resources/images/effects/" + resourcePath;
-    }
-
     public static void initialize() {
         TodoMod todoMod = new TodoMod();
     }
