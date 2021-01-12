@@ -2,6 +2,7 @@ package theTodo.util;
 
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.github.tommyettinger.colorful.Shaders;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.random.Random;
+import javafx.scene.Camera;
 import theTodo.cards.AbstractTodoCard;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class CardArtRoller {
             t.flip(false, true);
             FrameBuffer fb = FBHelper.createBuffer();
             SpriteBatch sb = new SpriteBatch();
-            fb.begin();
+            FBHelper.beginBuffer(fb);
             sb.setShader(shade);
             sb.setColor(HSLC);
             sb.begin();
