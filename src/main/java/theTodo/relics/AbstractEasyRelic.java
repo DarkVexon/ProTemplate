@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import theTodo.util.TexLoader;
 
+import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeRelicPath;
 
 public abstract class AbstractEasyRelic extends CustomRelic {
@@ -15,8 +16,8 @@ public abstract class AbstractEasyRelic extends CustomRelic {
     }
 
     public AbstractEasyRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
-        super(setId, TexLoader.getTexture(makeRelicPath(setId + ".png")), tier, sfx);
-        outlineImg = TexLoader.getTexture(makeRelicPath(setId + "Outline.png"));
+        super(setId, TexLoader.getTexture(makeRelicPath(setId.replace(getModID() + ":", "") + ".png")), tier, sfx);
+        outlineImg = TexLoader.getTexture(makeRelicPath(setId.replace(getModID() + ":", "") + "Outline.png"));
         this.color = color;
     }
 
