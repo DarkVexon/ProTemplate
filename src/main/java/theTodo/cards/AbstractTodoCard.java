@@ -2,6 +2,7 @@ package theTodo.cards;
 
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -13,11 +14,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theTodo.TheTodo;
+import theTodo.util.CardArtRoller;
 
 import java.util.ArrayList;
 
 import static theTodo.TodoMod.getModID;
-import static theTodo.util.TexLoader.getCardTextureString;
+import static theTodo.TodoMod.makeImagePath;
 import static theTodo.util.Wiz.atb;
 
 public abstract class AbstractTodoCard extends CustomCard {
@@ -38,6 +40,7 @@ public abstract class AbstractTodoCard extends CustomCard {
     private int previewIndex;
     protected ArrayList<AbstractCard> cardToPreview = new ArrayList<>();
 
+    private boolean needsArtRefresh = false;
 
     public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
@@ -51,6 +54,31 @@ public abstract class AbstractTodoCard extends CustomCard {
         name = originalName = cardStrings.NAME;
         initializeTitle();
         initializeDescription();
+
+        if (textureImg.contains("ui/missing.png")) {
+            needsArtRefresh = true;
+        }
+    }
+
+    public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
+        String textureString;
+
+        switch (cardType) {
+            case ATTACK:
+            case POWER:
+            case SKILL:
+                textureString = makeImagePath("cards/" + cardName + ".png");
+                break;
+            default:
+                textureString = makeImagePath("ui/missing.png");
+                break;
+        }
+
+        FileHandle h = Gdx.files.internal(textureString);
+        if (!h.exists()) {
+            textureString = makeImagePath("ui/missing.png");
+        }
+        return textureString;
     }
 
     @Override
@@ -145,6 +173,9 @@ public abstract class AbstractTodoCard extends CustomCard {
 
     public void update() {
         super.update();
+        if (needsArtRefresh) {
+            CardArtRoller.computeCard(this);
+        }
         if (!cardToPreview.isEmpty()) {
             if (hb.hovered) {
                 if (rotationTimer <= 0F) {

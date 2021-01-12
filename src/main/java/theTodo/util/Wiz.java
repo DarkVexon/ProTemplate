@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import theTodo.powers.LosePowerPower;
@@ -94,8 +95,12 @@ public class Wiz {
         return returnTrulyRandomPrediCardInCombat(pred, false);
     }
 
+    public static <T> T getRandomItem(ArrayList<T> list, Random rng) {
+        return list.isEmpty() ? null : list.get(rng.random(list.size() - 1));
+    }
+
     public static <T> T getRandomItem(ArrayList<T> list) {
-        return list.isEmpty() ? null : list.get(AbstractDungeon.cardRandomRng.random(list.size() - 1));
+        return getRandomItem(list, AbstractDungeon.cardRandomRng);
     }
 
     public static boolean isInCombat() {

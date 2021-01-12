@@ -1,13 +1,11 @@
 package theTodo.util;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import java.util.HashMap;
 
@@ -30,45 +28,6 @@ public class TexLoader {
             }
         }
         return textures.get(textureString);
-    }
-
-    public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
-        String textureString;
-
-        switch (cardType) {
-            case ATTACK:
-                textureString = makeImagePath("cards/" + cardName + ".png");
-                break;
-            case SKILL:
-                textureString = makeImagePath("cards/" + cardName + ".png");
-                break;
-            case POWER:
-                textureString = makeImagePath("cards/" + cardName + ".png");
-                break;
-            default:
-                textureString = makeImagePath("ui/missing.png");
-                break;
-        }
-
-        FileHandle h = Gdx.files.internal(textureString);
-        if (!h.exists()) {
-            switch (cardType) {
-                case ATTACK:
-                    textureString = makeImagePath("cards/Attack.png");
-                    break;
-                case SKILL:
-                    textureString = makeImagePath("cards/Skill.png");
-                    break;
-                case POWER:
-                    textureString = makeImagePath("cards/Power.png");
-                    break;
-                default:
-                    textureString = makeImagePath("ui/missing.png");
-                    break;
-            }
-        }
-
-        return textureString;
     }
 
     private static void loadTexture(final String textureString) throws GdxRuntimeException {
