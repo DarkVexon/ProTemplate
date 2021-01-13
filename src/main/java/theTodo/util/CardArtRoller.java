@@ -50,7 +50,7 @@ public class CardArtRoller {
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
 
-        doneCardsPortrait.putIfAbsent(c.cardID, key -> {
+        doneCardsPortrait.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.get(c.cardID);
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
             TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
