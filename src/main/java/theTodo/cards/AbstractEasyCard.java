@@ -3,6 +3,7 @@ package theTodo.cards;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -62,6 +63,14 @@ public abstract class AbstractEasyCard extends CustomCard {
             } else
                 needsArtRefresh = true;
         }
+    }
+
+    @Override
+    protected Texture getPortraitImage() {
+        if (CardArtRoller.doneCardsPortrait.containsKey(cardID)) {
+            return CardArtRoller.doneCardsPortrait.get(cardID);
+        }
+        return super.getPortraitImage();
     }
 
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
