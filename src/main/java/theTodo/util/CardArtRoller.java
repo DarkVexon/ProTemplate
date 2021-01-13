@@ -1,8 +1,10 @@
 package theTodo.util;
 
 import basemod.BaseMod;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -18,6 +20,8 @@ import theTodo.cards.AbstractEasyCard;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static theTodo.TodoMod.getModID;
+
 public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
     public static HashMap<String, Texture> doneCardsPortrait = new HashMap<String, Texture>();
@@ -26,7 +30,7 @@ public class CardArtRoller {
 
     public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
-            ReskinInfo r = infos.computeIfAbsent(c.cardID, key2 -> {
+            ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                 Random rng = new Random();
                 ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && BaseMod.isBaseGameCardColor(s.color), true);
                 String q = Wiz.getRandomItem(cardsList, rng).cardID;
@@ -51,7 +55,7 @@ public class CardArtRoller {
         });
 
         doneCardsPortrait.computeIfAbsent(c.cardID, key -> {
-            ReskinInfo r = infos.get(c.cardID);
+            ReskinInfo r = infos.get(key);
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
             TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
             t.flip(false, true);
