@@ -67,10 +67,7 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     @Override
     protected Texture getPortraitImage() {
-        if (CardArtRoller.doneCardsPortrait.containsKey(cardID)) {
-            return CardArtRoller.doneCardsPortrait.get(cardID);
-        }
-        return super.getPortraitImage();
+        return CardArtRoller.getPortraitTexture(this);
     }
 
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {

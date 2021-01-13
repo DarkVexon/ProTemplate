@@ -53,27 +53,29 @@ public class CardArtRoller {
             TextureRegion a = FBHelper.getBufferTexture(fb);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
+    }
 
-        doneCardsPortrait.computeIfAbsent(c.cardID, key -> {
-            ReskinInfo r = infos.get(key);
-            Color HSLC = new Color(r.H, r.S, r.L, r.C);
-            TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
-            t.flip(false, true);
-            FrameBuffer fb = FBHelper.createBuffer(500, 380);
-            OrthographicCamera og = new OrthographicCamera(500, 380);
-            SpriteBatch sb = new SpriteBatch();
-            sb.setProjectionMatrix(og.combined);
-            FBHelper.beginBuffer(fb);
-            sb.setShader(shade);
-            sb.setColor(HSLC);
-            sb.begin();
-            sb.draw(t, -250, -190);
-            sb.end();
-            fb.end();
-            t.flip(false, true);
-            TextureRegion a = FBHelper.getBufferTexture(fb);
-            return a.getTexture();
-        });
+    public static Texture getPortraitTexture(AbstractCard c) {
+        ReskinInfo r = infos.get(c.cardID);
+        Color HSLC = new Color(r.H, r.S, r.L, r.C);
+        TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
+        t.flip(false, true);
+        FrameBuffer fb = FBHelper.createBuffer(500, 380);
+        OrthographicCamera og = new OrthographicCamera(500, 380);
+        SpriteBatch sb = new SpriteBatch();
+        sb.setProjectionMatrix(og.combined);
+        FBHelper.beginBuffer(fb);
+        sb.setShader(shade);
+        sb.setColor(HSLC);
+        sb.begin();
+        sb.draw(t, -250, -190);
+        sb.end();
+        fb.end();
+        t.flip(false, true);
+        TextureRegion a = FBHelper.getBufferTexture(fb);
+        return a.getTexture();
+
+        //Actually, I think this can work. Because SingleCardViewPopup disposes of the texture, we can just make a new one every time.
     }
 
     public static class ReskinInfo {
