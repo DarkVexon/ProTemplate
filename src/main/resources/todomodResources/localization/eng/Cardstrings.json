@@ -31,5 +31,10 @@
     "NAME": "Multiple Previews - One Card",
     "DESCRIPTION": "Ethereal. NL Add a random *Stinky *Watcher *Buddy into your hand. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Ethereal. NL Add a random Upgraded *Stinky *Watcher *Buddy into your hand. NL Exhaust."
+  },
+  "${ModID}:EasyXCostDemo": {
+    "NAME": "Easy X Cost",
+    "DESCRIPTION": "Deal !D! damage X times. NL Gain X Strength. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage X+1 times. NL Gain X+1 Strength. NL Exhaust."
   }
 }

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeImagePath;
 import static theTodo.util.Wiz.atb;
+import static theTodo.util.Wiz.att;
 
 public abstract class AbstractEasyCard extends CustomCard {
 
@@ -210,6 +211,10 @@ public abstract class AbstractEasyCard extends CustomCard {
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
     protected void dmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
         atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
+    }
+
+    protected void dmgTop(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
+        att(new DamageAction(m, new DamageInfo(AbstractDungeon.player, damage, damageTypeForTurn), fx));
     }
 
     protected void allDmg(AbstractGameAction.AttackEffect fx) {
