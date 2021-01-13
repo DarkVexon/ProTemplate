@@ -2,6 +2,7 @@ package theTodo.util;
 
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.github.tommyettinger.colorful.Shaders;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
 import theTodo.cards.AbstractEasyCard;
 
@@ -17,15 +19,20 @@ import java.util.HashMap;
 
 public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
+    public static HashMap<String, Texture> doneCardsPortrait = new HashMap<String, Texture>();
+    public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
     private static ShaderProgram shade = new ShaderProgram(Shaders.vertexShaderHSLC, Shaders.fragmentShaderHSLC);
 
     public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
-            Random rng = new Random();
-            ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(r -> r.type == c.type && BaseMod.isBaseGameCardColor(r.color), true);
-            AbstractCard q = Wiz.getRandomItem(cardsList, rng);
-            Color HSLC = new Color(rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f));
-            TextureAtlas.AtlasRegion t = q.portrait;
+            ReskinInfo r = infos.computeIfAbsent(c.cardID, key2 -> {
+                Random rng = new Random();
+                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && BaseMod.isBaseGameCardColor(s.color), true);
+                String q = Wiz.getRandomItem(cardsList, rng).cardID;
+                return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
+            });
+            Color HSLC = new Color(r.H, r.S, r.L, r.C);
+            TextureAtlas.AtlasRegion t = CardLibrary.getCard(r.origCardID).portrait;
             t.flip(false, true);
             FrameBuffer fb = FBHelper.createBuffer();
             SpriteBatch sb = new SpriteBatch();
@@ -39,5 +46,42 @@ public class CardArtRoller {
             TextureRegion a = FBHelper.getBufferTexture(fb);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
+
+        doneCardsPortrait.computeIfAbsent(c.cardID, key -> {
+            ReskinInfo r = infos.get(c.cardID);
+            Color HSLC = new Color(r.H, r.S, r.L, r.C);
+            TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
+            t.flip(false, true);
+            FrameBuffer fb = FBHelper.createBuffer();
+            SpriteBatch sb = new SpriteBatch();
+            FBHelper.beginBuffer(fb);
+            sb.setShader(shade);
+            sb.setColor(HSLC);
+            sb.begin();
+            sb.draw(t, 0, 0);
+            sb.end();
+            fb.end();
+            t.flip(false, true);
+            TextureRegion a = FBHelper.getBufferTexture(fb);
+            return a.getTexture();
+        });
+    }
+
+    public static class ReskinInfo {
+        public String origCardID;
+        public float H;
+        public float S;
+        public float L;
+        public float C;
+        public boolean flipX;
+
+        public ReskinInfo(String ID, float H, float S, float L, float C, boolean flipX) {
+            this.origCardID = ID;
+            this.H = H;
+            this.S = S;
+            this.L = L;
+            this.C = C;
+            this.flipX = flipX;
+        }
     }
 }
