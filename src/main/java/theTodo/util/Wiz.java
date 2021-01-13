@@ -169,11 +169,6 @@ public class Wiz {
         att(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
     }
 
-    public static void applyToEnemyTemp(AbstractMonster m, AbstractPower po) {
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, po, po.amount));
-        atb(new ApplyPowerAction(m, AbstractDungeon.player, new LosePowerPower(po.owner, po, po.amount)));
-    }
-
     public static void applyToSelfTemp(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new LosePowerPower(AbstractDungeon.player, po, po.amount)));
