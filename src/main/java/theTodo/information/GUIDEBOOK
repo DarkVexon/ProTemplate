@@ -7,7 +7,7 @@ The structure of a Slay the Spire mod primarily is split between two folders and
 - Main folder (This folder contains everything in your mod.)
     -.idea (This folder is automatically created by intelliJ, and manages what intelliJ knows about your code. You usually won't need this.)
     -src (Source folder. This contains the stuff you make for your mod.)
-        -main (Another subfolder. If you had other files main, it could go in another folder inside src.
+        -main (Another subfolder. If you had other files main, it could go in another folder inside src.)
             -java (For java code.)
                 -theTodo (Java code for your character in specific.)
                     -actions (AbstractGameActions. We'll get to these later.)
