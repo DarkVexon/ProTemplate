@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static theTodo.TodoMod.makeID;
 
-public class Strike extends AbstractTodoCard {
+public class Strike extends AbstractEasyCard {
     public final static String ID = makeID("Strike");
     // intellij stuff attack, enemy, basic, 6, 3,  , , , 
 

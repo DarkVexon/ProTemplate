@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import static theTodo.TodoMod.makeID;
 
-public class Defend extends AbstractTodoCard {
+public class Defend extends AbstractEasyCard {
     public final static String ID = makeID("Defend");
     // intellij stuff skill, self, basic, , ,  5, 3, , 
 

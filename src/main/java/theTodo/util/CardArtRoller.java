@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.github.tommyettinger.colorful.Shaders;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.random.Random;
-import theTodo.cards.AbstractTodoCard;
+import theTodo.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
     private static ShaderProgram shade = new ShaderProgram(Shaders.vertexShaderHSLC, Shaders.fragmentShaderHSLC);
 
-    public static void computeCard(AbstractTodoCard c) {
+    public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             Random rng = new Random();
             ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(r -> r.type == c.type && BaseMod.isBaseGameCardColor(r.color), true);

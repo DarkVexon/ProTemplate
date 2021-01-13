@@ -22,7 +22,7 @@ import static theTodo.TodoMod.getModID;
 import static theTodo.TodoMod.makeImagePath;
 import static theTodo.util.Wiz.atb;
 
-public abstract class AbstractTodoCard extends CustomCard {
+public abstract class AbstractEasyCard extends CustomCard {
 
     protected final CardStrings cardStrings;
 
@@ -42,11 +42,11 @@ public abstract class AbstractTodoCard extends CustomCard {
 
     private boolean needsArtRefresh = false;
 
-    public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
+    public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, TheTodo.Enums.TODO_COLOR);
     }
 
-    public AbstractTodoCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
+    public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
         super(cardID, "", getCardTextureString(cardID.replace(getModID() + ":", ""), type),
                 cost, "", type, color, rarity, target);
         cardStrings = CardCrawlGame.languagePack.getCardStrings(this.cardID);

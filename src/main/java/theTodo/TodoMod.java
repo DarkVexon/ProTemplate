@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import theTodo.cards.AbstractTodoCard;
+import theTodo.cards.AbstractEasyCard;
 import theTodo.cards.cardvars.SecondDamage;
 import theTodo.cards.cardvars.SillyVariable;
 import theTodo.relics.AbstractEasyRelic;
@@ -115,7 +115,7 @@ public class TodoMod implements
         BaseMod.addDynamicVariable(new SillyVariable());
         BaseMod.addDynamicVariable(new SecondDamage());
         new AutoAdd(modID)
-                .packageFilter(AbstractTodoCard.class)
+                .packageFilter(AbstractEasyCard.class)
                 .setDefaultSeen(true)
                 .cards();
     }
