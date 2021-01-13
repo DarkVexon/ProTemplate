@@ -1,0 +1,34 @@
+This guidebook will walk you through the basics of programming your Slay the Spire mod.
+This is a long guidebook. Grab your pot of tea, sit back...
+
+1. Basic Overview
+IntelliJ is a Java programming IDE (Integrated Developing Environment). Basically, it's a code editor that helps you write code with autofilling and more.
+The structure of a Slay the Spire mod primarily is split between two folders and their sub-folders, but for completion's sake, I'll go over the entire filesystem.
+- Main folder (This folder contains everything in your mod.)
+    -.idea (This folder is automatically created by intelliJ, and manages what intelliJ knows about your code. You usually won't need this.)
+    -src (Source folder. This contains the stuff you make for your mod.)
+        -main (Another subfolder. If you had other files main, it could go in another folder inside src.
+            -java (For java code.)
+                -theTodo (Java code for your character in specific.)
+                    -actions (AbstractGameActions. We'll get to these later.)
+                    -cardmods (AbstractCardModifiers. We'll get to these later.)
+                    -cards (Cards. We'll get to these later.)
+                    -effects (Visual effects. We'll get to these later.)
+                    -information (The folder this file is in.)
+                    -powers (Powers. We'll get to these later.)
+                    -relics (Relics. We'll get to these later.)
+                    -util (Utility clases. We'll get to these soon.)
+                    TheTodo.class (This is the character class file for your mod's character. The character class file holds information such as the character's starting deck, relics, and HP.)
+                    TodoMod.class (This is the main mod file. This is what actually gets pulled by the game's modding API to add your code to the game. If you ever need to use Subscribers, you should probably attach them here.)
+            -resources (The resources folder. This is mainly for localization and text storage purposes.
+                -todomodResources (Anything in that resources folder is added to the game's resources. To prevent mod conflict, the resources folder your mod works off of is renamed to be unique so files don't clash.)
+                    -images (Images for the game. Everything in here should be pretty self explanatory.)
+                    -localization (Localization for the game. This is where text gets loaded in, although you could hardcode most text in as strings. Cards, character info and relics must be put in here though.)
+                        -eng (English. By default, this is the only folder that exists. If you implement localization, making alternate folders to this would be the way to go.
+                    ModTheSpire.json (This file tells the modding API about your mod. Most of its info gets loaded from your pom.xml file.)
+    gitignore (Tells git what to ignore. If you don't use git, this won't be there and you don't need it.)
+    LICENSE (This lets everyone access your mod code, unless you change it to say "this is mine" or something.)
+    pom.xml (This file is VERY IMPORTANT! It tells intelliJ how to compile your code into a jar the game can run. You'll need to change a lot in here, which you hopefully already did when following the README.)
+    ???.iml (This IML file will be named after your mod's project in intelliJ. I have no idea what it does, but IntelliJ breaks if you delete it, so just ignore it.)
+    README (The README you hopefully read to get started.)
+- External Libraries (The pom.xml also loads in external resources that the mod needs to know about for you to be able to code effectively, like the basegame and modding stuff. That's where this is - although usually you'll access the things here with search.)
