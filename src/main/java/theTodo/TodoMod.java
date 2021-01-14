@@ -86,7 +86,7 @@ public class TodoMod implements
     }
 
     public static void initialize() {
-        TodoMod todoMod = new TodoMod();
+        TodoMod thismod = new TodoMod();
     }
 
     @Override
