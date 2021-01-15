@@ -21,6 +21,7 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import theTodo.cards.Defend;
 import theTodo.cards.Strike;
+import theTodo.cards.democards.EasyXCostDemo;
 import theTodo.relics.TodoItem;
 
 import java.util.ArrayList;
@@ -126,6 +127,7 @@ public class TheTodo extends CustomPlayer {
 
     @Override
     public AbstractCard getStartCardForEvent() {
+        System.out.println("YOU NEED TO SET getStartCardForEvent() in your " + getClass().getSimpleName() + " file!");
         return null;
     }
 
