@@ -1,13 +1,14 @@
 package theTodo.util;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 
-public class FBHelper {
+public class ImageHelper {
     public static FrameBuffer createBuffer() {
         return createBuffer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
@@ -27,5 +28,9 @@ public class FBHelper {
         TextureRegion texture = new TextureRegion(fbo.getColorBufferTexture());
         texture.flip(false, true);
         return texture;
+    }
+
+    public static TextureAtlas.AtlasRegion asAtlasRegion(Texture tex) {
+        return new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
     }
 }

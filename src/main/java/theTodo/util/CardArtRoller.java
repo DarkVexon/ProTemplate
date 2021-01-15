@@ -1,10 +1,8 @@
 package theTodo.util;
 
 import basemod.BaseMod;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -19,8 +17,6 @@ import theTodo.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static theTodo.TodoMod.getModID;
 
 public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
@@ -39,18 +35,18 @@ public class CardArtRoller {
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
             TextureAtlas.AtlasRegion t = CardLibrary.getCard(r.origCardID).portrait;
             t.flip(false, true);
-            FrameBuffer fb = FBHelper.createBuffer(250, 190);
+            FrameBuffer fb = ImageHelper.createBuffer(250, 190);
             OrthographicCamera og = new OrthographicCamera(250, 190);
             SpriteBatch sb = new SpriteBatch();
             sb.setProjectionMatrix(og.combined);
-            FBHelper.beginBuffer(fb);
+            ImageHelper.beginBuffer(fb);
             sb.setShader(shade);
             sb.setColor(HSLC);
             sb.begin();
             sb.draw(t, -125, -95);
             sb.end();
             fb.end();
-            TextureRegion a = FBHelper.getBufferTexture(fb);
+            TextureRegion a = ImageHelper.getBufferTexture(fb);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
     }
@@ -60,11 +56,11 @@ public class CardArtRoller {
         Color HSLC = new Color(r.H, r.S, r.L, r.C);
         TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
         t.flip(false, true);
-        FrameBuffer fb = FBHelper.createBuffer(500, 380);
+        FrameBuffer fb = ImageHelper.createBuffer(500, 380);
         OrthographicCamera og = new OrthographicCamera(500, 380);
         SpriteBatch sb = new SpriteBatch();
         sb.setProjectionMatrix(og.combined);
-        FBHelper.beginBuffer(fb);
+        ImageHelper.beginBuffer(fb);
         sb.setShader(shade);
         sb.setColor(HSLC);
         sb.begin();
@@ -72,7 +68,7 @@ public class CardArtRoller {
         sb.end();
         fb.end();
         t.flip(false, true);
-        TextureRegion a = FBHelper.getBufferTexture(fb);
+        TextureRegion a = ImageHelper.getBufferTexture(fb);
         return a.getTexture();
 
         //Actually, I think this can work. Because SingleCardViewPopup disposes of the texture, we can just make a new one every time.

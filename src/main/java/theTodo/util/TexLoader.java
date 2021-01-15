@@ -50,7 +50,7 @@ public class TexLoader {
 
     public static TextureAtlas.AtlasRegion getTextureAsAtlasRegion(String textureString) {
         Texture texture = getTexture(textureString);
-        return new TextureAtlas.AtlasRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
+        return ImageHelper.asAtlasRegion(texture);
     }
 
 
