@@ -52,12 +52,12 @@ public class Wiz {
     }
 
     public static void forAllMonstersLiving(Consumer<AbstractMonster> consumer) {
-        for (AbstractMonster m : monsterList()) {
+        for (AbstractMonster m : getEnemies()) {
             consumer.accept(m);
         }
     }
 
-    public static ArrayList<AbstractMonster> monsterList() {
+    public static ArrayList<AbstractMonster> getEnemies() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
         monsters.removeIf(m -> m.isDead || m.isDying);
         return monsters;
