@@ -1,6 +1,7 @@
 package theTodo.util;
 
 import basemod.BaseMod;
+import basemod.patches.whatmod.WhatMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,7 +29,7 @@ public class CardArtRoller {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                 Random rng = new Random((long) c.cardID.hashCode());
-                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && BaseMod.isBaseGameCardColor(s.color), true);
+                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && WhatMod.findModName(s.getClass()) == null, true);
                 String q = Wiz.getRandomItem(cardsList, rng).cardID;
                 return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
             });
