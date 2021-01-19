@@ -21,7 +21,6 @@ import java.util.HashMap;
 
 public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
-    public static HashMap<String, Texture> doneCardsPortrait = new HashMap<String, Texture>();
     public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
     private static ShaderProgram shade = new ShaderProgram(Shaders.vertexShaderHSLC, Shaders.fragmentShaderHSLC);
 
