@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.megacrit.cardcrawl.core.Settings;
 
 public class ImageHelper {
     public static FrameBuffer createBuffer() {
@@ -32,5 +34,9 @@ public class ImageHelper {
 
     public static TextureAtlas.AtlasRegion asAtlasRegion(Texture tex) {
         return new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
+    }
+
+    public static void drawTextureScaled(SpriteBatch sb, Texture tex, float x, float y) {
+        sb.draw(tex, x, y, 0, 0, tex.getWidth() * Settings.scale, tex.getHeight() * Settings.scale, 1, 1, 0, 0, 0, tex.getWidth(), tex.getHeight(), false, false);
     }
 }
