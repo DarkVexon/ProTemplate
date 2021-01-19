@@ -2,24 +2,26 @@ package theTodo.actions;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import theTodo.cards.EasyModalChoiceCard;
 
 import java.util.ArrayList;
 
 public class EasyModalChoiceAction extends SelectCardsAction {
-    public EasyModalChoiceAction(ArrayList<EasyModalChoiceCard> list, int amount, String textforSelect) {
-        super(new ArrayList<>(list), amount, textforSelect, (cards) -> {
+
+    //TODO: When the StsLib SelectCardsCenteredAction PR is pushed to steam, swap the extended action with that.
+
+    public EasyModalChoiceAction(ArrayList<AbstractCard> list, int amount, String textforSelect) {
+        super(list, amount, textforSelect, (cards) -> {
             for (AbstractCard q : cards) {
                 q.onChoseThisOption();
             }
         });
     }
 
-    public EasyModalChoiceAction(ArrayList<EasyModalChoiceCard> list, int amount) {
+    public EasyModalChoiceAction(ArrayList<AbstractCard> list, int amount) {
         this(list, amount, "Choose.");
     }
 
-    public EasyModalChoiceAction(ArrayList<EasyModalChoiceCard> list) {
+    public EasyModalChoiceAction(ArrayList<AbstractCard> list) {
         this(list, 1, "Choose.");
     }
 }

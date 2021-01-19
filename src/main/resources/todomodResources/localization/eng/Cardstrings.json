@@ -36,5 +36,9 @@
     "NAME": "Easy X Cost",
     "DESCRIPTION": "Deal !D! damage X times. NL Gain X Strength. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Deal !D! damage X+1 times. NL Gain X+1 Strength. NL Exhaust."
+  },
+  "${ModID}:EasyModalChoiceDemo": {
+    "NAME": "Easy Modal Choice",
+    "DESCRIPTION": "Choose 1: Draw !M! cards or gain !todomod:si! Strength."
   }
 }
