@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.helpers.input.InputHelper;
 
 public class ImageHelper {
     public static FrameBuffer createBuffer() {
@@ -38,5 +40,18 @@ public class ImageHelper {
 
     public static void drawTextureScaled(SpriteBatch sb, Texture tex, float x, float y) {
         sb.draw(tex, x, y, 0, 0, tex.getWidth() * Settings.scale, tex.getHeight() * Settings.scale, 1, 1, 0, 0, 0, tex.getWidth(), tex.getHeight(), false, false);
+    }
+
+    public static void tipBoxAtMousePos(String name, String description) {
+        if ((float) InputHelper.mX < 1400.0F * Settings.scale) {
+            TipHelper.renderGenericTip(
+                    (float) InputHelper.mX + 60.0F * Settings.scale, (float) InputHelper.mY - 50.0F * Settings.scale,
+                    name,
+                    description);
+        } else {
+            TipHelper.renderGenericTip((float) InputHelper.mX - 350.0F * Settings.scale, (float) InputHelper.mY - 50.0F * Settings.scale,
+                    name,
+                    description);
+        }
     }
 }
