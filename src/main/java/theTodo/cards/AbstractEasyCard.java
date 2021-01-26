@@ -20,8 +20,7 @@ import theTodo.util.CardArtRoller;
 
 import java.util.ArrayList;
 
-import static theTodo.TodoMod.getModID;
-import static theTodo.TodoMod.makeImagePath;
+import static theTodo.TodoMod.*;
 import static theTodo.util.Wiz.atb;
 import static theTodo.util.Wiz.att;
 
@@ -50,7 +49,7 @@ public abstract class AbstractEasyCard extends CustomCard {
     }
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
-        super(cardID, "", getCardTextureString(cardID.replace(getModID() + ":", ""), type),
+        super(cardID, "", getCardTextureString(cardID.replace(modID + ":", ""), type),
                 cost, "", type, color, rarity, target);
         cardStrings = CardCrawlGame.languagePack.getCardStrings(this.cardID);
         rawDescription = cardStrings.DESCRIPTION;

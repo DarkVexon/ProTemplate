@@ -31,29 +31,27 @@ public class TodoMod implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber {
 
-    private static String modID = "todomod";
-    public static String getModID() {
-        return modID;
-    }
+    public static final String modID = "todomod"; //TODO: Change this.
+
     public static String makeID(String idText) {
-        return getModID() + ":" + idText;
+        return modID + ":" + idText;
     }
 
     public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
-    public static final String SHOULDER1 = getModID() + "Resources/images/char/mainChar/shoulder.png";
-    public static final String SHOULDER2 = getModID() + "Resources/images/char/mainChar/shoulder2.png";
-    public static final String CORPSE = getModID() + "Resources/images/char/mainChar/corpse.png";
-    private static final String ATTACK_S_ART = getModID() + "Resources/images/512/attack.png";
-    private static final String SKILL_S_ART = getModID() + "Resources/images/512/skill.png";
-    private static final String POWER_S_ART = getModID() + "Resources/images/512/power.png";
-    private static final String CARD_ENERGY_S = getModID() + "Resources/images/512/energy.png";
-    private static final String TEXT_ENERGY = getModID() + "Resources/images/512/text_energy.png";
-    private static final String ATTACK_L_ART = getModID() + "Resources/images/1024/attack.png";
-    private static final String SKILL_L_ART = getModID() + "Resources/images/1024/skill.png";
-    private static final String POWER_L_ART = getModID() + "Resources/images/1024/power.png";
-    private static final String CARD_ENERGY_L = getModID() + "Resources/images/1024/energy.png";
-    private static final String CHARSELECT_BUTTON = getModID() + "Resources/images/charSelect/charButton.png";
-    private static final String CHARSELECT_PORTRAIT = getModID() + "Resources/images/charSelect/charBG.png";
+    public static final String SHOULDER1 = modID + "Resources/images/char/mainChar/shoulder.png";
+    public static final String SHOULDER2 = modID + "Resources/images/char/mainChar/shoulder2.png";
+    public static final String CORPSE = modID + "Resources/images/char/mainChar/corpse.png";
+    private static final String ATTACK_S_ART = modID + "Resources/images/512/attack.png";
+    private static final String SKILL_S_ART = modID + "Resources/images/512/skill.png";
+    private static final String POWER_S_ART = modID + "Resources/images/512/power.png";
+    private static final String CARD_ENERGY_S = modID + "Resources/images/512/energy.png";
+    private static final String TEXT_ENERGY = modID + "Resources/images/512/text_energy.png";
+    private static final String ATTACK_L_ART = modID + "Resources/images/1024/attack.png";
+    private static final String SKILL_L_ART = modID + "Resources/images/1024/skill.png";
+    private static final String POWER_L_ART = modID + "Resources/images/1024/power.png";
+    private static final String CARD_ENERGY_L = modID + "Resources/images/1024/energy.png";
+    private static final String CHARSELECT_BUTTON = modID + "Resources/images/charSelect/charButton.png";
+    private static final String CHARSELECT_PORTRAIT = modID + "Resources/images/charSelect/charBG.png";
 
     public TodoMod() {
         BaseMod.subscribe(this);
@@ -124,19 +122,19 @@ public class TodoMod implements
 
     @Override
     public void receiveEditStrings() {
-        BaseMod.loadCustomStringsFile(CardStrings.class, getModID() + "Resources/localization/eng/Cardstrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, modID + "Resources/localization/eng/Cardstrings.json");
 
-        BaseMod.loadCustomStringsFile(RelicStrings.class, getModID() + "Resources/localization/eng/Relicstrings.json");
+        BaseMod.loadCustomStringsFile(RelicStrings.class, modID + "Resources/localization/eng/Relicstrings.json");
 
-        BaseMod.loadCustomStringsFile(CharacterStrings.class, getModID() + "Resources/localization/eng/Charstrings.json");
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, modID + "Resources/localization/eng/Charstrings.json");
 
-        BaseMod.loadCustomStringsFile(PowerStrings.class, getModID() + "Resources/localization/eng/Powerstrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, modID + "Resources/localization/eng/Powerstrings.json");
     }
 
     @Override
     public void receiveEditKeywords() {
         Gson gson = new Gson();
-        String json = Gdx.files.internal(getModID() + "Resources/localization/eng/Keywordstrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
+        String json = Gdx.files.internal(modID + "Resources/localization/eng/Keywordstrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
 
         if (keywords != null) {

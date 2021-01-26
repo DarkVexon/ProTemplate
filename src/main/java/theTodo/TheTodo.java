@@ -32,26 +32,26 @@ import static theTodo.TodoMod.*;
 
 public class TheTodo extends CustomPlayer {
     private static final String[] orbTextures = {
-            getModID() + "Resources/images/char/mainChar/orb/layer1.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer2.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer3.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer4.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer5.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer6.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer1d.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer2d.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer3d.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer4d.png",
-            getModID() + "Resources/images/char/mainChar/orb/layer5d.png",};
-    static final String ID = makeID("TemplatePlayer");
+            modID + "Resources/images/char/mainChar/orb/layer1.png",
+            modID + "Resources/images/char/mainChar/orb/layer2.png",
+            modID + "Resources/images/char/mainChar/orb/layer3.png",
+            modID + "Resources/images/char/mainChar/orb/layer4.png",
+            modID + "Resources/images/char/mainChar/orb/layer5.png",
+            modID + "Resources/images/char/mainChar/orb/layer6.png",
+            modID + "Resources/images/char/mainChar/orb/layer1d.png",
+            modID + "Resources/images/char/mainChar/orb/layer2d.png",
+            modID + "Resources/images/char/mainChar/orb/layer3d.png",
+            modID + "Resources/images/char/mainChar/orb/layer4d.png",
+            modID + "Resources/images/char/mainChar/orb/layer5d.png",};
+    static final String ID = makeID("TheTodo");
     static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     static final String[] NAMES = characterStrings.NAMES;
     static final String[] TEXT = characterStrings.TEXT;
 
 
     public TheTodo(String name, PlayerClass setClass) {
-        super(name, setClass, new CustomEnergyOrb(orbTextures, getModID() + "Resources/images/char/mainChar/orb/vfx.png", null), new SpriterAnimation(
-                getModID() + "Resources/images/char/mainChar/static.scml"));
+        super(name, setClass, new CustomEnergyOrb(orbTextures, modID + "Resources/images/char/mainChar/orb/vfx.png", null), new SpriterAnimation(
+                modID + "Resources/images/char/mainChar/static.scml"));
         initializeClass(null,
                 SHOULDER1,
                 SHOULDER2,
@@ -160,11 +160,6 @@ public class TheTodo extends CustomPlayer {
     }
 
     @Override
-    public List<CutscenePanel> getCutscenePanels() {
-        return super.getCutscenePanels();
-    }
-
-    @Override
     public String getSpireHeartText() {
         return TEXT[1];
     }
@@ -175,6 +170,7 @@ public class TheTodo extends CustomPlayer {
     }
 
     public static class Enums {
+        //TODO: Change these.
         @SpireEnum
         public static AbstractPlayer.PlayerClass THE_TODO;
         @SpireEnum(name = "TODO_COLOR")
