@@ -39,6 +39,6 @@
   },
   "${ModID}:EasyModalChoiceDemo": {
     "NAME": "Easy Modal Choice",
-    "DESCRIPTION": "Choose 1: Draw !M! cards or gain !todomod:si! Strength."
+    "DESCRIPTION": "Choose 1: Draw !M! cards or gain !${ModID}:m2! Strength."
   }
 }

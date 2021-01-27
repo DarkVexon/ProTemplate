@@ -6,11 +6,11 @@ import theTodo.cards.AbstractEasyCard;
 
 import static theTodo.TodoMod.makeID;
 
-public class SillyVariable extends DynamicVariable {
+public class SecondMagicNumber extends DynamicVariable {
 
     @Override
     public String key() {
-        return makeID("si");
+        return makeID("m2");
     }
 
     @Override

@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import theTodo.cards.AbstractEasyCard;
 import theTodo.cards.cardvars.SecondDamage;
-import theTodo.cards.cardvars.SillyVariable;
+import theTodo.cards.cardvars.SecondMagicNumber;
 import theTodo.relics.AbstractEasyRelic;
 
 import java.nio.charset.StandardCharsets;
@@ -112,7 +112,7 @@ public class TodoMod implements
 
     @Override
     public void receiveEditCards() {
-        BaseMod.addDynamicVariable(new SillyVariable());
+        BaseMod.addDynamicVariable(new SecondMagicNumber());
         BaseMod.addDynamicVariable(new SecondDamage());
         new AutoAdd(modID)
                 .packageFilter(AbstractEasyCard.class)
