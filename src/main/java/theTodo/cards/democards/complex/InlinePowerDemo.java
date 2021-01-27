@@ -1,4 +1,4 @@
-package theTodo.cards.democards;
+package theTodo.cards.democards.complex;
 
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;

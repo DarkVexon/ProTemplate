@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.cutscenes.CutscenePanel;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
@@ -21,11 +20,9 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import theTodo.cards.Defend;
 import theTodo.cards.Strike;
-import theTodo.cards.democards.EasyXCostDemo;
 import theTodo.relics.TodoItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static theTodo.TheTodo.Enums.TODO_COLOR;
 import static theTodo.TodoMod.*;

@@ -1,4 +1,4 @@
-package theTodo.cards.democards;
+package theTodo.cards.democards.complex;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

@@ -1,4 +1,4 @@
-package theTodo.cards.democards;
+package theTodo.cards.democards.complex;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.optionCards.BecomeAlmighty;

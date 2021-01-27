@@ -10,10 +10,6 @@ import static theTodo.TodoMod.makeID;
 @AutoAdd.Ignore
 public class EasyModalChoiceCard extends AbstractEasyCard {
 
-    //RIP Octopus.
-    //Why isn't this abstract? Because AbstractCard MakeCopy for Lambdas would be very difficult. Maybe some other time. Also Java hates instantiating abstracts unless they're SAMs.
-    //Typically you'll want to add the EasyModalChoiceAction to the bottom, and have the EasyModalChoiceCard Runnables inside add to top.
-
     private Runnable onUseOrChosen;
     private String passedName;
     private String passedDesc;

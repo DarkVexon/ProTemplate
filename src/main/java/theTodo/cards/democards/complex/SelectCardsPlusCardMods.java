@@ -1,4 +1,4 @@
-package theTodo.cards.democards;
+package theTodo.cards.democards.complex;
 
 import basemod.AutoAdd;
 import basemod.helpers.CardModifierManager;
