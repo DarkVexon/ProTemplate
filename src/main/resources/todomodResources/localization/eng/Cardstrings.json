@@ -40,5 +40,9 @@
   "${ModID}:EasyModalChoiceDemo": {
     "NAME": "Easy Modal Choice",
     "DESCRIPTION": "Choose 1: Draw !M! cards or gain !${ModID}:m2! Strength."
+  },
+  "${ModID}:DrawAndShiv": {
+    "NAME": "Draw and Shiv",
+    "DESCRIPTION": "Draw 1 card. NL Add 1 *Shiv into your hand."
   }
 }

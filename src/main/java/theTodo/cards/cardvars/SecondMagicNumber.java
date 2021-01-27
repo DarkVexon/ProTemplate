@@ -16,7 +16,7 @@ public class SecondMagicNumber extends DynamicVariable {
     @Override
     public boolean isModified(AbstractCard card) {
         if (card instanceof AbstractEasyCard) {
-            return ((AbstractEasyCard) card).isSillyModified;
+            return ((AbstractEasyCard) card).isSecondMagicModified;
         }
         return false;
     }
@@ -24,21 +24,21 @@ public class SecondMagicNumber extends DynamicVariable {
     @Override
     public int value(AbstractCard card) {
         if (card instanceof AbstractEasyCard) {
-            return ((AbstractEasyCard) card).silly;
+            return ((AbstractEasyCard) card).secondMagic;
         }
         return -1;
     }
 
     public void setIsModified(AbstractCard card, boolean v) {
         if (card instanceof AbstractEasyCard) {
-            ((AbstractEasyCard) card).isSillyModified = v;
+            ((AbstractEasyCard) card).isSecondMagicModified = v;
         }
     }
 
     @Override
     public int baseValue(AbstractCard card) {
         if (card instanceof AbstractEasyCard) {
-            return ((AbstractEasyCard) card).baseSilly;
+            return ((AbstractEasyCard) card).baseSecondMagic;
         }
         return -1;
     }
@@ -46,7 +46,7 @@ public class SecondMagicNumber extends DynamicVariable {
     @Override
     public boolean upgraded(AbstractCard card) {
         if (card instanceof AbstractEasyCard) {
-            return ((AbstractEasyCard) card).upgradedSilly;
+            return ((AbstractEasyCard) card).upgradedSecondMagic;
         }
         return false;
     }

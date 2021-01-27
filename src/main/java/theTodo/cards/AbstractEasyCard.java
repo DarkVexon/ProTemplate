@@ -28,10 +28,10 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     protected final CardStrings cardStrings;
 
-    public int silly;
-    public int baseSilly;
-    public boolean upgradedSilly;
-    public boolean isSillyModified;
+    public int secondMagic;
+    public int baseSecondMagic;
+    public boolean upgradedSecondMagic;
+    public boolean isSecondMagicModified;
 
     public int secondDamage;
     public int baseSecondDamage;
@@ -131,17 +131,17 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public void resetAttributes() {
         super.resetAttributes();
-        silly = baseSilly;
-        isSillyModified = false;
+        secondMagic = baseSecondMagic;
+        isSecondMagicModified = false;
         secondDamage = baseSecondDamage;
         isSecondDamageModified = false;
     }
 
     public void displayUpgrades() {
         super.displayUpgrades();
-        if (upgradedSilly) {
-            silly = baseSilly;
-            isSillyModified = true;
+        if (upgradedSecondMagic) {
+            secondMagic = baseSecondMagic;
+            isSecondMagicModified = true;
         }
         if (upgradedSecondDamage) {
             secondDamage = baseSecondDamage;
@@ -150,9 +150,9 @@ public abstract class AbstractEasyCard extends CustomCard {
     }
 
     protected void upgradeSilly(int amount) {
-        baseSilly += amount;
-        silly = baseSilly;
-        upgradedSilly = true;
+        baseSecondMagic += amount;
+        secondMagic = baseSecondMagic;
+        upgradedSecondMagic = true;
     }
 
     protected void upgradeSecondDamage(int amount) {

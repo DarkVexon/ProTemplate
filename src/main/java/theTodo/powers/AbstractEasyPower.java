@@ -15,22 +15,11 @@ import java.util.Map;
 import static theTodo.TodoMod.makeID;
 
 public abstract class AbstractEasyPower extends AbstractPower {
-    private static PowerStrings getPowerStrings(String ID) {
-        return CardCrawlGame.languagePack.getPowerStrings(ID);
-    }
-
-    protected static Map<String, PowerStrings> powerStrings = new HashMap<>();
-
-    protected String[] DESCRIPTIONS;
-
     public AbstractEasyPower(String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this.ID = makeID(NAME.replaceAll("([ ])", ""));
         this.isTurnBased = isTurnBased;
 
-        if (!powerStrings.containsKey(this.ID))
-            powerStrings.put(this.ID, getPowerStrings(this.ID));
         this.name = NAME;
-        this.DESCRIPTIONS = powerStrings.get(this.ID).DESCRIPTIONS;
 
         this.owner = owner;
         this.amount = amount;
