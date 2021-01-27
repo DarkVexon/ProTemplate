@@ -1,5 +1,7 @@
 New -> Edit File Templates... and add the following:
 
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theTodo.cards.AbstractEasyCard;
 
 import static theTodo.TodoMod.makeID;
