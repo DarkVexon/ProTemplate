@@ -17,6 +17,6 @@ public class ApplyCardModifierAction extends AbstractGameAction {
     @Override
     public void update() {
         isDone = true;
-        CardModifierManager.addModifier(card, mod); // Lol, this spells CardMod.
+        CardModifierManager.addModifier(card, mod);
     }
 }
