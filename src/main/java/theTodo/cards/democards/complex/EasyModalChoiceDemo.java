@@ -33,6 +33,6 @@ public class EasyModalChoiceDemo extends AbstractEasyCard {
 
     public void upp() {
         upgradeMagicNumber(1);
-        upgradeSilly(1);
+        upgradeSecondMagic(1);
     }
 }

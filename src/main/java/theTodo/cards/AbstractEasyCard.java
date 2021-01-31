@@ -149,7 +149,7 @@ public abstract class AbstractEasyCard extends CustomCard {
         }
     }
 
-    protected void upgradeSilly(int amount) {
+    protected void upgradeSecondMagic(int amount) {
         baseSecondMagic += amount;
         secondMagic = baseSecondMagic;
         upgradedSecondMagic = true;
