@@ -46,6 +46,7 @@ public class CardArtRoller {
             sb.draw(t, -125, -95);
             sb.end();
             fb.end();
+            t.flip(false, true);
             TextureRegion a = ImageHelper.getBufferTexture(fb);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
