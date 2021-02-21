@@ -22,6 +22,7 @@ import theTodo.powers.LosePowerPower;
 import theTodo.powers.NextTurnPowerPower;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -181,5 +182,13 @@ public class Wiz {
 
     public static void applyToSelfNextTurn(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnPowerPower(AbstractDungeon.player, po)));
+    }
+
+    public static void addListedActionsToQueue(ArrayList<AbstractGameAction> queue, boolean top){
+        if(top){ Collections.reverse(queue); }
+        for(AbstractGameAction a: queue){
+            if (top) { att(a);
+            } else { att(a); }
+        }
     }
 }
