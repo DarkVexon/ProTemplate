@@ -188,7 +188,7 @@ public class Wiz {
         if(top){ Collections.reverse(queue); }
         for(AbstractGameAction a: queue){
             if (top) { att(a);
-            } else { att(a); }
+            } else { atb(a); }
         }
     }
 }
