@@ -20,5 +20,3 @@ Setup guide:
 8. In the main mod file, change the modID to match the modID field in your pom.xml.
 
 9+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
-
-(You could also commission me to make the mod of your dreams at Vex'd#2468!)
