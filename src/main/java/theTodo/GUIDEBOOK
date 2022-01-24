@@ -1,0 +1,13 @@
+This guidebook will walk you through the basics of programming your Slay the Spire mod.
+
+1. Basic Overview
+
+Hi. Hopefully you've already followed the basic step-by-step instructions in README file. If not, go do those. In order.
+
+If you ever need help beyond this guide, feel free to join the Slay the Spire discord! The modding community (found in the
+#modding-technical channel) are happy to help for most things (as long as you're willing to listen.)
+Here's a link: https://discord.gg/yWrmtJj5rT
+
+Okay. So you've gone and renamed a bunch of things and now you're looking to make a Slay the Spire mod. STEP ONE DONE!
+
+Step two is to look at cards. Try Strike, Defend, and the cards in 'democards/simple'.

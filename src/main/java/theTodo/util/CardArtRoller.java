@@ -1,6 +1,5 @@
 package theTodo.util;
 
-import basemod.BaseMod;
 import basemod.patches.whatmod.WhatMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -29,7 +28,12 @@ public class CardArtRoller {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                 Random rng = new Random((long) c.cardID.hashCode());
                 ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && WhatMod.findModName(s.getClass()) == null, true);
-                String q = Wiz.getRandomItem(cardsList, rng).cardID;
+                String q;
+                if (c.cardArtCopy() != null) {
+                    q = c.cardArtCopy();
+                } else {
+                    q = Wiz.getRandomItem(cardsList, rng).cardID;
+                }
                 return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
             });
             Color HSLC = new Color(r.H, r.S, r.L, r.C);

@@ -67,7 +67,12 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     @Override
     protected Texture getPortraitImage() {
-        return CardArtRoller.getPortraitTexture(this);
+        if (textureImg.contains("ui/missing.png")) {
+            return CardArtRoller.getPortraitTexture(this);
+        }
+        else {
+            return super.getPortraitImage();
+        }
     }
 
     public static String getCardTextureString(final String cardName, final AbstractCard.CardType cardType) {
@@ -222,5 +227,9 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     protected void blck() {
         atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
+    }
+
+    public String cardArtCopy() {
+        return null;
     }
 }
