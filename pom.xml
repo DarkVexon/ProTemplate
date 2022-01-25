@@ -53,11 +53,6 @@
             <scope>system</scope>
             <systemPath>${Steam.path}/workshop/content/646570/1609158507/StSLib.jar</systemPath>
         </dependency>
-        <dependency>
-            <groupId>com.github.tommyettinger</groupId>
-            <artifactId>colorful</artifactId>
-            <version>0.4.0</version>
-        </dependency>
     </dependencies>
 
 
