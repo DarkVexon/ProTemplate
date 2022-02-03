@@ -232,4 +232,16 @@ public abstract class AbstractEasyCard extends CustomCard {
     public String cardArtCopy() {
         return null;
     }
+
+    protected void upMagic(int x) {
+        upgradeMagicNumber(x);
+    }
+
+    protected void upSecondMagic(int x) {
+        upgradeSecondMagic(x);
+    }
+
+    protected void upSecondDamage(int x) {
+        upgradeSecondDamage(x);
+    }
 }
