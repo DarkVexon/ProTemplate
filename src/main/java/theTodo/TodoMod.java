@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import theTodo.cards.AbstractEasyCard;
 import theTodo.cards.cardvars.SecondDamage;
 import theTodo.cards.cardvars.SecondMagicNumber;
@@ -36,6 +38,9 @@ public class TodoMod implements
     public static String makeID(String idText) {
         return modID + ":" + idText;
     }
+
+    // This makes debugging so much easier
+    public static Logger logger = LogManager.getLogger(TodoMod.class.getName());
 
     public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); // This should be changed eventually
 
