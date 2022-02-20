@@ -1,1 +1,10 @@
-{}
+{
+  "${ModID}:ExampleTwoAmount": {
+    "NAME": "Example 2",
+    "DESCRIPTIONS": [
+      "Amount is #b",
+      ".  Amount2 is #b",
+      "."
+    ]
+  }
+}

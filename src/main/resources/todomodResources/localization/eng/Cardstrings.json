@@ -7,6 +7,10 @@
     "NAME": "Defend",
     "DESCRIPTION": "Gain !B! Block."
   },
+  "${ModID}:ExampleTwoAmountPowerCard": {
+    "NAME": "Example Power 2",
+    "DESCRIPTION": "Gains !M! amount.  Sets Amount2."
+  },
   "${ModID}:TemporaryPowerDemo": {
     "NAME": "Auto-Generated Temporary Power",
     "DESCRIPTION": "Whenever you Scry this turn, gain !M! Block."

@@ -2,11 +2,11 @@ package theTodo.util;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
@@ -181,5 +181,21 @@ public class Wiz {
 
     public static void applyToSelfNextTurn(AbstractPower po) {
         atb(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new NextTurnPowerPower(AbstractDungeon.player, po)));
+    }
+
+    public static void thornDmg(AbstractCreature m, int amount, AbstractGameAction.AttackEffect AtkFX) {
+        atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, amount, DamageInfo.DamageType.THORNS), AtkFX));
+    }
+
+    public static void thornDmg(AbstractCreature m, int amount) {
+        thornDmg(m, amount, AbstractGameAction.AttackEffect.NONE);
+    }
+
+    public static void discard(int amount, boolean isRandom) {
+        atb(new DiscardAction(adp(), adp(), amount, isRandom));
+    }
+
+    public static void discard(int amount) {
+        discard(amount, false);
     }
 }
