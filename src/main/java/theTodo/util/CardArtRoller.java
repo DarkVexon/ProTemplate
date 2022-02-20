@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
 import theTodo.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CardArtRoller {
     public static final String partialHueRodrigues =
@@ -77,16 +80,36 @@ public class CardArtRoller {
     public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
 
+    private static ArrayList<AbstractCard> cardList;
+
+    public static void initializeCardsList() {
+        cardList = new ArrayList<>();
+        for (AbstractCard c : CardLibrary.getAllCards()) {
+            if (WhatMod.findModName(c.getClass()) == null) {
+                cardList.add(c.makeCopy());
+            }
+        }
+    }
+
+    private static ArrayList<AbstractCard> findCardMatchingType(AbstractCard.CardType t) {
+        return new ArrayList<AbstractCard>(cardList.stream().filter(c -> c.type == t).collect(Collectors.toList()));
+    }
+
     public static void computeCard(AbstractEasyCard c) {
+        if (cardList == null) {
+            initializeCardsList();
+        }
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                 Random rng = new Random((long) c.cardID.hashCode());
-                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && WhatMod.findModName(s.getClass()) == null, true);
+                ArrayList<AbstractCard> validCards = findCardMatchingType(c.type);
                 String q;
                 if (c.cardArtCopy() != null) {
                     q = c.cardArtCopy();
                 } else {
-                    q = Wiz.getRandomItem(cardsList, rng).cardID;
+                    AbstractCard found = Wiz.getRandomItem(validCards, rng);
+                    cardList.remove(found);
+                    q = found.cardID;
                 }
                 return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
             });
