@@ -9,7 +9,7 @@
   },
   "${ModID}:ExampleTwoAmountPowerCard": {
     "NAME": "Example Power 2",
-    "DESCRIPTION": "Gains !M! amount.  Sets Amount2."
+    "DESCRIPTION": "At start of turn, gain !M! Strength and 1 Dexterity."
   },
   "${ModID}:TemporaryPowerDemo": {
     "NAME": "Auto-Generated Temporary Power",

@@ -2,9 +2,9 @@
   "${ModID}:ExampleTwoAmount": {
     "NAME": "Example 2",
     "DESCRIPTIONS": [
-      "Amount is #b",
-      ".  Amount2 is #b",
-      "."
+      "At the start of your turn, gain #b",
+      " #yStrength and #b",
+      " #yDexterity."
     ]
   }
 }
