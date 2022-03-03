@@ -28,6 +28,8 @@ public class ExampleTwoAmountPower extends AbstractEasyPower implements OnReceiv
         updateDescription();
     }
 
+    // THIS IS IMPORTANT!
+    // You need to have this for it to stack the second amount properly
     @Override
     public boolean onReceivePower(AbstractPower pow, AbstractCreature target, AbstractCreature source) {
         if (pow instanceof ExampleTwoAmountPower && target == owner)
