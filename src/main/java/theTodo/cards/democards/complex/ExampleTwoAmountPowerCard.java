@@ -1,7 +1,8 @@
-package theTodo.cards;
+package theTodo.cards.democards.complex;
 
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import theTodo.cards.AbstractEasyCard;
 import theTodo.powers.ExampleTwoAmountPower;
 
 import static theTodo.TodoMod.makeID;
