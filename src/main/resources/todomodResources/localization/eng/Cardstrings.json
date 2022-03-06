@@ -8,7 +8,7 @@
     "DESCRIPTION": "Gain !B! Block."
   },
   "${ModID}:ExampleTwoAmountPowerCard": {
-    "NAME": "Example Power 2",
+    "NAME": "Two Amounts, One Power",
     "DESCRIPTION": "At start of turn, gain !M! Strength and 1 Dexterity."
   },
   "${ModID}:TemporaryPowerDemo": {
@@ -48,5 +48,9 @@
   "${ModID}:DrawAndShiv": {
     "NAME": "Draw and Shiv",
     "DESCRIPTION": "Draw 1 card. NL Add 1 *Shiv into your hand."
+  },
+  "${ModID}:TwoTypesOfDamage": {
+    "NAME": "Two Types of Damage",
+    "DESCRIPTION": "Deal !D! damage. NL If you're Vulnerable, deal !${ModID}:sd! damage instead."
   }
 }
