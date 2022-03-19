@@ -198,4 +198,12 @@ public class Wiz {
     public static void discard(int amount) {
         discard(amount, false);
     }
+
+    public static int pwrAmt(AbstractCreature check, String ID) {
+        AbstractPower found = check.getPower(ID);
+        if (found != null) {
+            return found.amount;
+        }
+        return 0;
+    }
 }

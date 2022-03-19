@@ -80,36 +80,16 @@ public class CardArtRoller {
     public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
 
-    private static ArrayList<AbstractCard> cardList;
-
-    public static void initializeCardsList() {
-        cardList = new ArrayList<>();
-        for (AbstractCard c : CardLibrary.getAllCards()) {
-            if (WhatMod.findModName(c.getClass()) == null) {
-                cardList.add(c.makeCopy());
-            }
-        }
-    }
-
-    private static ArrayList<AbstractCard> findCardMatchingType(AbstractCard.CardType t) {
-        return new ArrayList<AbstractCard>(cardList.stream().filter(c -> c.type == t).collect(Collectors.toList()));
-    }
-
     public static void computeCard(AbstractEasyCard c) {
-        if (cardList == null) {
-            initializeCardsList();
-        }
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
                 Random rng = new Random((long) c.cardID.hashCode());
-                ArrayList<AbstractCard> validCards = findCardMatchingType(c.type);
+                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && WhatMod.findModName(s.getClass()) == null, true);
                 String q;
                 if (c.cardArtCopy() != null) {
                     q = c.cardArtCopy();
                 } else {
-                    AbstractCard found = Wiz.getRandomItem(validCards, rng);
-                    cardList.remove(found);
-                    q = found.cardID;
+                    q = Wiz.getRandomItem(cardsList, rng).cardID;
                 }
                 return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
             });
