@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -39,9 +40,6 @@ public class TodoMod implements
         return modID + ":" + idText;
     }
 
-    // This makes debugging so much easier
-    public static Logger logger = LogManager.getLogger(TodoMod.class.getName());
-
     public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); // This should be changed eventually
 
     public static final String SHOULDER1 = modID + "Resources/images/char/mainChar/shoulder.png";
@@ -58,6 +56,19 @@ public class TodoMod implements
     private static final String CARD_ENERGY_L = modID + "Resources/images/1024/energy.png";
     private static final String CHARSELECT_BUTTON = modID + "Resources/images/charSelect/charButton.png";
     private static final String CHARSELECT_PORTRAIT = modID + "Resources/images/charSelect/charBG.png";
+
+    public static Settings.GameLanguage[] SupportedLanguages = {
+            Settings.GameLanguage.ENG,
+    };
+
+    private String getLangString() {
+        for (Settings.GameLanguage lang : SupportedLanguages) {
+            if (lang.equals(Settings.language)) {
+                return Settings.language.name().toLowerCase();
+            }
+        }
+        return "eng";
+    }
 
     public TodoMod() {
         BaseMod.subscribe(this);
@@ -128,13 +139,13 @@ public class TodoMod implements
 
     @Override
     public void receiveEditStrings() {
-        BaseMod.loadCustomStringsFile(CardStrings.class, modID + "Resources/localization/eng/Cardstrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, modID + "Resources/localization/" + getLangString() + "/Cardstrings.json");
 
-        BaseMod.loadCustomStringsFile(RelicStrings.class, modID + "Resources/localization/eng/Relicstrings.json");
+        BaseMod.loadCustomStringsFile(RelicStrings.class, modID + "Resources/localization/" + getLangString() + "/Relicstrings.json");
 
-        BaseMod.loadCustomStringsFile(CharacterStrings.class, modID + "Resources/localization/eng/Charstrings.json");
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, modID + "Resources/localization/" + getLangString() + "/Charstrings.json");
 
-        BaseMod.loadCustomStringsFile(PowerStrings.class, modID + "Resources/localization/eng/Powerstrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, modID + "Resources/localization/" + getLangString() + "/Powerstrings.json");
     }
 
     @Override
