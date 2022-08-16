@@ -9,7 +9,23 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
+import com.megacrit.cardcrawl.cards.blue.Dualcast;
+import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
+import com.megacrit.cardcrawl.cards.blue.Zap;
+import com.megacrit.cardcrawl.cards.green.Defend_Green;
+import com.megacrit.cardcrawl.cards.green.Neutralize;
+import com.megacrit.cardcrawl.cards.green.Strike_Green;
+import com.megacrit.cardcrawl.cards.green.Survivor;
+import com.megacrit.cardcrawl.cards.purple.Defend_Watcher;
+import com.megacrit.cardcrawl.cards.purple.Eruption;
+import com.megacrit.cardcrawl.cards.purple.Strike_Purple;
+import com.megacrit.cardcrawl.cards.purple.Vigilance;
+import com.megacrit.cardcrawl.cards.red.Bash;
+import com.megacrit.cardcrawl.cards.red.Defend_Red;
+import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
@@ -80,6 +96,18 @@ public class CardArtRoller {
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
     public static HashMap<String, ReskinInfo> infos = new HashMap<>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
+    private static String[] strikes = {
+            Strike_Red.ID,
+            Strike_Blue.ID,
+            Strike_Green.ID,
+            Strike_Purple.ID
+    };
+    private static String[] defends = {
+            Defend_Red.ID,
+            Defend_Blue.ID,
+            Defend_Green.ID,
+            Defend_Watcher.ID
+    };
     private static ArrayList<String> possAttacks = new ArrayList<>();
     private static ArrayList<String> possSkills = new ArrayList<>();
     private static ArrayList<String> possPowers = new ArrayList<>();
@@ -98,6 +126,10 @@ public class CardArtRoller {
                 String q;
                 if (c.cardArtCopy() != null) {
                     q = c.cardArtCopy();
+                } else if (c.hasTag(AbstractCard.CardTags.STARTER_STRIKE)) {
+                    q = strikes[MathUtils.random(0, 3)];
+                } else if (c.hasTag(AbstractCard.CardTags.STARTER_DEFEND)) {
+                    q = defends[MathUtils.random(0, 3)];
                 } else if (c.type == AbstractCard.CardType.ATTACK) {
                     if (possAttacks.isEmpty()) {
                         for (CardLibrary.LibraryType l : basicColors) {
