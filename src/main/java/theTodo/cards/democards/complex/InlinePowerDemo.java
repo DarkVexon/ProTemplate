@@ -27,7 +27,7 @@ public class InlinePowerDemo extends AbstractEasyCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new LambdaPower(cardStrings.EXTENDED_DESCRIPTION[0], AbstractPower.PowerType.BUFF, false, p, magicNumber) {
+        applyToSelf(new LambdaPower(makeID("StrikeAndBlockBoostPower"), cardStrings.EXTENDED_DESCRIPTION[0], AbstractPower.PowerType.BUFF, false, p, magicNumber) {
             @Override
             public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
                 if (card.hasTag(CardTags.STRIKE)) {
