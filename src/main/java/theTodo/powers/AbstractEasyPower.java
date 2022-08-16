@@ -8,11 +8,8 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.random.Random;
 import theTodo.TodoMod;
 import theTodo.util.TexLoader;
-
-import static theTodo.TodoMod.makeID;
 
 public abstract class AbstractEasyPower extends AbstractPower {
     public int amount2 = -1;
@@ -21,11 +18,8 @@ public abstract class AbstractEasyPower extends AbstractPower {
     public static Color greenColor2 = Color.GREEN.cpy();
     public boolean canGoNegative2 = false;
 
-    private boolean overrideRender = false;
-    private Color renderIconColor;
-
-    public AbstractEasyPower(String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
-        this.ID = makeID(NAME.replaceAll("([ ])", ""));
+    public AbstractEasyPower(String ID, String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
+        this.ID = ID;
         this.isTurnBased = isTurnBased;
 
         this.name = NAME;
@@ -43,18 +37,9 @@ public abstract class AbstractEasyPower extends AbstractPower {
         } else if (normalTexture != null) {
             this.img = normalTexture;
             region48 = new TextureAtlas.AtlasRegion(normalTexture, 0, 0, normalTexture.getWidth(), normalTexture.getHeight());
-        } else if (normalTexture == null) {
-            overrideRender = true;
-            Random rng = new Random((long)  this.ID.hashCode());
-            renderIconColor = new Color(rng.random(), rng.random(), rng.random(), 1);
         }
 
         this.updateDescription();
-    }
-
-    @Override
-    public void renderIcons(SpriteBatch sb, float x, float y, Color c) {
-        super.renderIcons(sb, x, y, c);
     }
 
     public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
