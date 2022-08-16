@@ -10,20 +10,19 @@ import static theTodo.util.Wiz.applyToSelf;
 
 public class ExampleTwoAmountPowerCard extends AbstractEasyCard {
     public final static String ID = makeID("ExampleTwoAmountPowerCard");
-    private final static int MAGIC = 1;
-    private final static int UPGRADE_MAGIC = 1;
-    private final static int COST = 1;
 
     public ExampleTwoAmountPowerCard() {
-        super(ID, COST, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);
-        baseMagicNumber = magicNumber = MAGIC;
+        super(ID, 1, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);
+        baseMagicNumber = magicNumber = 1;
+        baseSecondMagic = secondMagic = 2;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new ExampleTwoAmountPower(p, magicNumber, 1));
+        applyToSelf(new ExampleTwoAmountPower(p, magicNumber, secondMagic));
     }
 
     public void upp() {
-        upgradeMagicNumber(UPGRADE_MAGIC);
+        upgradeMagicNumber(1);
+        upgradeSecondMagic(1);
     }
 }

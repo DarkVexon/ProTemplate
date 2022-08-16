@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.random.Random;
 import theTodo.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,20 +78,64 @@ public class CardArtRoller {
                     "}";
 
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
-    public static HashMap<String, ReskinInfo> infos = new HashMap<String, ReskinInfo>();
+    public static HashMap<String, ReskinInfo> infos = new HashMap<>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
+    private static ArrayList<String> possAttacks = new ArrayList<>();
+    private static ArrayList<String> possSkills = new ArrayList<>();
+    private static ArrayList<String> possPowers = new ArrayList<>();
+    private static CardLibrary.LibraryType[] basicColors = {
+            CardLibrary.LibraryType.RED,
+            CardLibrary.LibraryType.GREEN,
+            CardLibrary.LibraryType.BLUE,
+            CardLibrary.LibraryType.PURPLE,
+            CardLibrary.LibraryType.COLORLESS,
+            CardLibrary.LibraryType.CURSE
+    };
 
     public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
-                Random rng = new Random((long) c.cardID.hashCode());
-                ArrayList<AbstractCard> cardsList = Wiz.getCardsMatchingPredicate(s -> s.type == c.type && WhatMod.findModName(s.getClass()) == null, true);
                 String q;
                 if (c.cardArtCopy() != null) {
                     q = c.cardArtCopy();
+                } else if (c.type == AbstractCard.CardType.ATTACK) {
+                    if (possAttacks.isEmpty()) {
+                        for (CardLibrary.LibraryType l : basicColors) {
+                            for (AbstractCard card : CardLibrary.getCardList(l)) {
+                                if (card.type == AbstractCard.CardType.ATTACK) {
+                                    possAttacks.add(card.cardID);
+                                }
+                            }
+                        }
+                        Collections.shuffle(possAttacks);
+                    }
+                    q = possAttacks.remove(0);
+                } else if (c.type == AbstractCard.CardType.POWER) {
+                    if (possPowers.isEmpty()) {
+                        for (CardLibrary.LibraryType l : basicColors) {
+                            for (AbstractCard card : CardLibrary.getCardList(l)) {
+                                if (card.type == AbstractCard.CardType.POWER) {
+                                    possPowers.add(card.cardID);
+                                }
+                            }
+                        }
+                        Collections.shuffle(possPowers);
+                    }
+                    q = possPowers.remove(0);
                 } else {
-                    q = Wiz.getRandomItem(cardsList, rng).cardID;
+                    if (possSkills.isEmpty()) {
+                        for (CardLibrary.LibraryType l : basicColors) {
+                            for (AbstractCard card : CardLibrary.getCardList(l)) {
+                                if (card.type == AbstractCard.CardType.SKILL) {
+                                    possSkills.add(card.cardID);
+                                }
+                            }
+                        }
+                        Collections.shuffle(possSkills);
+                    }
+                    q = possSkills.remove(0);
                 }
+                Random rng = new Random((long) c.cardID.hashCode());
                 return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
             });
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
