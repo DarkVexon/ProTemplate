@@ -9,19 +9,16 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import theTodo.TodoMod;
 
+import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.*;
 
 public class ExampleTwoAmountPower extends AbstractEasyPower implements OnReceivePowerPower {
-    // intellij stuff Example, buff, false
-    private static final String SIMPLE_NAME = "ExampleTwoAmount";
-    public static final String POWER_ID = TodoMod.makeID(SIMPLE_NAME);
-    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-    public static final String LOC_NAME = powerStrings.NAME;
-    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    public static String ID = makeID(ExampleTwoAmountPower.class.getSimpleName());
+
+    private static PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
     public ExampleTwoAmountPower(AbstractCreature owner, int amount, int amount2) {
-        super(SIMPLE_NAME, PowerType.BUFF, false, owner, amount);
-        name = LOC_NAME;
+        super(ID, powerStrings.NAME, PowerType.BUFF, false, owner, amount);
         isTwoAmount = true;
         this.amount2 = amount2;
         canGoNegative2 = true;

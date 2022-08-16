@@ -11,30 +11,22 @@
     "NAME": "Two Amounts, One Power",
     "DESCRIPTION": "At start of turn, gain !M! Strength and !${ModID}:m2! Dexterity."
   },
-  "${ModID}:TemporaryPowerDemo": {
-    "NAME": "Auto-Generated Temporary Power",
-    "DESCRIPTION": "Whenever you Scry this turn, gain !M! Block."
-  },
   "${ModID}:InlinePowerDemo": {
     "NAME": "Inline Power",
-    "DESCRIPTION": "Strikes deal !M! more damage. NL At the end of your turn, gain !M! Block."
+    "DESCRIPTION": "Strikes deal !M! more damage. NL At the end of your turn, gain !M! Block.",
+    "EXTENDED_DESCRIPTION": [
+      "Strike+, Block+",
+      "#yStrikes deal #b",
+      " additional damage. At the end of your turn, gain #b",
+      " #yBlock."
+    ]
   },
   "${ModID}:SelectCardsPlusCardMods": {
     "NAME": "Card Parsing, Card Selection, Card Mods",
-    "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust."
-  },
-  "${ModID}:InlineCardModDemo": {
-    "NAME": "Inline Card Mods",
-    "DESCRIPTION": "Add a random Strike of any color to your hand. NL Enchant it with \"Kills Spikers.\""
-  },
-  "${ModID}:NextTurnPowerDemo": {
-    "NAME": "Auto-Generated Next Turn Power",
-    "DESCRIPTION": "Next turn, gain !M! Thorns."
-  },
-  "${ModID}:MultiPreviewDemoCard": {
-    "NAME": "Multiple Previews - One Card",
-    "DESCRIPTION": "Ethereal. NL Add a random *Stinky *Watcher *Buddy into your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Ethereal. NL Add a random Upgraded *Stinky *Watcher *Buddy into your hand. NL Exhaust."
+    "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose a card to add into your hand with Ethereal and Exhaust."
+    ]
   },
   "${ModID}:EasyXCostDemo": {
     "NAME": "Easy X Cost",
@@ -43,7 +35,15 @@
   },
   "${ModID}:EasyModalChoiceDemo": {
     "NAME": "Easy Modal Choice",
-    "DESCRIPTION": "Choose one: Draw !M! cards or gain !${ModID}:m2! Strength."
+    "DESCRIPTION": "Choose one: Draw !M! cards or gain !${ModID}:m2! Strength.",
+    "EXTENDED_DESCRIPTION": [
+      "Draw",
+      "Draw ",
+      " cards.",
+      "Strength",
+      "Gain ",
+      " Strength."
+    ]
   },
   "${ModID}:DrawAndShiv": {
     "NAME": "Draw and Shiv",

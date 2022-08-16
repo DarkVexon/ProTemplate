@@ -11,7 +11,7 @@ import static theTodo.util.Wiz.*;
 import static theTodo.TodoMod.makeID;
 
 public class EasyXCostDemo extends AbstractEasyCard {
-    public final static String ID = makeID("EasyXCostDemo");
+    public final static String ID = makeID(EasyXCostDemo.class.getSimpleName());
     // intellij stuff attack, enemy, rare, , , , , 0, 1
 
     public EasyXCostDemo() {

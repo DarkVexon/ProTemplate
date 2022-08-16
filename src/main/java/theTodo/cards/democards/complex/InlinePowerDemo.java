@@ -15,7 +15,7 @@ import static theTodo.util.Wiz.atb;
 
 public class InlinePowerDemo extends AbstractEasyCard {
 
-    public final static String ID = makeID("InlinePowerDemo");
+    public final static String ID = makeID(InlinePowerDemo.class.getSimpleName());
     // intellij stuff power, self, uncommon
 
     private static final int MAGIC = 4;
@@ -27,7 +27,7 @@ public class InlinePowerDemo extends AbstractEasyCard {
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
-        applyToSelf(new LambdaPower("Strike+, Block+", AbstractPower.PowerType.BUFF, false, p, magicNumber) {
+        applyToSelf(new LambdaPower(cardStrings.EXTENDED_DESCRIPTION[0], AbstractPower.PowerType.BUFF, false, p, magicNumber) {
             @Override
             public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
                 if (card.hasTag(CardTags.STRIKE)) {
@@ -44,7 +44,7 @@ public class InlinePowerDemo extends AbstractEasyCard {
 
             @Override
             public void updateDescription() {
-                description = "#yStrikes deal #b" + amount + " additional damage. At the end of your turn, gain #b" + amount + " #yBlock.";
+                description = cardStrings.EXTENDED_DESCRIPTION[1] + amount + cardStrings.EXTENDED_DESCRIPTION[2] + amount + cardStrings.EXTENDED_DESCRIPTION[3];
             }
         });
     }

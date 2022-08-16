@@ -9,7 +9,7 @@ import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.applyToSelf;
 
 public class ExampleTwoAmountPowerCard extends AbstractEasyCard {
-    public final static String ID = makeID("ExampleTwoAmountPowerCard");
+    public final static String ID = makeID(ExampleTwoAmountPowerCard.class.getSimpleName());
 
     public ExampleTwoAmountPowerCard() {
         super(ID, 1, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);

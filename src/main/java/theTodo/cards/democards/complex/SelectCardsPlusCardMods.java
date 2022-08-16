@@ -19,7 +19,7 @@ import static theTodo.util.Wiz.*;
 
 public class SelectCardsPlusCardMods extends AbstractEasyCard {
 
-    public final static String ID = makeID("SelectCardsPlusCardMods");
+    public final static String ID = makeID(SelectCardsPlusCardMods.class.getSimpleName());
     // intellij stuff skill, self, uncommon
 
     public SelectCardsPlusCardMods() {
@@ -35,7 +35,7 @@ public class SelectCardsPlusCardMods extends AbstractEasyCard {
             CardModifierManager.addModifier(eligibleCardsList.get(i), new ExhaustMod());
             myCardsList.add(eligibleCardsList.get(i));
         }
-        atb(new SelectCardsAction(myCardsList, 1, "Choose a card to add into your hand with Ethereal and Exhaust.", (cards) -> {
+        atb(new SelectCardsAction(myCardsList, 1, cardStrings.EXTENDED_DESCRIPTION[0], (cards) -> {
             att(new MakeTempCardInHandAction(cards.get(0), 1, true));
         }));
     }

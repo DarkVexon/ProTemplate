@@ -38,10 +38,6 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
 
-    private float rotationTimer = 0;
-    private int previewIndex;
-    protected ArrayList<AbstractCard> cardToPreview = new ArrayList<>();
-
     private boolean needsArtRefresh = false;
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
@@ -171,12 +167,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         initializeDescription();
     }
 
-    protected void upgradeCardToPreview() {
-        for (AbstractCard q : cardToPreview) {
-            q.upgrade();
-        }
-    }
-
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
@@ -191,25 +181,6 @@ public abstract class AbstractEasyCard extends CustomCard {
         if (needsArtRefresh) {
             CardArtRoller.computeCard(this);
         }
-        if (!cardToPreview.isEmpty()) {
-            if (hb.hovered) {
-                if (rotationTimer <= 0F) {
-                    rotationTimer = getRotationTimeNeeded();
-                    cardsToPreview = cardToPreview.get(previewIndex);
-                    if (previewIndex == cardToPreview.size() - 1) {
-                        previewIndex = 0;
-                    } else {
-                        previewIndex++;
-                    }
-                } else {
-                    rotationTimer -= Gdx.graphics.getDeltaTime();
-                }
-            }
-        }
-    }
-
-    protected float getRotationTimeNeeded() {
-        return 1f;
     }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
