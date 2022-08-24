@@ -8,8 +8,8 @@
     "DESCRIPTION": "Gain !B! Block."
   },
   "${ModID}:ExampleTwoAmountPowerCard": {
-    "NAME": "Two Amounts, One Power",
-    "DESCRIPTION": "At start of turn, gain !M! Strength and !${ModID}:m2! Dexterity."
+    "NAME": "Two Amount Power",
+    "DESCRIPTION": "At the start of your turn, gain !M! Strength and !${ModID}:m2! Dexterity."
   },
   "${ModID}:InlinePowerDemo": {
     "NAME": "Inline Power",
@@ -22,7 +22,7 @@
     ]
   },
   "${ModID}:SelectCardsPlusCardMods": {
-    "NAME": "Card Parsing, Card Selection, Card Mods",
+    "NAME": "Cool Card Stuff",
     "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust.",
     "EXTENDED_DESCRIPTION": [
       "Choose a card to add into your hand with Ethereal and Exhaust."
@@ -50,7 +50,16 @@
     "DESCRIPTION": "Draw 1 card. NL Add 1 *Shiv into your hand."
   },
   "${ModID}:TwoTypesOfDamage": {
-    "NAME": "Two Types of Damage",
+    "NAME": "Two Damage Values",
     "DESCRIPTION": "Deal !D! damage. NL If you're Vulnerable, deal !${ModID}:sd! damage instead."
+  },
+  "${ModID}:StartupBlockCard": {
+    "NAME": "Startup And AOE",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Startup: Gain !M! Block."
+  },
+  "${ModID}:MultiCardPreviewAndDrawCallback": {
+    "NAME": "Previews and Callbacks",
+    "DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
   }
 }

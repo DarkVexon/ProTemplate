@@ -10,7 +10,7 @@ import static theTodo.TodoMod.makeID;
 import static theTodo.util.Wiz.*;
 
 public class DrawAndShiv extends AbstractEasyCard {
-    public final static String ID = makeID("DrawAndShiv");
+    public final static String ID = makeID(DrawAndShiv.class.getSimpleName());
     // intellij stuff skill, self, uncommon, , , , , , 
 
     public DrawAndShiv() {

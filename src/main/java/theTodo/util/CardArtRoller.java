@@ -12,30 +12,19 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.blue.Defend_Blue;
-import com.megacrit.cardcrawl.cards.blue.Dualcast;
 import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
-import com.megacrit.cardcrawl.cards.blue.Zap;
 import com.megacrit.cardcrawl.cards.green.Defend_Green;
-import com.megacrit.cardcrawl.cards.green.Neutralize;
 import com.megacrit.cardcrawl.cards.green.Strike_Green;
-import com.megacrit.cardcrawl.cards.green.Survivor;
 import com.megacrit.cardcrawl.cards.purple.Defend_Watcher;
-import com.megacrit.cardcrawl.cards.purple.Eruption;
 import com.megacrit.cardcrawl.cards.purple.Strike_Purple;
-import com.megacrit.cardcrawl.cards.purple.Vigilance;
-import com.megacrit.cardcrawl.cards.red.Bash;
 import com.megacrit.cardcrawl.cards.red.Defend_Red;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
 import theTodo.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CardArtRoller {
     public static final String partialHueRodrigues =
@@ -109,8 +98,14 @@ public class CardArtRoller {
             Defend_Watcher.ID
     };
     private static ArrayList<String> possAttacks = new ArrayList<>();
+    private static ArrayList<String> openAttacks = new ArrayList<>();
+    private static ArrayList<String> doneAttacks = new ArrayList<>();
     private static ArrayList<String> possSkills = new ArrayList<>();
+    private static ArrayList<String> openSkills = new ArrayList<>();
+    private static ArrayList<String> doneSkills = new ArrayList<>();
     private static ArrayList<String> possPowers = new ArrayList<>();
+    private static ArrayList<String> openPowers = new ArrayList<>();
+    private static ArrayList<String> donePowers = new ArrayList<>();
     private static CardLibrary.LibraryType[] basicColors = {
             CardLibrary.LibraryType.RED,
             CardLibrary.LibraryType.GREEN,
@@ -123,6 +118,7 @@ public class CardArtRoller {
     public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
+                Random rng = new Random((long) c.cardID.hashCode());
                 String q;
                 if (c.cardArtCopy() != null) {
                     q = c.cardArtCopy();
@@ -134,41 +130,74 @@ public class CardArtRoller {
                     if (possAttacks.isEmpty()) {
                         for (CardLibrary.LibraryType l : basicColors) {
                             for (AbstractCard card : CardLibrary.getCardList(l)) {
-                                if (card.type == AbstractCard.CardType.ATTACK) {
+                                if (card.type == AbstractCard.CardType.ATTACK && WhatMod.findModID(card.getClass()) == null && !card.hasTag(AbstractCard.CardTags.STARTER_STRIKE)) {
                                     possAttacks.add(card.cardID);
+                                    openAttacks.add(card.cardID);
                                 }
                             }
                         }
-                        Collections.shuffle(possAttacks);
                     }
-                    q = possAttacks.remove(0);
+                    q = possAttacks.get(rng.random(possAttacks.size() - 1));
+                    if (openAttacks.contains(q)) {
+                        openAttacks.remove(q);
+                        doneAttacks.add(q);
+                    } else {
+                        if (!openAttacks.isEmpty()) {
+                            q = openAttacks.get(rng.random(openAttacks.size() - 1));
+                            openAttacks.remove(q);
+                            doneAttacks.add(q);
+                        }
+                    }
                 } else if (c.type == AbstractCard.CardType.POWER) {
                     if (possPowers.isEmpty()) {
                         for (CardLibrary.LibraryType l : basicColors) {
                             for (AbstractCard card : CardLibrary.getCardList(l)) {
-                                if (card.type == AbstractCard.CardType.POWER) {
+                                if (card.type == AbstractCard.CardType.POWER && WhatMod.findModID(card.getClass()) == null) {
                                     possPowers.add(card.cardID);
+                                    openPowers.add(card.cardID);
                                 }
                             }
                         }
-                        Collections.shuffle(possPowers);
                     }
-                    q = possPowers.remove(0);
+                    q = possPowers.get(rng.random(possPowers.size() - 1));
+                    if (openPowers.contains(q)) {
+                        openPowers.remove(q);
+                        donePowers.add(q);
+                    } else {
+                        if (!openPowers.isEmpty()) {
+                            q = openPowers.get(rng.random(openPowers.size() - 1));
+                            openPowers.remove(q);
+                            donePowers.add(q);
+                        }
+                    }
                 } else {
                     if (possSkills.isEmpty()) {
                         for (CardLibrary.LibraryType l : basicColors) {
                             for (AbstractCard card : CardLibrary.getCardList(l)) {
-                                if (card.type == AbstractCard.CardType.SKILL) {
+                                if (card.type == AbstractCard.CardType.SKILL && WhatMod.findModID(card.getClass()) == null && !card.hasTag(AbstractCard.CardTags.STARTER_DEFEND)) {
                                     possSkills.add(card.cardID);
+                                    openSkills.add(card.cardID);
                                 }
                             }
                         }
-                        Collections.shuffle(possSkills);
                     }
-                    q = possSkills.remove(0);
+                    q = possSkills.get(rng.random(possSkills.size() - 1));
+                    if (openSkills.contains(q)) {
+                        openSkills.remove(q);
+                        doneSkills.add(q);
+                    } else {
+                        if (!openSkills.isEmpty()) {
+                            q = openSkills.get(rng.random(openSkills.size() - 1));
+                            openSkills.remove(q);
+                            doneSkills.add(q);
+                        }
+                    }
                 }
-                Random rng = new Random((long) c.cardID.hashCode());
-                return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
+                if (c.reskinInfo(q) != null) {
+                    return c.reskinInfo(q);
+                } else {
+                    return new ReskinInfo(q, rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.random(0.35f, 0.65f), rng.randomBoolean());
+                }
             });
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
             TextureAtlas.AtlasRegion t = CardLibrary.getCard(r.origCardID).portrait;
@@ -184,7 +213,7 @@ public class CardArtRoller {
             sb.draw(t, -125, -95);
             sb.end();
             fb.end();
-            t.flip(false, true);
+            t.flip(r.flipX, true);
             TextureRegion a = ImageHelper.getBufferTexture(fb);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });

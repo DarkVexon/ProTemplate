@@ -18,9 +18,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import theTodo.TheTodo;
 import theTodo.util.CardArtRoller;
 
-import java.util.ArrayList;
-
-import static theTodo.TodoMod.*;
+import static theTodo.TodoMod.makeImagePath;
+import static theTodo.TodoMod.modID;
 import static theTodo.util.Wiz.atb;
 import static theTodo.util.Wiz.att;
 
@@ -65,8 +64,7 @@ public abstract class AbstractEasyCard extends CustomCard {
     protected Texture getPortraitImage() {
         if (textureImg.contains("ui/missing.png")) {
             return CardArtRoller.getPortraitTexture(this);
-        }
-        else {
+        } else {
             return super.getPortraitImage();
         }
     }
@@ -196,6 +194,10 @@ public abstract class AbstractEasyCard extends CustomCard {
         atb(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
     }
 
+    protected void allDmgTop(AbstractGameAction.AttackEffect fx) {
+        att(new DamageAllEnemiesAction(AbstractDungeon.player, multiDamage, damageTypeForTurn, fx));
+    }
+
     protected void altDmg(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
         atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, secondDamage, damageTypeForTurn), fx));
     }
@@ -205,6 +207,10 @@ public abstract class AbstractEasyCard extends CustomCard {
     }
 
     public String cardArtCopy() {
+        return null;
+    }
+
+    public CardArtRoller.ReskinInfo reskinInfo(String ID) {
         return null;
     }
 
