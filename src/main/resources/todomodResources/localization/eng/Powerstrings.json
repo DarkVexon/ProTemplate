@@ -1,5 +1,5 @@
 {
-  "${ModID}:ExampleTwoAmount": {
+  "${ModID}:ExampleTwoAmountPower": {
     "NAME": "Example 2",
     "DESCRIPTIONS": [
       "At the start of your turn, gain #b",
