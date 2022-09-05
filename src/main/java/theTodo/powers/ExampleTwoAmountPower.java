@@ -7,22 +7,21 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import theTodo.TodoMod;
 
 import static theTodo.TodoMod.makeID;
-import static theTodo.util.Wiz.*;
+import static theTodo.util.Wiz.adp;
+import static theTodo.util.Wiz.applyToSelf;
 
 public class ExampleTwoAmountPower extends AbstractEasyPower implements OnReceivePowerPower {
     public static String ID = makeID(ExampleTwoAmountPower.class.getSimpleName());
 
-    private static PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
 
     public ExampleTwoAmountPower(AbstractCreature owner, int amount, int amount2) {
         super(ID, powerStrings.NAME, PowerType.BUFF, false, owner, amount);
         isTwoAmount = true;
         this.amount2 = amount2;
         canGoNegative2 = true;
-        updateDescription();
     }
 
     // THIS IS IMPORTANT!
@@ -30,7 +29,7 @@ public class ExampleTwoAmountPower extends AbstractEasyPower implements OnReceiv
     @Override
     public boolean onReceivePower(AbstractPower pow, AbstractCreature target, AbstractCreature source) {
         if (pow instanceof ExampleTwoAmountPower && target == owner)
-            amount2 += ((ExampleTwoAmountPower)pow).amount2;
+            amount2 += ((ExampleTwoAmountPower) pow).amount2;
         return true;
     }
 
@@ -42,6 +41,6 @@ public class ExampleTwoAmountPower extends AbstractEasyPower implements OnReceiv
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + amount2 + DESCRIPTIONS[2];
+        description = powerStrings.DESCRIPTIONS[0] + amount + powerStrings.DESCRIPTIONS[1] + amount2 + powerStrings.DESCRIPTIONS[2];
     }
 }

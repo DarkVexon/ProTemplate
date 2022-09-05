@@ -28,8 +28,8 @@ public abstract class AbstractEasyPower extends AbstractPower {
         this.amount = amount;
         this.type = powerType;
 
-        Texture normalTexture = TexLoader.getTexture(TodoMod.modID + "Resources/images/powers/" + NAME.replaceAll("([ ])", "") + "32.png");
-        Texture hiDefImage = TexLoader.getTexture(TodoMod.modID + "Resources/images/powers/" + NAME.replaceAll("([ ])", "") + "84.png");
+        Texture normalTexture = TexLoader.getTexture(TodoMod.modID + "Resources/images/powers/" + ID.replaceAll(TodoMod.modID + ":", "") + "32.png");
+        Texture hiDefImage = TexLoader.getTexture(TodoMod.modID + "Resources/images/powers/" + ID.replaceAll(TodoMod.modID + ":", "") + "84.png");
         if (hiDefImage != null) {
             region128 = new TextureAtlas.AtlasRegion(hiDefImage, 0, 0, hiDefImage.getWidth(), hiDefImage.getHeight());
             if (normalTexture != null)
@@ -39,7 +39,7 @@ public abstract class AbstractEasyPower extends AbstractPower {
             region48 = new TextureAtlas.AtlasRegion(normalTexture, 0, 0, normalTexture.getWidth(), normalTexture.getHeight());
         }
 
-        this.updateDescription();
+        updateDescription();
     }
 
     public void renderAmount(SpriteBatch sb, float x, float y, Color c) {
