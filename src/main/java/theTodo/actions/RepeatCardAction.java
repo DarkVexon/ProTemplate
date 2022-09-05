@@ -15,7 +15,7 @@ public class RepeatCardAction extends AbstractGameAction {
         this.duration = Settings.ACTION_DUR_FAST;
         this.actionType = ActionType.WAIT;
         this.source = AbstractDungeon.player;
-        this.target = (AbstractCreature) target;
+        this.target = target;
         this.funCard = card;
     }
 
