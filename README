@@ -11,11 +11,8 @@ It contains the basics of an empty character, as well as:
 Setup guide:
 1. Clone the project with Github, preferably downloading with Github Desktop to make it so IntelliJ integration is easy!
 2. Go into your pom.xml, and change the path to your steam installation, the artifactId, version number, name, description, and modID fields inside of that.
-3. Rename the enclosing mod folder. (the folder just under Java, initially named theTodo.)
-4. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources. The change needs to match your mod ID, plus "Resources". IE: if your modid is "blah", "blahResources".)
-5. Rename the modded character file. (the class initially named TheTodo, not in a folder.)
-6. In the modded character file, go to the Enums section at the bottom and change the PlayerClass and CardColor enums. They're also annotated with TODOs.
-7. Rename the main mod file. (the class initially named TodoMod, not in a folder.)
-8. In the main mod file, change the modID to match the modID field in your pom.xml.
+3. Rename the mod's Resources folder. (the folder under the "resources" folder, initially named todomodResources. The change needs to match your mod ID, plus "Resources". IE: if your modid is "blah", "blahResources".)
+4. In the modded character file, go to the Enums section at the bottom and change the PlayerClass and CardColor enums. They're also annotated with TODOs.
+5. In the main mod file, change the modID to match the modID field in your pom.xml.
 
-9+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
+6+. You'll probably want to rename your character in the CharStrings file to start off. From there, it's just making the mod of your dreams!
