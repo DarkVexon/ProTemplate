@@ -28,19 +28,8 @@ import static theTodo.TheTodo.Enums.TODO_COLOR;
 import static theTodo.TodoMod.*;
 
 public class TheTodo extends CustomPlayer {
-    private static final String[] orbTextures = {
-            modID + "Resources/images/char/mainChar/orb/layer1.png",
-            modID + "Resources/images/char/mainChar/orb/layer2.png",
-            modID + "Resources/images/char/mainChar/orb/layer3.png",
-            modID + "Resources/images/char/mainChar/orb/layer4.png",
-            modID + "Resources/images/char/mainChar/orb/layer5.png",
-            modID + "Resources/images/char/mainChar/orb/layer6.png",
-            modID + "Resources/images/char/mainChar/orb/layer1d.png",
-            modID + "Resources/images/char/mainChar/orb/layer2d.png",
-            modID + "Resources/images/char/mainChar/orb/layer3d.png",
-            modID + "Resources/images/char/mainChar/orb/layer4d.png",
-            modID + "Resources/images/char/mainChar/orb/layer5d.png",};
-    static final String ID = makeID("TheTodo"); //TODO: Change this
+
+    static final String ID = makeID(TheTodo.class.getSimpleName());
     static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     static final String[] NAMES = characterStrings.NAMES;
     static final String[] TEXT = characterStrings.TEXT;
@@ -91,6 +80,19 @@ public class TheTodo extends CustomPlayer {
         CardCrawlGame.screenShake.shake(ScreenShake.ShakeIntensity.LOW, ScreenShake.ShakeDur.SHORT,
                 false);
     }
+
+    private static final String[] orbTextures = {
+            modID + "Resources/images/char/mainChar/orb/layer1.png",
+            modID + "Resources/images/char/mainChar/orb/layer2.png",
+            modID + "Resources/images/char/mainChar/orb/layer3.png",
+            modID + "Resources/images/char/mainChar/orb/layer4.png",
+            modID + "Resources/images/char/mainChar/orb/layer5.png",
+            modID + "Resources/images/char/mainChar/orb/layer6.png",
+            modID + "Resources/images/char/mainChar/orb/layer1d.png",
+            modID + "Resources/images/char/mainChar/orb/layer2d.png",
+            modID + "Resources/images/char/mainChar/orb/layer3d.png",
+            modID + "Resources/images/char/mainChar/orb/layer4d.png",
+            modID + "Resources/images/char/mainChar/orb/layer5d.png",};
 
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
