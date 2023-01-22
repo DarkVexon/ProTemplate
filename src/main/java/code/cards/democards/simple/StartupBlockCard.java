@@ -16,7 +16,7 @@ public class StartupBlockCard extends AbstractEasyCard implements StartupCard { 
     // intellij stuff skill, self, uncommon, , , , , ,
 
     public StartupBlockCard() {
-        super(ID, 1, CardType.SKILL, CardRarity.COMMON, CardTarget.ENEMY); // This card is a 1 cost Common Skill that targets an enemy.
+        super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY); // This card is a 1 cost Common Skill that targets an enemy.
         baseDamage = 7;
         isMultiDamage = true; // This card attacks ALL enemies, so isMultiDamage is true...
         baseMagicNumber = magicNumber = 4;
