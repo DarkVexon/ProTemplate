@@ -1,5 +1,6 @@
 package code.util;
 
+import basemod.BaseMod;
 import basemod.patches.whatmod.WhatMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -82,9 +83,70 @@ public class CardArtRoller {
                     "     tgt.a), 0.0, 1.0);\n" + // keep alpha, then clamp
                     "}";
 
+    private static final String vertexBicolorShader = "#version 330\n" +
+            "\n" +
+            "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "in vec4 a_position;\n" +
+            "in vec2 a_texCoord0;\n" +
+            "in vec4 a_color;\n" +
+            "\n" +
+            "out vec4 v_color;\n" +
+            "out vec2 v_texCoord;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "    v_color = a_color;\n" +
+            "    v_texCoord = a_texCoord0;\n" +
+            "}";
+
+    private static final String fragmentBicolorShader = "const float SQRT = 1.73205;\n" +
+            "\n" +
+            "varying vec2 v_texCoord;\n" +
+            "\n" +
+            "uniform float lRed;\n" +
+            "uniform float lGreen;\n" +
+            "uniform float lBlue;\n" +
+            "uniform float rRed;\n" +
+            "uniform float rGreen;\n" +
+            "uniform float rBlue;\n" +
+            "uniform float anchorAR;\n" +
+            "uniform float anchorAG;\n" +
+            "uniform float anchorAB;\n" +
+            "uniform float anchorBR;\n" +
+            "uniform float anchorBG;\n" +
+            "uniform float anchorBB;\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform vec2 u_screenSize;\n" +
+            "\n" +
+            "void main() {\n" +
+            "\tvec4 color = texture2D(u_texture, v_texCoord);\n" +
+            "\n" +
+            "    vec3 T = vec3(color.r,color.g,color.b);\n" +
+            "    vec3 aA = vec3(anchorAR,anchorAG,anchorAB);\n" +
+            "    vec3 aB = vec3(anchorBR,anchorBG,anchorBB);\n" +
+            "\n" +
+            "    float lT = length(T);\n" +
+            "\n" +
+            "    float distA = abs(aA.r - T.r) + abs(aA.g - T.g) + abs(aA.b - T.b);\n" +
+            "    float distB = abs(aB.r - T.r) + abs(aB.g - T.g) + abs(aB.b - T.b);\n" +
+            "\n" +
+            "    float vT = distA/(distB+distA);\n" +
+            "\n" +
+            "    float newR = lRed + (rRed - lRed)*vT;\n" +
+            "    float newG = lGreen + (rGreen - lGreen)*vT;\n" +
+            "    float newB = lBlue + (rBlue - lBlue)*vT;\n" +
+            "\n" +
+            "    vec3 newColor = vec3(newR,newG,newB)*lT;\n" +
+            "\n" +
+            "    gl_FragColor = vec4(newColor,color.a);\n" +
+            "}";
+
     private static HashMap<String, TextureAtlas.AtlasRegion> doneCards = new HashMap<>();
     public static HashMap<String, ReskinInfo> infos = new HashMap<>();
     private static ShaderProgram shade = new ShaderProgram(vertexShaderHSLC, fragmentShaderHSLC);
+    private static ShaderProgram bicolorShader = new ShaderProgram(vertexBicolorShader,fragmentBicolorShader);
     private static String[] strikes = {
             Strike_Red.ID,
             Strike_Blue.ID,
@@ -207,9 +269,15 @@ public class CardArtRoller {
             SpriteBatch sb = new SpriteBatch();
             sb.setProjectionMatrix(og.combined);
             ImageHelper.beginBuffer(fb);
-            sb.setShader(shade);
-            sb.setColor(HSLC);
             sb.begin();
+            if (!r.isBicolor) {
+                sb.setShader(shade);
+                sb.setColor(HSLC);
+            } else {
+                sb.setShader(bicolorShader);
+                sb.setColor(Color.WHITE);
+                setBicolorShaderValues(r);
+            }
             sb.draw(t, -125, -95);
             sb.end();
             fb.end();
@@ -229,9 +297,15 @@ public class CardArtRoller {
         SpriteBatch sb = new SpriteBatch();
         sb.setProjectionMatrix(og.combined);
         ImageHelper.beginBuffer(fb);
-        sb.setShader(shade);
-        sb.setColor(HSLC);
         sb.begin();
+        if (!r.isBicolor) {
+            sb.setShader(shade);
+            sb.setColor(HSLC);
+        } else {
+            sb.setShader(bicolorShader);
+            sb.setColor(Color.WHITE);
+            setBicolorShaderValues(r);
+        }
         sb.draw(t, -250, -190);
         sb.end();
         fb.end();
@@ -242,13 +316,34 @@ public class CardArtRoller {
         //Actually, I think this can work. Because SingleCardViewPopup disposes of the texture, we can just make a new one every time.
     }
 
+    private static void setBicolorShaderValues(ReskinInfo info) {
+        bicolorShader.setUniformf("lRed", info.target1.r);
+        bicolorShader.setUniformf("lGreen", info.target1.g);
+        bicolorShader.setUniformf("lBlue", info.target1.b);
+        bicolorShader.setUniformf("rRed", info.target2.r);
+        bicolorShader.setUniformf("rGreen", info.target2.g);
+        bicolorShader.setUniformf("rBlue", info.target2.b);
+        bicolorShader.setUniformf("anchorAR", info.anchor1.r);
+        bicolorShader.setUniformf("anchorAG", info.anchor1.g);
+        bicolorShader.setUniformf("anchorAB", info.anchor1.b);
+        bicolorShader.setUniformf("anchorBR", info.anchor2.r);
+        bicolorShader.setUniformf("anchorBG", info.anchor2.g);
+        bicolorShader.setUniformf("anchorBB", info.anchor2.b);
+    }
+
     public static class ReskinInfo {
         public String origCardID;
+        public boolean isBicolor = false;
         public float H;
         public float S;
         public float L;
         public float C;
         public boolean flipX;
+
+        public Color anchor1;
+        public Color anchor2;
+        public Color target1;
+        public Color target2;
 
         public ReskinInfo(String ID, float H, float S, float L, float C, boolean flipX) {
             this.origCardID = ID;
@@ -257,6 +352,21 @@ public class CardArtRoller {
             this.L = L;
             this.C = C;
             this.flipX = flipX;
+        }
+
+
+        //If you use this constructor, the original image will be changed so that :
+        //the anchor1 color will be made into the target1 color
+        //the anchor2 color will be made into the target2 color
+        //every other color will be made into a color between the two targets, based on its distance to the anchors
+        public ReskinInfo(String ID, Color anchor1, Color anchor2, Color target1, Color target2, boolean flipX) {
+            this.origCardID = ID;
+            this.anchor1 = anchor1;
+            this.anchor2 = anchor2;
+            this.target1 = target1;
+            this.target2 = target2;
+            this.flipX = flipX;
+            isBicolor = true;
         }
     }
 }
