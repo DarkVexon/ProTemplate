@@ -1,6 +1,12 @@
 package code.cards.democards.simple;
 
+import code.util.CardArtRoller;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.cards.colorless.SwiftStrike;
+import com.megacrit.cardcrawl.cards.green.PoisonedStab;
+import com.megacrit.cardcrawl.cards.purple.Collect;
+import com.megacrit.cardcrawl.cards.red.Warcry;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.VulnerablePower;

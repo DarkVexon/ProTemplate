@@ -129,8 +129,8 @@ public class CardArtRoller {
             "\n" +
             "    float lT = length(T);\n" +
             "\n" +
-            "    float distA = abs(aA.r - T.r) + abs(aA.g - T.g) + abs(aA.b - T.b);\n" +
-            "    float distB = abs(aB.r - T.r) + abs(aB.g - T.g) + abs(aB.b - T.b);\n" +
+            "    float distA = 0.2126*abs(aA.r - T.r) + 0.7152*abs(aA.g - T.g) + 0.0722*abs(aA.b - T.b);\n" +
+            "    float distB = 0.2126*abs(aB.r - T.r) + 0.7152*abs(aB.g - T.g) + 0.0722*abs(aB.b - T.b);\n" +
             "\n" +
             "    float vT = distA/(distB+distA);\n" +
             "\n" +
