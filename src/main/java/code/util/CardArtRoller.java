@@ -32,9 +32,9 @@ import static com.badlogic.gdx.graphics.GL20.GL_DST_COLOR;
 import static com.badlogic.gdx.graphics.GL20.GL_ZERO;
 
 public class CardArtRoller {
-    private static final Texture attackMask = TexLoader.getTexture(ModFile.modID+"Resources/images/masks/AttackMask.png");
-    private static final Texture skillMask = TexLoader.getTexture(ModFile.modID+"Resources/images/masks/SkillMask.png");
-    private static final Texture powerMask = TexLoader.getTexture(ModFile.modID+"Resources/images/masks/PowerMask.png");
+    private static final Texture attackMask = TexLoader.getTexture(ModFile.makeImagePath("masks/AttackMask.png"));
+    private static final Texture skillMask = TexLoader.getTexture(ModFile.makeImagePath("masks/SkillMask.png"));
+    private static final Texture powerMask = TexLoader.getTexture(ModFile.makeImagePath("masks/PowerMask.png"));
 
     public static final String partialHueRodrigues =
             "vec3 applyHue(vec3 rgb, float hue)\n" +
