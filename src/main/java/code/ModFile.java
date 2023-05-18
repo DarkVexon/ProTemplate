@@ -52,8 +52,8 @@ public class ModFile implements
     private static final String SKILL_L_ART = modID + "Resources/images/1024/skill.png";
     private static final String POWER_L_ART = modID + "Resources/images/1024/power.png";
     private static final String CARD_ENERGY_L = modID + "Resources/images/1024/energy.png";
-    private static final String CHARSELECT_BUTTON = modID + "Resources/images/charSelect/charButton.png";
-    private static final String CHARSELECT_PORTRAIT = modID + "Resources/images/charSelect/charBG.png";
+    private static final String CHAR_SELECT_BUTTON = modID + "Resources/images/charSelect/charButton.png";
+    private static final String CHAR_SELECT_PORTRAIT = modID + "Resources/images/charSelect/charBG.png";
 
     public static Settings.GameLanguage[] SupportedLanguages = {
             Settings.GameLanguage.ENG,
@@ -105,7 +105,7 @@ public class ModFile implements
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new CharacterFile(CharacterFile.characterStrings.NAMES[1], CharacterFile.Enums.THE_TODO),
-                CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+                CHAR_SELECT_BUTTON, CHAR_SELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
     }
 
     @Override
