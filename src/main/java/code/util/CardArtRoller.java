@@ -2,6 +2,7 @@ package code.util;
 
 import basemod.BaseMod;
 import basemod.patches.whatmod.WhatMod;
+import code.ModFile;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +28,14 @@ import code.cards.AbstractEasyCard;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.badlogic.gdx.graphics.GL20.GL_DST_COLOR;
+import static com.badlogic.gdx.graphics.GL20.GL_ZERO;
+
 public class CardArtRoller {
+    private static final Texture attackMask = TexLoader.getTexture(ModFile.makeImagePath("masks/AttackMask.png"));
+    private static final Texture skillMask = TexLoader.getTexture(ModFile.makeImagePath("masks/SkillMask.png"));
+    private static final Texture powerMask = TexLoader.getTexture(ModFile.makeImagePath("masks/PowerMask.png"));
+
     public static final String partialHueRodrigues =
             "vec3 applyHue(vec3 rgb, float hue)\n" +
                     "{\n" +
@@ -262,10 +270,42 @@ public class CardArtRoller {
                 }
             });
             Color HSLC = new Color(r.H, r.S, r.L, r.C);
-            TextureAtlas.AtlasRegion t = CardLibrary.getCard(r.origCardID).portrait;
-            t.flip(false, true);
+            AbstractCard artCard = CardLibrary.getCard(r.origCardID);
+            TextureAtlas.AtlasRegion t = artCard.portrait;
+            t.flip(r.flipX, true);
             FrameBuffer fb = ImageHelper.createBuffer(250, 190);
             OrthographicCamera og = new OrthographicCamera(250, 190);
+            if (needsMask(c, artCard)) {
+                if (artCard.type == AbstractCard.CardType.ATTACK) {
+                    if (c.type == AbstractCard.CardType.POWER) {
+                        //Attack to Power
+                        og.zoom = 0.976f;
+                        og.translate(-3, 0);
+                    } else {
+                        //Attack to Skill, Status, Curse
+                        og.zoom = 0.9f;
+                        og.translate(0, -10);
+                    }
+                } else if (artCard.type == AbstractCard.CardType.POWER) {
+                    if (c.type == AbstractCard.CardType.ATTACK) {
+                        //Power to Attack
+                        og.zoom = 0.9f;
+                        og.translate(0, -10);
+                    } else {
+                        //Power to Skill, Status, Curse
+                        og.zoom = 0.825f;
+                        og.translate(-1, -18);
+                    }
+                } else {
+                    if (c.type == AbstractCard.CardType.POWER) {
+                        //Skill, Status, Curse to Power
+                        og.zoom = 0.976f;
+                        og.translate(-3, 0);
+                    }
+                    //Skill, Status, Curse to Attack is free
+                }
+                og.update();
+            }
             SpriteBatch sb = new SpriteBatch();
             sb.setProjectionMatrix(og.combined);
             ImageHelper.beginBuffer(fb);
@@ -279,6 +319,12 @@ public class CardArtRoller {
                 setBicolorShaderValues(r);
             }
             sb.draw(t, -125, -95);
+            if (needsMask(c, artCard)) {
+                sb.setBlendFunction(GL_DST_COLOR, GL_ZERO);
+                Texture mask = getMask(c);
+                sb.setProjectionMatrix(new OrthographicCamera(250, 190).combined);
+                sb.draw(mask, -125, -95, -125, -95, 250, 190, 1, 1, 0, 0, 0, mask.getWidth(), mask.getHeight(), false, true);
+            }
             sb.end();
             fb.end();
             t.flip(r.flipX, true);
@@ -290,10 +336,42 @@ public class CardArtRoller {
     public static Texture getPortraitTexture(AbstractCard c) {
         ReskinInfo r = infos.get(c.cardID);
         Color HSLC = new Color(r.H, r.S, r.L, r.C);
-        TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + CardLibrary.getCard(r.origCardID).assetUrl + ".png"), 0, 0, 500, 380);
-        t.flip(false, true);
+        AbstractCard artCard = CardLibrary.getCard(r.origCardID);
+        TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + artCard.assetUrl + ".png"), 0, 0, 500, 380);
+        t.flip(r.flipX, true);
         FrameBuffer fb = ImageHelper.createBuffer(500, 380);
         OrthographicCamera og = new OrthographicCamera(500, 380);
+        if (needsMask(c, artCard)) {
+            if (artCard.type == AbstractCard.CardType.ATTACK) {
+                if (c.type == AbstractCard.CardType.POWER) {
+                    //Attack to Power
+                    og.zoom = 0.976f;
+                    og.translate(-6, 0);
+                } else {
+                    //Attack to Skill, Status, Curse
+                    og.zoom = 0.9f;
+                    og.translate(0, -20);
+                }
+            } else if (artCard.type == AbstractCard.CardType.POWER) {
+                if (c.type == AbstractCard.CardType.ATTACK) {
+                    //Power to Attack
+                    og.zoom = 0.9f;
+                    og.translate(0, -20);
+                } else {
+                    //Power to Skill, Status, Curse
+                    og.zoom = 0.825f;
+                    og.translate(-2, -36);
+                }
+            } else {
+                if (c.type == AbstractCard.CardType.POWER) {
+                    //Skill, Status, Curse to Power
+                    og.zoom = 0.976f;
+                    og.translate(-6, 0);
+                }
+                //Skill, Status, Curse to Attack is free
+            }
+            og.update();
+        }
         SpriteBatch sb = new SpriteBatch();
         sb.setProjectionMatrix(og.combined);
         ImageHelper.beginBuffer(fb);
@@ -307,9 +385,15 @@ public class CardArtRoller {
             setBicolorShaderValues(r);
         }
         sb.draw(t, -250, -190);
+        if (needsMask(c, artCard)) {
+            sb.setBlendFunction(GL_DST_COLOR, GL_ZERO);
+            Texture mask = getMask(c);
+            sb.setProjectionMatrix(new OrthographicCamera(500, 380).combined);
+            sb.draw(mask, -250, -190, -250, -190, 500, 380, 1, 1, 0, 0, 0, mask.getWidth(), mask.getHeight(), false, true);
+        }
         sb.end();
         fb.end();
-        t.flip(false, true);
+        t.flip(r.flipX, true);
         TextureRegion a = ImageHelper.getBufferTexture(fb);
         return a.getTexture();
 
@@ -329,6 +413,37 @@ public class CardArtRoller {
         bicolorShader.setUniformf("anchorBR", info.anchor2.r);
         bicolorShader.setUniformf("anchorBG", info.anchor2.g);
         bicolorShader.setUniformf("anchorBB", info.anchor2.b);
+    }
+
+    public static Texture getMask(AbstractCard card) {
+        switch (card.type) {
+            case SKILL:
+            case STATUS:
+            case CURSE:
+                return skillMask;
+            case ATTACK:
+                return attackMask;
+            case POWER:
+                return powerMask;
+        }
+        return skillMask;
+    }
+    public static int getMaskIndex(AbstractCard card) {
+        switch (card.type) {
+            case SKILL:
+            case STATUS:
+            case CURSE:
+                return 2;
+            case ATTACK:
+                return 1;
+            case POWER:
+                return 0;
+        }
+        return 0;
+    }
+
+    public static boolean needsMask(AbstractCard card, AbstractCard desiredArt) {
+        return getMaskIndex(card) != getMaskIndex(desiredArt);
     }
 
     public static class ReskinInfo {
