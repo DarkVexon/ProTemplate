@@ -36,8 +36,8 @@ public class CharacterFile extends CustomPlayer {
 
 
     public CharacterFile(String name, PlayerClass setClass) {
-        super(name, setClass, new CustomEnergyOrb(orbTextures, modID + "Resources/images/char/mainChar/orb/vfx.png", null), new SpriterAnimation(
-                modID + "Resources/images/char/mainChar/static.scml"));
+        super(name, setClass, new CustomEnergyOrb(orbTextures, makeCharacterPath("mainChar/orb/vfx.png"), null), new SpriterAnimation(
+                makeCharacterPath("mainChar/static.scml")));
         initializeClass(null,
                 SHOULDER1,
                 SHOULDER2,
@@ -82,17 +82,18 @@ public class CharacterFile extends CustomPlayer {
     }
 
     private static final String[] orbTextures = {
-            modID + "Resources/images/char/mainChar/orb/layer1.png",
-            modID + "Resources/images/char/mainChar/orb/layer2.png",
-            modID + "Resources/images/char/mainChar/orb/layer3.png",
-            modID + "Resources/images/char/mainChar/orb/layer4.png",
-            modID + "Resources/images/char/mainChar/orb/layer5.png",
-            modID + "Resources/images/char/mainChar/orb/layer6.png",
-            modID + "Resources/images/char/mainChar/orb/layer1d.png",
-            modID + "Resources/images/char/mainChar/orb/layer2d.png",
-            modID + "Resources/images/char/mainChar/orb/layer3d.png",
-            modID + "Resources/images/char/mainChar/orb/layer4d.png",
-            modID + "Resources/images/char/mainChar/orb/layer5d.png",};
+            makeCharacterPath("mainChar/orb/layer1.png"),
+            makeCharacterPath("mainChar/orb/layer2.png"),
+            makeCharacterPath("mainChar/orb/layer3.png"),
+            makeCharacterPath("mainChar/orb/layer4.png"),
+            makeCharacterPath("mainChar/orb/layer4.png"),
+            makeCharacterPath("mainChar/orb/layer6.png"),
+            makeCharacterPath("mainChar/orb/layer1d.png"),
+            makeCharacterPath("mainChar/orb/layer2d.png"),
+            makeCharacterPath("mainChar/orb/layer3d.png"),
+            makeCharacterPath("mainChar/orb/layer4d.png"),
+            makeCharacterPath("mainChar/orb/layer5d.png"),
+    };
 
     @Override
     public String getCustomModeCharacterButtonSoundKey() {
