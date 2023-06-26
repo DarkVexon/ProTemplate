@@ -40,20 +40,20 @@ public class ModFile implements
 
     public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); // This should be changed eventually
 
-    public static final String SHOULDER1 = modID + "Resources/images/char/mainChar/shoulder.png";
-    public static final String SHOULDER2 = modID + "Resources/images/char/mainChar/shoulder2.png";
-    public static final String CORPSE = modID + "Resources/images/char/mainChar/corpse.png";
-    private static final String ATTACK_S_ART = modID + "Resources/images/512/attack.png";
-    private static final String SKILL_S_ART = modID + "Resources/images/512/skill.png";
-    private static final String POWER_S_ART = modID + "Resources/images/512/power.png";
-    private static final String CARD_ENERGY_S = modID + "Resources/images/512/energy.png";
-    private static final String TEXT_ENERGY = modID + "Resources/images/512/text_energy.png";
-    private static final String ATTACK_L_ART = modID + "Resources/images/1024/attack.png";
-    private static final String SKILL_L_ART = modID + "Resources/images/1024/skill.png";
-    private static final String POWER_L_ART = modID + "Resources/images/1024/power.png";
-    private static final String CARD_ENERGY_L = modID + "Resources/images/1024/energy.png";
-    private static final String CHARSELECT_BUTTON = modID + "Resources/images/charSelect/charButton.png";
-    private static final String CHARSELECT_PORTRAIT = modID + "Resources/images/charSelect/charBG.png";
+    public static final String SHOULDER1 = makeCharacterPath("mainChar/shoulder.png");
+    public static final String SHOULDER2 = makeCharacterPath("mainChar/shoulder2.png");
+    public static final String CORPSE = makeCharacterPath("mainChar/corpse.png");
+    private static final String ATTACK_S_ART = makeImagePath("512/attack.png");
+    private static final String SKILL_S_ART = makeImagePath("512/skill.png");
+    private static final String POWER_S_ART = makeImagePath("512/power.png");
+    private static final String CARD_ENERGY_S = makeImagePath("512/energy.png");
+    private static final String TEXT_ENERGY = makeImagePath("512/text_energy.png");
+    private static final String ATTACK_L_ART = makeImagePath("1024/attack.png");
+    private static final String SKILL_L_ART = makeImagePath("1024/skill.png");
+    private static final String POWER_L_ART = makeImagePath("1024/power.png");
+    private static final String CARD_ENERGY_L = makeImagePath("1024/energy.png");
+    private static final String CHARSELECT_BUTTON = makeImagePath("charSelect/charButton.png");
+    private static final String CHARSELECT_PORTRAIT = makeImagePath("charSelect/charBG.png");
 
     public static Settings.GameLanguage[] SupportedLanguages = {
             Settings.GameLanguage.ENG,
@@ -92,6 +92,11 @@ public class ModFile implements
 
     public static String makePowerPath(String resourcePath) {
         return modID + "Resources/images/powers/" + resourcePath;
+    }
+
+    public static String makeCharacterPath(String resourcePath)
+    {
+        return modID + "Resources/images/char/";
     }
 
     public static String makeCardPath(String resourcePath) {
