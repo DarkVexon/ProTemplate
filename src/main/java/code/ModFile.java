@@ -96,7 +96,7 @@ public class ModFile implements
 
     public static String makeCharacterPath(String resourcePath)
     {
-        return modID + "Resources/images/char/";
+        return modID + "Resources/images/char/" + resourcePath;
     }
 
     public static String makeCardPath(String resourcePath) {
