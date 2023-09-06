@@ -2,7 +2,9 @@ package code.cards;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
-import code.util.CustomVarInfo;
+import basemod.abstracts.DynamicVariable;
+import code.CharacterFile;
+import code.util.CardArtRoller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,15 +19,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import code.CharacterFile;
-import code.util.CardArtRoller;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static code.ModFile.makeImagePath;
-import static code.ModFile.modID;
+import static code.ModFile.*;
 import static code.util.Wiz.atb;
 import static code.util.Wiz.att;
 
@@ -45,7 +44,7 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     private boolean needsArtRefresh = false;
 
-    final protected Map<String, CustomVarInfo.QuickDynamicVariable> customDynVars = new HashMap<>();
+    final protected Map<String, QuickDynamicVariable> customDynVars = new HashMap<>();
     final protected Map<String, CustomVarInfo> cardVariables = new HashMap<>();
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
@@ -287,7 +286,7 @@ public abstract class AbstractEasyCard extends CustomCard {
     // Custom Var gubbins
     protected final void setCustomVar(String key, int base, CalculationType type) {
         if (!customDynVars.containsKey(key)) {
-            CustomVarInfo.QuickDynamicVariable var = new CustomVarInfo.QuickDynamicVariable(key);
+            QuickDynamicVariable var = new QuickDynamicVariable(key);
             customDynVars.put(key, var);
             BaseMod.addDynamicVariable(var);
         }
@@ -312,16 +311,19 @@ public abstract class AbstractEasyCard extends CustomCard {
         if (var == null) return -1;
         return var.base;
     }
+
     public int customVar(String key) {
         CustomVarInfo var = cardVariables.get(key);
         if (var == null) return -1;
         return var.value;
     }
+
     public boolean isCustomVarModified(String key) {
         CustomVarInfo var = cardVariables.get(key);
         if (var == null) return false;
         return var.isModified();
     }
+
     public boolean customVarUpgraded(String key) {
         CustomVarInfo var = cardVariables.get(key);
         if (var == null) return false;
@@ -337,5 +339,81 @@ public abstract class AbstractEasyCard extends CustomCard {
         DAMAGE,
         BLOCK,
         NONE
+    }
+
+    public static class CustomVarInfo {
+        public int base;
+        public int value;
+        private boolean upgraded;
+        private boolean forceModified;
+        public AbstractEasyCard.CalculationType type;
+
+        public BiFunction<AbstractMonster, Integer, Integer> calculation = CustomVarInfo::noCalc;
+
+        public CustomVarInfo(int base, AbstractEasyCard.CalculationType type) {
+            this.value = this.base = base;
+            this.upgraded = false;
+            this.type = type;
+        }
+
+        private static int noCalc(AbstractMonster m, int base) {
+            return base;
+        }
+
+        public boolean isModified() {
+            return forceModified || base != value;
+        }
+
+        public boolean isUpgraded() {
+            return upgraded;
+        }
+
+        public void upgrade(int upgradeAmt) {
+            this.value = this.base += upgradeAmt;
+            this.upgraded = true;
+        }
+    }
+
+    public static class QuickDynamicVariable extends DynamicVariable {
+        final String localKey, key;
+
+        public QuickDynamicVariable(String key) {
+            this.localKey = key;
+            this.key = makeID(key);
+        }
+
+        @Override
+        public String key() {
+            return key;
+        }
+
+        @Override
+        public void setIsModified(AbstractCard c, boolean v) {
+            if (c instanceof AbstractEasyCard) {
+                CustomVarInfo var = ((AbstractEasyCard) c).getCustomVar(localKey);
+                if (var != null) var.forceModified = v;
+            }
+        }
+
+        @Override
+        public boolean isModified(AbstractCard c) {
+            return c instanceof AbstractEasyCard && ((AbstractEasyCard) c).isCustomVarModified(localKey);
+        }
+
+        @Override
+        public int value(AbstractCard c) {
+            return c instanceof AbstractEasyCard ? ((AbstractEasyCard) c).customVar(localKey) : 0;
+        }
+
+        @Override
+        public int baseValue(AbstractCard c) {
+            return c instanceof AbstractEasyCard ? ((AbstractEasyCard) c).customVarBase(localKey) : 0;
+        }
+
+        @Override
+        public boolean upgraded(AbstractCard c) {
+            return c instanceof AbstractEasyCard && ((AbstractEasyCard) c).customVarUpgraded(localKey);
+        }
+
     }
 }
