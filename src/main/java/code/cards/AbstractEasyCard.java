@@ -1,6 +1,8 @@
 package code.cards;
 
+import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
+import code.util.CustomVarInfo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +19,10 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import code.CharacterFile;
 import code.util.CardArtRoller;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 import static code.ModFile.makeImagePath;
 import static code.ModFile.modID;
@@ -38,6 +44,9 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean isSecondDamageModified;
 
     private boolean needsArtRefresh = false;
+
+    final protected Map<String, CustomVarInfo.QuickDynamicVariable> customDynVars = new HashMap<>();
+    final protected Map<String, CustomVarInfo> cardVariables = new HashMap<>();
 
     public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, CharacterFile.Enums.TODO_COLOR);
@@ -103,10 +112,24 @@ public abstract class AbstractEasyCard extends CustomCard {
             secondDamage = damage;
             baseDamage = tmp;
 
-            super.applyPowers();
-
             isSecondDamageModified = (secondDamage != baseSecondDamage);
-        } else super.applyPowers();
+        }
+        for (CustomVarInfo var : cardVariables.values()) {
+            if (var.type == CalculationType.DAMAGE) {
+                var.value = var.base;
+
+                int tmp = baseDamage;
+                baseDamage = var.calculation.apply(null, var.base);
+
+                super.applyPowers();
+
+                var.value = damage;
+                baseDamage = tmp;
+            } else {
+                var.value = var.calculation.apply(null, var.base);
+            }
+        }
+        super.applyPowers();
     }
 
     @Override
@@ -122,10 +145,42 @@ public abstract class AbstractEasyCard extends CustomCard {
             secondDamage = damage;
             baseDamage = tmp;
 
-            super.calculateCardDamage(mo);
-
             isSecondDamageModified = (secondDamage != baseSecondDamage);
-        } else super.calculateCardDamage(mo);
+        }
+        for (CustomVarInfo var : cardVariables.values()) {
+            if (var.type == CalculationType.DAMAGE) {
+                var.value = var.base;
+
+                int tmp = baseDamage;
+                baseDamage = var.calculation.apply(mo, var.base);
+
+                super.calculateCardDamage(mo);
+
+                var.value = damage;
+                baseDamage = tmp;
+            } else {
+                var.value = var.calculation.apply(mo, var.base);
+            }
+        }
+        super.calculateCardDamage(mo);
+    }
+
+    @Override
+    protected void applyPowersToBlock() {
+        for (CustomVarInfo var : cardVariables.values()) {
+            if (var.type == CalculationType.BLOCK) {
+                var.value = var.base;
+
+                int tmp = baseBlock;
+                baseBlock = var.calculation.apply(null, var.base);
+
+                super.applyPowersToBlock();
+
+                var.value = block;
+                baseBlock = tmp;
+            }
+        }
+        super.applyPowersToBlock();
     }
 
     public void resetAttributes() {
@@ -134,6 +189,9 @@ public abstract class AbstractEasyCard extends CustomCard {
         isSecondMagicModified = false;
         secondDamage = baseSecondDamage;
         isSecondDamageModified = false;
+        for (CustomVarInfo var : cardVariables.values()) {
+            var.value = var.base;
+        }
     }
 
     public void displayUpgrades() {
@@ -224,5 +282,60 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     protected void upSecondDamage(int x) {
         upgradeSecondDamage(x);
+    }
+
+    // Custom Var gubbins
+    protected final void setCustomVar(String key, int base, CalculationType type) {
+        if (!customDynVars.containsKey(key)) {
+            CustomVarInfo.QuickDynamicVariable var = new CustomVarInfo.QuickDynamicVariable(key);
+            customDynVars.put(key, var);
+            BaseMod.addDynamicVariable(var);
+        }
+        cardVariables.put(key, new CustomVarInfo(base, type));
+    }
+
+    protected final void setCustomVar(String key, int base) {
+        setCustomVar(key, base, CalculationType.NONE);
+    }
+
+    protected void setCustomVarCalculation(String key, BiFunction<AbstractMonster, Integer, Integer> calculation) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var != null) var.calculation = calculation;
+    }
+
+    public CustomVarInfo getCustomVar(String key) {
+        return cardVariables.get(key);
+    }
+
+    public int customVarBase(String key) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var == null) return -1;
+        return var.base;
+    }
+    public int customVar(String key) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var == null) return -1;
+        return var.value;
+    }
+    public boolean isCustomVarModified(String key) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var == null) return false;
+        return var.isModified();
+    }
+    public boolean customVarUpgraded(String key) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var == null) return false;
+        return var.isUpgraded();
+    }
+
+    public void upgradeCustomVar(String key, int upgradeAmt) {
+        CustomVarInfo var = cardVariables.get(key);
+        if (var != null) var.upgrade(upgradeAmt);
+    }
+
+    public enum CalculationType {
+        DAMAGE,
+        BLOCK,
+        NONE
     }
 }
