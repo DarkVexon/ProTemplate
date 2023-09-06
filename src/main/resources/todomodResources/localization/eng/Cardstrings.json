@@ -61,5 +61,9 @@
     "NAME": "Previews and Callbacks",
     "DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies.",
     "UPGRADE_DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
+  },
+  "${ModID}:CustomCardVarDemo": {
+    "NAME": "Custom Card Var",
+    "DESCRIPTION": "Deal !${ModID}:thirdDamage! damage. NL Gain !${ModID}:secondBlock! Block. NL Apply !${ModID}:poisonHatesByrds! Poison, doubled on Byrds."
   }
 }
