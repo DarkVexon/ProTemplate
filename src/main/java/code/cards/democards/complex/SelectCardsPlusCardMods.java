@@ -23,6 +23,7 @@ public class SelectCardsPlusCardMods extends AbstractEasyCard {
 
     public SelectCardsPlusCardMods() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
+        setUpgradedCost(0);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -37,9 +38,5 @@ public class SelectCardsPlusCardMods extends AbstractEasyCard {
         atb(new SelectCardsAction(myCardsList, 1, cardStrings.EXTENDED_DESCRIPTION[0], (cards) -> {
             att(new MakeTempCardInHandAction(cards.get(0), 1, true));
         }));
-    }
-
-    public void upp() {
-        upgradeBaseCost(0);
     }
 } 

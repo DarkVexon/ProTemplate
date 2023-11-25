@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import code.cards.AbstractEasyCard;
 
 import static code.ModFile.makeID;
+import static code.util.Wiz.actionify;
 import static code.util.Wiz.atb;
 import static code.util.Wiz.shuffleIn;
 
@@ -20,8 +21,9 @@ public class MultiCardPreviewAndDrawCallback extends AbstractEasyCard {
 
     public MultiCardPreviewAndDrawCallback() {
         super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY); // This card is a 1 cost Uncommon Attack that targets ALL enemies.
-        baseDamage = 10;
+        setDamage(10, +1);
         MultiCardPreview.add(this, new Smite(), new Safety()); // Display both Smite and Safety when you hover this card.
+        isMultiDamage = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -31,25 +33,15 @@ public class MultiCardPreviewAndDrawCallback extends AbstractEasyCard {
         AbstractCard q2 = new Safety(); // Same for Safety.
         if (upgraded) q2.upgrade();
         shuffleIn(q2);
-        atb(new DrawCardAction(1, new AbstractGameAction() { // Add an action that draws 1 card. As soon as that's done, add another action that...
-            @Override
-            public void update() {
-                isDone = true; // is done immediately AND...
-                if (DrawCardAction.drawnCards.stream().anyMatch(q -> q.color.equals(CardColor.COLORLESS))) { // checks if any cards drawn were colorless...
-                    allDmgTop(AttackEffect.SLASH_VERTICAL); // and if so deals the damage to ALL enemies.
-                }
-            }
-        }));
+        atb(new DrawCardAction(1, actionify(() -> { // Add an action that draws 1 card. As soon as that's done, add another action that...
+            if (DrawCardAction.drawnCards.stream().anyMatch(c -> c.color.equals(CardColor.COLORLESS))) // checks if any cards drawn were colorless...
+                allDmgTop(AbstractGameAction.AttackEffect.SLASH_VERTICAL); // and if so deals the damage to ALL enemies.
+        })));
     }
 
+    @Override
     public void upp() {
-        upgradeDamage(1); // here, we show upgraded smite and safeties.
-        AbstractCard q = new Smite();
-        q.upgrade();
-        AbstractCard q2 = new Safety();
-        q2.upgrade();
-        MultiCardPreview.clear(this);
-        MultiCardPreview.add(this, q, q2);
-        uDesc();
+        super.upp();
+        MultiCardPreview.multiCardPreview.get(this).forEach(c -> c.upgrade()); // here, we show upgraded smite and safeties.
     }
 }

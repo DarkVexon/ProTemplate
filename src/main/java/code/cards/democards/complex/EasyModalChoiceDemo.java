@@ -20,8 +20,8 @@ public class EasyModalChoiceDemo extends AbstractEasyCard {
 
     public EasyModalChoiceDemo() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
-        baseMagicNumber = magicNumber = 3;
-        baseSecondMagic = secondMagic = 1;
+        setMagic(3, +1);
+        setSecondMagic(1, +1);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -29,10 +29,5 @@ public class EasyModalChoiceDemo extends AbstractEasyCard {
         easyCardList.add(new EasyModalChoiceCard(cardStrings.EXTENDED_DESCRIPTION[0], cardStrings.EXTENDED_DESCRIPTION[1] + magicNumber + cardStrings.EXTENDED_DESCRIPTION[2], () -> att(new DrawCardAction(magicNumber))));
         easyCardList.add(new EasyModalChoiceCard(cardStrings.EXTENDED_DESCRIPTION[3], cardStrings.EXTENDED_DESCRIPTION[4]+ secondMagic + cardStrings.EXTENDED_DESCRIPTION[5], () -> applyToSelfTop(new StrengthPower(p, secondMagic))));
         atb(new EasyModalChoiceAction(easyCardList));
-    }
-
-    public void upp() {
-        upgradeMagicNumber(1);
-        upgradeSecondMagic(1);
     }
 }

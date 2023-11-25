@@ -17,9 +17,9 @@ public class StartupBlockCard extends AbstractEasyCard implements StartupCard { 
 
     public StartupBlockCard() {
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY); // This card is a 1 cost Common Skill that targets an enemy.
-        baseDamage = 7;
+        setDamage(7, +2);
+        setMagic(4, +1);
         isMultiDamage = true; // This card attacks ALL enemies, so isMultiDamage is true...
-        baseMagicNumber = magicNumber = 4;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -30,10 +30,5 @@ public class StartupBlockCard extends AbstractEasyCard implements StartupCard { 
     public boolean atBattleStartPreDraw() {
         atb(new GainBlockAction(AbstractDungeon.player, magicNumber)); // Since this isn't a card being played, we use a flat value (magicnumber) for the Block.
         return true; // The return value is if you want this card to show up pre-fight, to indicate the effect triggered. Since it always triggers, we always return true.
-    }
-
-    public void upp() {
-        upgradeDamage(2);
-        upgradeMagicNumber(1);
     }
 }
