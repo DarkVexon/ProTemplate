@@ -2,6 +2,7 @@ package code;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.DynamicVariable;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -22,6 +23,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import code.cards.AbstractEasyCard;
+import code.cards.cardvars.AbstractEasyDynamicVariable;
 import code.cards.cardvars.SecondDamage;
 import code.cards.cardvars.SecondMagicNumber;
 import code.potions.AbstractEasyPotion;
@@ -147,8 +149,10 @@ public class ModFile implements
 
     @Override
     public void receiveEditCards() {
-        BaseMod.addDynamicVariable(new SecondMagicNumber());
-        BaseMod.addDynamicVariable(new SecondDamage());
+        new AutoAdd(modID)
+            .packageFilter(AbstractEasyDynamicVariable.class)
+            .any(DynamicVariable.class, (info, var) -> 
+                BaseMod.addDynamicVariable(var));
         new AutoAdd(modID)
                 .packageFilter(AbstractEasyCard.class)
                 .setDefaultSeen(true)

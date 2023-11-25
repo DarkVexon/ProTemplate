@@ -32,10 +32,20 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean upgradedSecondMagic;
     public boolean isSecondMagicModified;
 
+    public int thirdMagic;
+    public int baseThirdMagic;
+    public boolean upgradedThirdMagic;
+    public boolean isThirdMagicModified;
+
     public int secondDamage;
     public int baseSecondDamage;
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
+
+    public int secondBlock;
+    public int baseSecondBlock;
+    public boolean upgradedSecondBlock;
+    public boolean isSecondBlockModified;
 
     private boolean needsArtRefresh = false;
 
@@ -110,6 +120,25 @@ public abstract class AbstractEasyCard extends CustomCard {
     }
 
     @Override
+    protected void applyPowersToBlock() {
+        if (baseSecondBlock > -1) {
+            secondBlock = baseSecondBlock;
+
+            int tmp = baseBlock;
+            baseBlock = baseSecondBlock;
+
+            super.applyPowersToBlock();
+
+            secondBlock = block;
+            baseBlock = tmp;
+
+            super.applyPowersToBlock();
+
+            isSecondBlockModified = (secondBlock != baseSecondBlock);
+        } else super.applyPowersToBlock();
+    }
+
+    @Override
     public void calculateCardDamage(AbstractMonster mo) {
         if (baseSecondDamage > -1) {
             secondDamage = baseSecondDamage;
@@ -132,8 +161,12 @@ public abstract class AbstractEasyCard extends CustomCard {
         super.resetAttributes();
         secondMagic = baseSecondMagic;
         isSecondMagicModified = false;
+        thirdMagic = baseThirdMagic;
+        isThirdMagicModified = false;
         secondDamage = baseSecondDamage;
         isSecondDamageModified = false;
+        secondBlock = baseSecondBlock;
+        isSecondBlockModified = false;
     }
 
     public void displayUpgrades() {
@@ -142,9 +175,17 @@ public abstract class AbstractEasyCard extends CustomCard {
             secondMagic = baseSecondMagic;
             isSecondMagicModified = true;
         }
+        if (upgradedThirdMagic) {
+            thirdMagic = baseThirdMagic;
+            isThirdMagicModified = true;
+        }
         if (upgradedSecondDamage) {
             secondDamage = baseSecondDamage;
             isSecondDamageModified = true;
+        }
+        if (upgradedSecondBlock) {
+            secondBlock = baseSecondBlock;
+            isSecondBlockModified = true;
         }
     }
 
@@ -154,10 +195,22 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradedSecondMagic = true;
     }
 
+    protected void upgradedThirdMagic(int amount) {
+        baseThirdMagic += amount;
+        thirdMagic = baseThirdMagic;
+        upgradedThirdMagic = true;
+    }
+
     protected void upgradeSecondDamage(int amount) {
         baseSecondDamage += amount;
         secondDamage = baseSecondDamage;
         upgradedSecondDamage = true;
+    }
+
+    protected void upgradeSecondBlock(int amount) {
+        baseSecondBlock += amount;
+        secondBlock = baseSecondBlock;
+        upgradedSecondBlock = true;
     }
 
     protected void uDesc() {
@@ -176,9 +229,17 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public void update() {
         super.update();
-        if (needsArtRefresh) {
+        if (needsArtRefresh)
             CardArtRoller.computeCard(this);
-        }
+    }
+
+    public AbstractCard makeStatEquivalentCopy() {
+        AbstractEasyCard c = (AbstractEasyCard)super.makeStatEquivalentCopy();
+        c.baseSecondDamage = c.secondDamage = baseSecondDamage;
+        c.baseSecondBlock = c.secondBlock = baseSecondBlock;
+        c.baseSecondMagic = c.secondMagic = baseSecondMagic;
+        c.baseThirdMagic = c.thirdMagic = baseThirdMagic;
+        return c;
     }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
@@ -206,6 +267,18 @@ public abstract class AbstractEasyCard extends CustomCard {
         atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
     }
 
+    protected void blckTop() {
+        att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
+    }
+
+    protected void altBlck() {
+        atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
+    }
+
+    protected void altBlckTop() {
+        att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
+    }
+
     public String cardArtCopy() {
         return null;
     }
@@ -222,7 +295,15 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradeSecondMagic(x);
     }
 
+    protected void upThirdMagic(int x) {
+        upgradedThirdMagic(x);
+    }
+
     protected void upSecondDamage(int x) {
         upgradeSecondDamage(x);
+    }
+
+    protected void upSecondBlock(int x) {
+        upgradeSecondBlock(x);
     }
 }
