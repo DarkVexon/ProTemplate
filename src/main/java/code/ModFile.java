@@ -19,10 +19,12 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import code.cards.AbstractEasyCard;
 import code.cards.cardvars.SecondDamage;
 import code.cards.cardvars.SecondMagicNumber;
+import code.potions.AbstractEasyPotion;
 import code.relics.AbstractEasyRelic;
 import code.util.ProAudio;
 import java.nio.charset.StandardCharsets;
@@ -115,7 +117,16 @@ public class ModFile implements
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new CharacterFile(CharacterFile.characterStrings.NAMES[1], CharacterFile.Enums.THE_TODO),
-                CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+            CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+        
+        new AutoAdd(modID)
+            .packageFilter(AbstractEasyPotion.class)
+            .any(AbstractEasyPotion.class, (info, potion) -> {
+                if (potion.pool == null)
+                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
+                else
+                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID, potion.pool);
+            });
     }
 
     @Override
