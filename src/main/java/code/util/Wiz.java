@@ -20,8 +20,13 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import code.actions.TimedVFXAction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static code.ModFile.makeID;
 
 public class Wiz {
     //The wonderful Wizard of Oz allows access to most easy compilations of data, or functions.
@@ -31,28 +36,28 @@ public class Wiz {
     }
 
     public static void forAllCardsInList(Consumer<AbstractCard> consumer, ArrayList<AbstractCard> cardsList) {
-        for (AbstractCard c : cardsList) {
-            consumer.accept(c);
-        }
+        cardsList.forEach(c -> consumer.accept(c));
     }
 
     public static ArrayList<AbstractCard> getAllCardsInCardGroups(boolean includeHand, boolean includeExhaust) {
         ArrayList<AbstractCard> masterCardsList = new ArrayList<>();
         masterCardsList.addAll(AbstractDungeon.player.drawPile.group);
         masterCardsList.addAll(AbstractDungeon.player.discardPile.group);
-        if (includeHand) {
+        if (includeHand)
             masterCardsList.addAll(AbstractDungeon.player.hand.group);
-        }
-        if (includeExhaust) {
+        if (includeExhaust)
             masterCardsList.addAll(AbstractDungeon.player.exhaustPile.group);
-        }
         return masterCardsList;
     }
 
     public static void forAllMonstersLiving(Consumer<AbstractMonster> consumer) {
-        for (AbstractMonster m : getEnemies()) {
-            consumer.accept(m);
-        }
+        getEnemies().forEach(mo -> consumer.accept(mo));
+    }
+
+    public static void forAllMonstersLivingTop(Consumer<AbstractMonster> consumer) {
+        ArrayList<AbstractMonster> enemies = getEnemies();
+        Collections.reverse(enemies);
+        enemies.forEach(mo -> consumer.accept(mo));
     }
 
     public static ArrayList<AbstractMonster> getEnemies() {
@@ -66,23 +71,14 @@ public class Wiz {
     }
 
     public static ArrayList<AbstractCard> getCardsMatchingPredicate(Predicate<AbstractCard> pred, boolean allcards) {
-        if (allcards) {
+        if (allcards)
+            return (ArrayList<AbstractCard>)CardLibrary.getAllCards().stream().filter(pred).collect(Collectors.toList());
+        else {
             ArrayList<AbstractCard> cardsList = new ArrayList<>();
-            for (AbstractCard c : CardLibrary.getAllCards()) {
-                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
-            }
-            return cardsList;
-        } else {
-            ArrayList<AbstractCard> cardsList = new ArrayList<>();
-            for (AbstractCard c : AbstractDungeon.srcCommonCardPool.group) {
-                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
-            }
-            for (AbstractCard c : AbstractDungeon.srcUncommonCardPool.group) {
-                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
-            }
-            for (AbstractCard c : AbstractDungeon.srcRareCardPool.group) {
-                if (pred.test(c)) cardsList.add(c.makeStatEquivalentCopy());
-            }
+            cardsList.addAll(AbstractDungeon.srcCommonCardPool.group);
+            cardsList.addAll(AbstractDungeon.srcUncommonCardPool.group);
+            cardsList.addAll(AbstractDungeon.srcRareCardPool.group);
+            cardsList.removeIf(c -> !pred.test(c));
             return cardsList;
         }
     }
@@ -90,7 +86,6 @@ public class Wiz {
     public static AbstractCard returnTrulyRandomPrediCardInCombat(Predicate<AbstractCard> pred, boolean allCards) {
         return getRandomItem(getCardsMatchingPredicate(pred, allCards));
     }
-
 
     public static AbstractCard returnTrulyRandomPrediCardInCombat(Predicate<AbstractCard> pred) {
         return returnTrulyRandomPrediCardInCombat(pred, false);
@@ -104,7 +99,7 @@ public class Wiz {
         return getRandomItem(list, AbstractDungeon.cardRandomRng);
     }
 
-    private static boolean actuallyHovered(Hitbox hb) {
+    public static boolean actuallyHovered(Hitbox hb) {
         return InputHelper.mX > hb.x && InputHelper.mX < hb.x + hb.width && InputHelper.mY > hb.y && InputHelper.mY < hb.y + hb.height;
     }
 
@@ -190,9 +185,38 @@ public class Wiz {
 
     public static int pwrAmt(AbstractCreature check, String ID) {
         AbstractPower found = check.getPower(ID);
-        if (found != null) {
+        if (found != null)
             return found.amount;
-        }
         return 0;
+    }
+
+    public static AbstractGameAction actionify(Runnable todo) {
+        return new AbstractGameAction() {
+            public void update() {
+                isDone = true;
+                todo.run();
+            }
+        };
+    }
+
+    public static void actB(Runnable todo) {
+        atb(actionify(todo));
+    }
+
+    public static void actT(Runnable todo) {
+        att(actionify(todo));
+    }
+
+    public static AbstractGameAction multiAction(AbstractGameAction... actions) {
+        return actionify(() -> {
+            ArrayList<AbstractGameAction> actionsList = (ArrayList<AbstractGameAction>)Arrays.asList(actions);
+            Collections.reverse(actionsList);
+            for (AbstractGameAction action : actions)
+                att(action);
+        });
+    }
+
+    public static void playAudio(ProAudio a) {
+        CardCrawlGame.sound.play(makeID(a.name()));
     }
 }
