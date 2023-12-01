@@ -11,15 +11,11 @@ public class Defend extends AbstractEasyCard {
 
     public Defend() {
         super(ID, 1, CardType.SKILL, CardRarity.BASIC, CardTarget.SELF);
-        baseBlock = 5;
+        setBlock(5, +3);
         tags.add(CardTags.STARTER_DEFEND);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         blck();
-    }
-
-    public void upp() {
-        upgradeBlock(3);
     }
 }

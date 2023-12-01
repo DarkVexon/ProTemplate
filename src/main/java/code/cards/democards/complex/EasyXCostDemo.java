@@ -16,23 +16,17 @@ public class EasyXCostDemo extends AbstractEasyCard {
 
     public EasyXCostDemo() {
         super(ID, -1, CardType.ATTACK, CardRarity.RARE, CardTarget.ENEMY);
-        baseMagicNumber = magicNumber = 0;
-        baseDamage = 5;
-        exhaust = true;
+        setDamage(5);
+        setMagic(0, +1);
+        setExhaust(true);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         atb(new EasyXCostAction(this, (effect, params) -> {
-            for (int i = 0; i < effect + params[0]; i++) {
-                dmgTop(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
-            }
             applyToSelfTop(new StrengthPower(p, effect + params[0]));
+            for (int i = 0; i < effect + params[0]; i++)
+                dmgTop(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
             return true;
         }, magicNumber));
-    }
-
-    public void upp() {
-        upgradeMagicNumber(1);
-        uDesc();
     }
 }

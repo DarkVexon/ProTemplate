@@ -30,8 +30,7 @@
   },
   "${ModID}:EasyXCostDemo": {
     "NAME": "Easy X Cost",
-    "DESCRIPTION": "Deal !D! damage X times. NL Gain X Strength. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Deal !D! damage X+1 times. NL Gain X+1 Strength. NL Exhaust."
+    "DESCRIPTION": "{@@}Deal !D! damage X{!M!|>0=+!M!} times. NL Gain X{!M!|>0=+!M!} Strength. NL Exhaust."
   },
   "${ModID}:EasyModalChoiceDemo": {
     "NAME": "Easy Modal Choice",
@@ -59,7 +58,6 @@
   },
   "${ModID}:MultiCardPreviewAndDrawCallback": {
     "NAME": "Previews and Callbacks",
-    "DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies.",
-    "UPGRADE_DESCRIPTION": "Shuffle *Smite and *Safety into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
+    "DESCRIPTION": "{@@}Shuffle *Smite{!Upgrades!|>0=+} and *Safety{!Upgrades!|>0=+} into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
   }
 }

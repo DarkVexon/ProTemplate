@@ -14,16 +14,12 @@ import static code.util.Wiz.applyToSelf;
 import static code.util.Wiz.atb;
 
 public class InlinePowerDemo extends AbstractEasyCard {
-
     public final static String ID = makeID(InlinePowerDemo.class.getSimpleName());
     // intellij stuff power, self, uncommon
 
-    private static final int MAGIC = 4;
-    private static final int UPG_MAGIC = 2;
-
     public InlinePowerDemo() {
         super(ID, 1, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);
-        baseMagicNumber = magicNumber = MAGIC;
+        setMagic(4, +2);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -47,9 +43,5 @@ public class InlinePowerDemo extends AbstractEasyCard {
                 description = cardStrings.EXTENDED_DESCRIPTION[1] + amount + cardStrings.EXTENDED_DESCRIPTION[2] + amount + cardStrings.EXTENDED_DESCRIPTION[3];
             }
         });
-    }
-
-    public void upp() {
-        upgradeMagicNumber(UPG_MAGIC);
     }
 } 

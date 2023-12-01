@@ -2,6 +2,7 @@ package code;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.DynamicVariable;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -13,14 +14,21 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.localization.OrbStrings;
+import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.StanceStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import code.cards.AbstractEasyCard;
+import code.cards.cardvars.AbstractEasyDynamicVariable;
 import code.cards.cardvars.SecondDamage;
 import code.cards.cardvars.SecondMagicNumber;
+import code.potions.AbstractEasyPotion;
 import code.relics.AbstractEasyRelic;
-
+import code.util.ProAudio;
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -30,7 +38,8 @@ public class ModFile implements
         EditRelicsSubscriber,
         EditStringsSubscriber,
         EditKeywordsSubscriber,
-        EditCharactersSubscriber {
+        EditCharactersSubscriber,
+        AddAudioSubscriber {
 
     public static final String modID = "todomod"; //TODO: Change this.
 
@@ -110,7 +119,16 @@ public class ModFile implements
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new CharacterFile(CharacterFile.characterStrings.NAMES[1], CharacterFile.Enums.THE_TODO),
-                CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+            CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+        
+        new AutoAdd(modID)
+            .packageFilter(AbstractEasyPotion.class)
+            .any(AbstractEasyPotion.class, (info, potion) -> {
+                if (potion.pool == null)
+                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
+                else
+                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID, potion.pool);
+            });
     }
 
     @Override
@@ -131,24 +149,32 @@ public class ModFile implements
 
     @Override
     public void receiveEditCards() {
-        BaseMod.addDynamicVariable(new SecondMagicNumber());
-        BaseMod.addDynamicVariable(new SecondDamage());
+        new AutoAdd(modID)
+            .packageFilter(AbstractEasyDynamicVariable.class)
+            .any(DynamicVariable.class, (info, var) -> 
+                BaseMod.addDynamicVariable(var));
         new AutoAdd(modID)
                 .packageFilter(AbstractEasyCard.class)
                 .setDefaultSeen(true)
                 .cards();
     }
 
-
     @Override
     public void receiveEditStrings() {
         BaseMod.loadCustomStringsFile(CardStrings.class, modID + "Resources/localization/" + getLangString() + "/Cardstrings.json");
-
         BaseMod.loadCustomStringsFile(RelicStrings.class, modID + "Resources/localization/" + getLangString() + "/Relicstrings.json");
-
         BaseMod.loadCustomStringsFile(CharacterStrings.class, modID + "Resources/localization/" + getLangString() + "/Charstrings.json");
-
         BaseMod.loadCustomStringsFile(PowerStrings.class, modID + "Resources/localization/" + getLangString() + "/Powerstrings.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, modID + "Resources/localization/" + getLangString() + "/UIstrings.json");
+        BaseMod.loadCustomStringsFile(OrbStrings.class, modID + "Resources/localization/" + getLangString() + "/Orbstrings.json");
+        BaseMod.loadCustomStringsFile(StanceStrings.class, modID + "Resources/localization/" + getLangString() + "/Stancestrings.json");
+        BaseMod.loadCustomStringsFile(PotionStrings.class, modID + "Resources/localization/" + getLangString() + "/Potionstrings.json");
+    }
+
+    @Override
+    public void receiveAddAudio() {
+        for (ProAudio a : ProAudio.values())
+            BaseMod.addAudio(makeID(a.name()), makePath("audio/" + a.name().toLowerCase() + ".ogg"));
     }
 
     @Override

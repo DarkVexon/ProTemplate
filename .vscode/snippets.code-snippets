@@ -1,0 +1,36 @@
+{
+	"Card": {
+		"scope": "java",
+		"isFileTemplate": true,
+		"body": [
+"package code.cards;",
+"",
+"import com.megacrit.cardcrawl.characters.AbstractPlayer;",
+"import com.megacrit.cardcrawl.monsters.AbstractMonster;",
+"",
+"import static code.ModFile.makeID;",
+"import static code.util.Wiz.*;",
+"",
+"public class $TM_FILENAME_BASE extends AbstractEasyCard {",
+"    public final static String ID = makeID(\"$TM_FILENAME_BASE\");",
+"",
+"    public $TM_FILENAME_BASE() {",
+"        super(ID, ${1|0,1,2,3,-1,-2|}, CardType.${2|ATTACK,SKILL,POWER,CURSE,STATUS|}, CardRarity.${3|COMMON,UNCOMMON,RARE,SPECIAL,BASIC,CURSE|}, CardTarget.${4|ENEMY,ALL_ENEMY,SELF,NONE,SELF_AND_ENEMY,ALL|});",
+"        $0",
+"    }",
+"",
+"    public void use(AbstractPlayer p, AbstractMonster m) {",
+"        ",
+"    }",
+"},",
+"  \"${ModID${ModID}}:$TM_FILENAME_BASE\": {",
+"    \"NAME\": \"${TM_FILENAME_BASE/(.*)/$1/}\",",
+"    \"DESCRIPTION\": \"\"",
+"  }"
+		]
+	},
+	"Damage": {
+		"scope": "java",
+		"body": ["dmg(m, AbstractGameAction.AttackEffect.${1|BLUNT_LIGHT,BLUNT_HEAVY,SLASH_DIAGONAL,SMASH,SLASH_HEAVY,SLASH_HORIZONTAL,SLASH_VERTICAL,NONE,FIRE,POISON,SHIELD,LIGHTNING|});"]
+	}
+}

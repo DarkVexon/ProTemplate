@@ -32,10 +32,45 @@ public abstract class AbstractEasyCard extends CustomCard {
     public boolean upgradedSecondMagic;
     public boolean isSecondMagicModified;
 
+    public int thirdMagic;
+    public int baseThirdMagic;
+    public boolean upgradedThirdMagic;
+    public boolean isThirdMagicModified;
+
     public int secondDamage;
     public int baseSecondDamage;
     public boolean upgradedSecondDamage;
     public boolean isSecondDamageModified;
+
+    public int secondBlock;
+    public int baseSecondBlock;
+    public boolean upgradedSecondBlock;
+    public boolean isSecondBlockModified;
+
+    private boolean upgradesDamage = false;
+    private int damageUpgrade;
+    private boolean upgradesBlock = false;
+    private int blockUpgrade;
+    private boolean upgradesMagic = false;
+    private int magicUpgrade;
+    private boolean upgradesSecondMagic = false;
+    private int secondMagicUpgrade;
+    private boolean upgradesThirdMagic = false;
+    private int thirdMagicUpgrade;
+    private boolean upgradesSecondDamage = false;
+    private int secondDamageUpgrade;
+    private boolean upgradesSecondBlock = false;
+    private int secondBlockUpgrade;
+    private boolean upgradesCost = false;
+    private int costUpgrade;
+    private boolean upgradesExhaust = false;
+    private boolean upgradedExhaust;
+    private boolean upgradesEthereal = false;
+    private boolean upgradedEthereal;
+    private boolean upgradesInnate = false;
+    private boolean upgradedInnate;
+    private boolean upgradesRetain = false;
+    private boolean upgradedRetain;
 
     private boolean needsArtRefresh = false;
 
@@ -110,6 +145,25 @@ public abstract class AbstractEasyCard extends CustomCard {
     }
 
     @Override
+    protected void applyPowersToBlock() {
+        if (baseSecondBlock > -1) {
+            secondBlock = baseSecondBlock;
+
+            int tmp = baseBlock;
+            baseBlock = baseSecondBlock;
+
+            super.applyPowersToBlock();
+
+            secondBlock = block;
+            baseBlock = tmp;
+
+            super.applyPowersToBlock();
+
+            isSecondBlockModified = (secondBlock != baseSecondBlock);
+        } else super.applyPowersToBlock();
+    }
+
+    @Override
     public void calculateCardDamage(AbstractMonster mo) {
         if (baseSecondDamage > -1) {
             secondDamage = baseSecondDamage;
@@ -132,8 +186,12 @@ public abstract class AbstractEasyCard extends CustomCard {
         super.resetAttributes();
         secondMagic = baseSecondMagic;
         isSecondMagicModified = false;
+        thirdMagic = baseThirdMagic;
+        isThirdMagicModified = false;
         secondDamage = baseSecondDamage;
         isSecondDamageModified = false;
+        secondBlock = baseSecondBlock;
+        isSecondBlockModified = false;
     }
 
     public void displayUpgrades() {
@@ -142,9 +200,17 @@ public abstract class AbstractEasyCard extends CustomCard {
             secondMagic = baseSecondMagic;
             isSecondMagicModified = true;
         }
+        if (upgradedThirdMagic) {
+            thirdMagic = baseThirdMagic;
+            isThirdMagicModified = true;
+        }
         if (upgradedSecondDamage) {
             secondDamage = baseSecondDamage;
             isSecondDamageModified = true;
+        }
+        if (upgradedSecondBlock) {
+            secondBlock = baseSecondBlock;
+            isSecondBlockModified = true;
         }
     }
 
@@ -154,15 +220,22 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradedSecondMagic = true;
     }
 
+    protected void upgradeThirdMagic(int amount) {
+        baseThirdMagic += amount;
+        thirdMagic = baseThirdMagic;
+        upgradedThirdMagic = true;
+    }
+
     protected void upgradeSecondDamage(int amount) {
         baseSecondDamage += amount;
         secondDamage = baseSecondDamage;
         upgradedSecondDamage = true;
     }
 
-    protected void uDesc() {
-        rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-        initializeDescription();
+    protected void upgradeSecondBlock(int amount) {
+        baseSecondBlock += amount;
+        secondBlock = baseSecondBlock;
+        upgradedSecondBlock = true;
     }
 
     public void upgrade() {
@@ -172,13 +245,161 @@ public abstract class AbstractEasyCard extends CustomCard {
         }
     }
 
-    public abstract void upp();
+    protected void setDamage(int base, int up) {
+        setDamage(base);
+        upgradesDamage = true;
+        damageUpgrade = up;
+    }
+
+    protected void setDamage(int base) {
+        baseDamage = base; 
+    }
+
+    protected void setBlock(int base, int up) {
+        setBlock(base);
+        upgradesBlock = true;
+        blockUpgrade = up;
+    }
+
+    protected void setBlock(int base) {
+        baseBlock = base; 
+    }
+
+    protected void setMagic(int base, int up) {
+        setMagic(base);
+        upgradesMagic = true;
+        magicUpgrade = up;
+    }
+
+    protected void setMagic(int base) {
+        baseMagicNumber = magicNumber = base; 
+    }
+
+    protected void setSecondMagic(int base, int up) {
+        setSecondMagic(base);
+        upgradesSecondMagic = true;
+        secondMagicUpgrade = up;
+    }
+
+    protected void setSecondMagic(int base) {
+        baseSecondMagic = secondMagic = base; 
+    }
+
+    protected void setThirdMagic(int base, int up) {
+        setThirdMagic(base);
+        upgradesThirdMagic = true;
+        thirdMagicUpgrade = up;
+    }
+
+    protected void setThirdMagic(int base) {
+        baseThirdMagic = thirdMagic = base; 
+    }
+
+    protected void setSecondDamage(int base, int up) {
+        setSecondDamage(base);
+        upgradesSecondDamage = true;
+        secondDamageUpgrade = up;
+    }
+
+    protected void setSecondDamage(int base) {
+        baseSecondDamage = secondDamage = base; 
+    }
+
+    protected void setSecondBlock(int base, int up) {
+        setSecondDamage(base);
+        upgradesSecondBlock = true;
+        secondBlockUpgrade = up;
+    }
+
+    protected void setSecondBlock(int base) {
+        baseSecondBlock = secondBlock = base; 
+    }
+
+    protected void setExhaust(boolean exhausts, boolean exhaustsWhenUpgraded) {
+        setExhaust(exhausts);
+        upgradesExhaust = true;
+        upgradedExhaust = exhaustsWhenUpgraded;
+    }
+
+    protected void setExhaust(boolean exhausts) {
+        exhaust = exhausts;
+    }
+
+    protected void setEthereal(boolean ethereal, boolean etherealWhenUpgraded) {
+        setEthereal(ethereal);
+        upgradesEthereal = true;
+        upgradedEthereal = etherealWhenUpgraded;
+    }
+
+    protected void setEthereal(boolean exhausts) {
+        isEthereal = exhausts;
+    }
+
+    protected void setInnate(boolean innate, boolean innateWhenUpgraded) {
+        setInnate(innate);
+        upgradesInnate = true;
+        upgradedInnate = innateWhenUpgraded;
+    }
+
+    protected void setInnate(boolean innate) {
+        isInnate = innate;
+    }
+
+    protected void setRetain(boolean retains, boolean retainsWhenUpgraded) {
+        setRetain(retains);
+        upgradesRetain = true;
+        upgradedRetain = retainsWhenUpgraded;
+    }
+
+    protected void setRetain(boolean retains) {
+        selfRetain = retains;
+    }
+
+    protected void setUpgradedCost(int newCost) {
+        upgradesCost = true;
+        costUpgrade = newCost;
+    }
+
+    public void upp() {
+        if (upgradesDamage)
+            upgradeDamage(damageUpgrade);
+        if (upgradesBlock)
+            upgradeBlock(blockUpgrade);
+        if (upgradesMagic)
+            upgradeMagicNumber(magicUpgrade);
+        if (upgradesSecondMagic)
+            upgradeSecondMagic(secondMagicUpgrade);
+        if (upgradesThirdMagic)
+            upgradeThirdMagic(thirdMagicUpgrade);
+        if (upgradesSecondDamage)
+            upgradeSecondDamage(secondDamageUpgrade);
+        if (upgradesSecondBlock)
+            upgradeSecondBlock(secondBlockUpgrade);
+        if (upgradesCost)
+            upgradeBaseCost(costUpgrade);
+        if (upgradesExhaust)
+            exhaust = upgradedExhaust;
+        if (upgradesEthereal)
+            isEthereal = upgradedEthereal;
+        if (upgradesInnate)
+            isInnate = upgradedInnate;
+        if (upgradesRetain)
+            selfRetain = upgradedRetain;
+    };
 
     public void update() {
         super.update();
-        if (needsArtRefresh) {
+        if (needsArtRefresh)
             CardArtRoller.computeCard(this);
-        }
+    }
+
+    public AbstractCard makeStatEquivalentCopy() {
+        AbstractEasyCard c = (AbstractEasyCard)super.makeStatEquivalentCopy();
+        c.baseSecondDamage = c.secondDamage = baseSecondDamage;
+        c.baseSecondBlock = c.secondBlock = baseSecondBlock;
+        c.baseSecondMagic = c.secondMagic = baseSecondMagic;
+        c.baseThirdMagic = c.thirdMagic = baseThirdMagic;
+        return c;
     }
 
     // These shortcuts are specifically for cards. All other shortcuts that aren't specifically for cards can go in Wiz.
@@ -202,8 +423,24 @@ public abstract class AbstractEasyCard extends CustomCard {
         atb(new DamageAction(m, new DamageInfo(AbstractDungeon.player, secondDamage, damageTypeForTurn), fx));
     }
 
+    protected void altDmgTop(AbstractMonster m, AbstractGameAction.AttackEffect fx) {
+        att(new DamageAction(m, new DamageInfo(AbstractDungeon.player, secondDamage, damageTypeForTurn), fx));
+    }
+
     protected void blck() {
         atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
+    }
+
+    protected void blckTop() {
+        att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, block));
+    }
+
+    protected void altBlck() {
+        atb(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
+    }
+
+    protected void altBlckTop() {
+        att(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, secondBlock));
     }
 
     public String cardArtCopy() {
@@ -222,7 +459,15 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradeSecondMagic(x);
     }
 
+    protected void upThirdMagic(int x) {
+        upgradeThirdMagic(x);
+    }
+
     protected void upSecondDamage(int x) {
         upgradeSecondDamage(x);
+    }
+
+    protected void upSecondBlock(int x) {
+        upgradeSecondBlock(x);
     }
 }
