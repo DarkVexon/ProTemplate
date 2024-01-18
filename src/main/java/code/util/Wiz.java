@@ -62,7 +62,7 @@ public class Wiz {
 
     public static ArrayList<AbstractMonster> getEnemies() {
         ArrayList<AbstractMonster> monsters = new ArrayList<>(AbstractDungeon.getMonsters().monsters);
-        monsters.removeIf(m -> m.isDead || m.isDying);
+        monsters.removeIf(AbstractCreature::isDeadOrEscaped);
         return monsters;
     }
 
