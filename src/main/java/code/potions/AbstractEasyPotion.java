@@ -23,6 +23,7 @@ public abstract class AbstractEasyPotion extends CustomPotion {
     public AbstractEasyPotion(String id, PotionRarity rarity, PotionSize size, Color liquidColor, Color hybridColor, Color spotsColor, AbstractPlayer.PlayerClass pool, Color labOutlineColor) {
         this(id, rarity, size, liquidColor, hybridColor, spotsColor);
         this.labOutlineColor = labOutlineColor;
+        this.pool = pool;
     }
 
     @Override
