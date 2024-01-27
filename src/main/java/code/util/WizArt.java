@@ -34,21 +34,32 @@ public class WizArt {
     }
 
     //SpriteBatch settings helpers
-    public static void setAllToDefault(SpriteBatch sb) {
+    public static void clearAllSettings(SpriteBatch sb) {
         sb.setColor(Color.WHITE);
         sb.setShader(null);
         sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
 
-    public static void setBlendToDefault(SpriteBatch sb) {
+    public static void setToNormalBlend(SpriteBatch sb) {
         sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     }
+
+    public static void setToAdditiveBlend(SpriteBatch sb) {
+        sb.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_DST_ALPHA);
+    }
+
+    //textures drawn with this functions follow the alpha channel of what is already drawn
+    public static void setToMaskBlend(SpriteBatch sb) {
+        sb.setBlendFunction(GL20.GL_DST_ALPHA, GL20.GL_ONE_MINUS_DST_ALPHA);
+    }
+
+
 
     //buffer helpers
 
     //basic fbo over the whole screen. I think one global fbo like this actually covers most fbo uses.
     //other uses can just use their own
-    private static FrameBuffer fbo = null;
+    public static FrameBuffer fbo = null;
 
     public static void beginFbo() {
         if (fbo == null) {
@@ -92,6 +103,7 @@ public class WizArt {
 
 
     //SpriteBatch state save (only one at a time)
+    //saves the current SpriteBatch settings to load them back after you're done, to make sure you're not disturbing anything that happens around what you're doing
     private static final StateData stateSave = new StateData();
 
     public static void saveState(SpriteBatch sb) {
