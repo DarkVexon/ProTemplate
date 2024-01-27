@@ -1,5 +1,6 @@
 package code.util;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,9 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.GLFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.megacrit.cardcrawl.core.Settings;
 import org.w3c.dom.Text;
+
+import java.text.Normalizer;
 
 public class WizArt {
 
@@ -72,6 +76,21 @@ public class WizArt {
         Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glColorMask(true, true, true, true);
+    }
+
+    //uses reflection to change the buffer's colorTexture.
+    //that way, the original texture isn't disposed at the same time as the buffer, and can be kept for later use
+    //the original texture will also survive the buffer being cleared
+    //this isn't ideal since it requires creating a new texture that might never be used, but use cases exist
+    //and there is no alternative in this version of LibGdx as far as I can tell
+    public static void swapColorTexture(FrameBuffer fb, Texture tex) {
+        ReflectionHacks.setPrivate(fb, GLFrameBuffer.class, "colorTexture", tex);
+    }
+
+    public static void swapColorTexture(FrameBuffer fb) {
+        Pixmap.Format format = ReflectionHacks.getPrivate(fb, GLFrameBuffer.class, "format");
+        Texture tex = new Texture(fb.getWidth(), fb.getHeight(), format);
+        swapColorTexture(fb, tex);
     }
 
 
