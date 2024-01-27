@@ -12,9 +12,6 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.GLFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.megacrit.cardcrawl.core.Settings;
-import org.w3c.dom.Text;
-
-import java.text.Normalizer;
 
 public class WizArt {
 
@@ -95,7 +92,7 @@ public class WizArt {
 
 
     //SpriteBatch state save (only one at a time)
-    private static StateData stateSave = new StateData();
+    private static final StateData stateSave = new StateData();
 
     public static void saveState(SpriteBatch sb) {
         stateSave.save(sb);
