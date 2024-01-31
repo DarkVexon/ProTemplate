@@ -185,6 +185,10 @@ public class CardArtRoller {
             CardLibrary.LibraryType.CURSE
     };
 
+
+    private static FrameBuffer smallBuffer = null;
+    private static OrthographicCamera smallCamera = null;
+
     public static void computeCard(AbstractEasyCard c) {
         c.portrait = doneCards.computeIfAbsent(c.cardID, key -> {
             ReskinInfo r = infos.computeIfAbsent(key, key2 -> {
@@ -273,42 +277,54 @@ public class CardArtRoller {
             AbstractCard artCard = CardLibrary.getCard(r.origCardID);
             TextureAtlas.AtlasRegion t = artCard.portrait;
             t.flip(r.flipX, true);
-            FrameBuffer fb = ImageHelper.createBuffer(250, 190);
-            OrthographicCamera og = new OrthographicCamera(250, 190);
+            boolean shouldSwapColorTexture = true;
+            if (smallBuffer == null) {
+                smallBuffer = ImageHelper.createBuffer(250, 190);
+                shouldSwapColorTexture = false;
+            }
+            if (smallCamera == null) {
+                smallCamera = new OrthographicCamera(250, 190);
+            }
+            smallCamera.position.setZero();
             if (needsMask(c, artCard)) {
                 if (artCard.type == AbstractCard.CardType.ATTACK) {
                     if (c.type == AbstractCard.CardType.POWER) {
                         //Attack to Power
-                        og.zoom = 0.976f;
-                        og.translate(-3, 0);
+                        smallCamera.zoom = 0.976f;
+                        smallCamera.translate(-3, 0);
                     } else {
                         //Attack to Skill, Status, Curse
-                        og.zoom = 0.9f;
-                        og.translate(0, -10);
+                        smallCamera.zoom = 0.9f;
+                        smallCamera.translate(0, -10);
                     }
                 } else if (artCard.type == AbstractCard.CardType.POWER) {
                     if (c.type == AbstractCard.CardType.ATTACK) {
                         //Power to Attack
-                        og.zoom = 0.9f;
-                        og.translate(0, -10);
+                        smallCamera.zoom = 0.9f;
+                        smallCamera.translate(0, -10);
                     } else {
                         //Power to Skill, Status, Curse
-                        og.zoom = 0.825f;
-                        og.translate(-1, -18);
+                        smallCamera.zoom = 0.825f;
+                        smallCamera.translate(-1, -18);
                     }
                 } else {
                     if (c.type == AbstractCard.CardType.POWER) {
                         //Skill, Status, Curse to Power
-                        og.zoom = 0.976f;
-                        og.translate(-3, 0);
+                        smallCamera.zoom = 0.976f;
+                        smallCamera.translate(-3, 0);
                     }
                     //Skill, Status, Curse to Attack is free
                 }
-                og.update();
+                smallCamera.update();
             }
             SpriteBatch sb = new SpriteBatch();
-            sb.setProjectionMatrix(og.combined);
-            ImageHelper.beginBuffer(fb);
+            sb.setProjectionMatrix(smallCamera.combined);
+            smallBuffer.begin();
+            if (shouldSwapColorTexture) {
+                WizArt.swapTextureAndClear(smallBuffer);
+            } else {
+                WizArt.clearCurrentBuffer();
+            }
             sb.begin();
             if (!r.isBicolor) {
                 sb.setShader(shade);
@@ -326,12 +342,15 @@ public class CardArtRoller {
                 sb.draw(mask, -125, -95, -125, -95, 250, 190, 1, 1, 0, 0, 0, mask.getWidth(), mask.getHeight(), false, true);
             }
             sb.end();
-            fb.end();
+            smallBuffer.end();
             t.flip(r.flipX, true);
-            TextureRegion a = ImageHelper.getBufferTexture(fb);
+            TextureRegion a = ImageHelper.getBufferTexture(smallBuffer);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
     }
+
+    private static FrameBuffer portraitBuffer = null;
+    private static OrthographicCamera portraitCamera = null;
 
     public static Texture getPortraitTexture(AbstractCard c) {
         ReskinInfo r = infos.get(c.cardID);
@@ -339,42 +358,52 @@ public class CardArtRoller {
         AbstractCard artCard = CardLibrary.getCard(r.origCardID);
         TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + artCard.assetUrl + ".png"), 0, 0, 500, 380);
         t.flip(r.flipX, true);
-        FrameBuffer fb = ImageHelper.createBuffer(500, 380);
-        OrthographicCamera og = new OrthographicCamera(500, 380);
+        boolean shouldSwapColorTexture = true;
+        if (portraitBuffer == null) {
+            portraitBuffer = ImageHelper.createBuffer(500, 380);
+            shouldSwapColorTexture = false;
+        }
+        if (portraitCamera == null) {
+            portraitCamera = new OrthographicCamera(500, 380);
+        }
+        portraitCamera.position.setZero();
         if (needsMask(c, artCard)) {
             if (artCard.type == AbstractCard.CardType.ATTACK) {
                 if (c.type == AbstractCard.CardType.POWER) {
                     //Attack to Power
-                    og.zoom = 0.976f;
-                    og.translate(-6, 0);
+                    portraitCamera.zoom = 0.976f;
+                    portraitCamera.translate(-6, 0);
                 } else {
                     //Attack to Skill, Status, Curse
-                    og.zoom = 0.9f;
-                    og.translate(0, -20);
+                    portraitCamera.zoom = 0.9f;
+                    portraitCamera.translate(0, -20);
                 }
             } else if (artCard.type == AbstractCard.CardType.POWER) {
                 if (c.type == AbstractCard.CardType.ATTACK) {
                     //Power to Attack
-                    og.zoom = 0.9f;
-                    og.translate(0, -20);
+                    portraitCamera.zoom = 0.9f;
+                    portraitCamera.translate(0, -20);
                 } else {
                     //Power to Skill, Status, Curse
-                    og.zoom = 0.825f;
-                    og.translate(-2, -36);
+                    portraitCamera.zoom = 0.825f;
+                    portraitCamera.translate(-2, -36);
                 }
             } else {
                 if (c.type == AbstractCard.CardType.POWER) {
                     //Skill, Status, Curse to Power
-                    og.zoom = 0.976f;
-                    og.translate(-6, 0);
+                    portraitCamera.zoom = 0.976f;
+                    portraitCamera.translate(-6, 0);
                 }
                 //Skill, Status, Curse to Attack is free
             }
-            og.update();
+            portraitCamera.update();
         }
         SpriteBatch sb = new SpriteBatch();
-        sb.setProjectionMatrix(og.combined);
-        ImageHelper.beginBuffer(fb);
+        sb.setProjectionMatrix(portraitCamera.combined);
+        portraitBuffer.begin();
+        if (shouldSwapColorTexture) {
+            WizArt.swapTextureAndClear(portraitBuffer);
+        }
         sb.begin();
         if (!r.isBicolor) {
             sb.setShader(shade);
@@ -392,9 +421,9 @@ public class CardArtRoller {
             sb.draw(mask, -250, -190, -250, -190, 500, 380, 1, 1, 0, 0, 0, mask.getWidth(), mask.getHeight(), false, true);
         }
         sb.end();
-        fb.end();
+        portraitBuffer.end();
         t.flip(r.flipX, true);
-        TextureRegion a = ImageHelper.getBufferTexture(fb);
+        TextureRegion a = ImageHelper.getBufferTexture(portraitBuffer);
         return a.getTexture();
 
         //Actually, I think this can work. Because SingleCardViewPopup disposes of the texture, we can just make a new one every time.

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.GLFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.megacrit.cardcrawl.core.Settings;
 
+
 public class WizArt {
 
     //draw helpers
@@ -81,9 +82,9 @@ public class WizArt {
     }
 
     public static void clearCurrentBuffer() {
-        Gdx.gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        Gdx.gl.glColorMask(true, true, true, true);
+        Gdx.gl20.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        Gdx.gl20.glColorMask(true, true, true, true);
     }
 
     //uses reflection to change the buffer's colorTexture.
@@ -91,14 +92,33 @@ public class WizArt {
     //the original texture will also survive the buffer being cleared
     //this isn't ideal since it requires creating a new texture that might never be used, but use cases exist
     //and there is no alternative in this version of LibGdx as far as I can tell
-    public static void swapColorTexture(FrameBuffer fb, Texture tex) {
+    public static void swapColorTexture(FrameBuffer fb, Texture tex, boolean isBufferBound) {
         ReflectionHacks.setPrivate(fb, GLFrameBuffer.class, "colorTexture", tex);
+        if (!isBufferBound) {
+            fb.begin();
+        }
+        Gdx.gl20.glBindTexture(tex.glTarget, tex.getTextureObjectHandle());
+        Gdx.gl20.glFramebufferTexture2D(36160, 36064, 3553, tex.getTextureObjectHandle(), 0);
+        Gdx.gl20.glBindTexture(tex.glTarget, 0);
+        if (!isBufferBound) {
+            fb.end();
+        }
     }
 
-    public static void swapColorTexture(FrameBuffer fb) {
+    public static void swapColorTexture(FrameBuffer fb, boolean isBufferBound) {
         Pixmap.Format format = ReflectionHacks.getPrivate(fb, GLFrameBuffer.class, "format");
         Texture tex = new Texture(fb.getWidth(), fb.getHeight(), format);
-        swapColorTexture(fb, tex);
+        swapColorTexture(fb, tex, isBufferBound);
+    }
+
+    public static void swapTextureAndClear(FrameBuffer fb, Texture tex) {
+        swapColorTexture(fb, tex, true);
+        clearCurrentBuffer();
+    }
+
+    public static void swapTextureAndClear(FrameBuffer fb) {
+        swapColorTexture(fb, true);
+        clearCurrentBuffer();
     }
 
 
