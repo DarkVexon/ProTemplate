@@ -277,8 +277,10 @@ public class CardArtRoller {
             AbstractCard artCard = CardLibrary.getCard(r.origCardID);
             TextureAtlas.AtlasRegion t = artCard.portrait;
             t.flip(r.flipX, true);
+            boolean shouldSwapColorTexture = true;
             if (smallBuffer == null) {
                 smallBuffer = ImageHelper.createBuffer(250, 190);
+                shouldSwapColorTexture = false;
             }
             if (smallCamera == null) {
                 smallCamera = new OrthographicCamera(250, 190);
@@ -318,7 +320,11 @@ public class CardArtRoller {
             SpriteBatch sb = new SpriteBatch();
             sb.setProjectionMatrix(smallCamera.combined);
             smallBuffer.begin();
-            WizArt.clearCurrentBuffer();
+            if (shouldSwapColorTexture) {
+                WizArt.swapTextureAndClear(smallBuffer);
+            } else {
+                WizArt.clearCurrentBuffer();
+            }
             sb.begin();
             if (!r.isBicolor) {
                 sb.setShader(shade);
@@ -339,7 +345,6 @@ public class CardArtRoller {
             smallBuffer.end();
             t.flip(r.flipX, true);
             TextureRegion a = ImageHelper.getBufferTexture(smallBuffer);
-            WizArt.swapColorTexture(smallBuffer);
             return new TextureAtlas.AtlasRegion(a.getTexture(), 0, 0, 250, 190);
         });
     }
@@ -353,8 +358,10 @@ public class CardArtRoller {
         AbstractCard artCard = CardLibrary.getCard(r.origCardID);
         TextureAtlas.AtlasRegion t = new TextureAtlas.AtlasRegion(TexLoader.getTexture("images/1024Portraits/" + artCard.assetUrl + ".png"), 0, 0, 500, 380);
         t.flip(r.flipX, true);
+        boolean shouldSwapColorTexture = true;
         if (portraitBuffer == null) {
             portraitBuffer = ImageHelper.createBuffer(500, 380);
+            shouldSwapColorTexture = false;
         }
         if (portraitCamera == null) {
             portraitCamera = new OrthographicCamera(500, 380);
@@ -394,7 +401,9 @@ public class CardArtRoller {
         SpriteBatch sb = new SpriteBatch();
         sb.setProjectionMatrix(portraitCamera.combined);
         portraitBuffer.begin();
-        WizArt.clearCurrentBuffer();
+        if (shouldSwapColorTexture) {
+            WizArt.swapTextureAndClear(portraitBuffer);
+        }
         sb.begin();
         if (!r.isBicolor) {
             sb.setShader(shade);
@@ -415,7 +424,6 @@ public class CardArtRoller {
         portraitBuffer.end();
         t.flip(r.flipX, true);
         TextureRegion a = ImageHelper.getBufferTexture(portraitBuffer);
-        WizArt.swapColorTexture(portraitBuffer);
         return a.getTexture();
 
         //Actually, I think this can work. Because SingleCardViewPopup disposes of the texture, we can just make a new one every time.
