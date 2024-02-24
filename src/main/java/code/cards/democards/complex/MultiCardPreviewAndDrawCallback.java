@@ -1,6 +1,7 @@
 package code.cards.democards.complex;
 
 import basemod.patches.com.megacrit.cardcrawl.cards.AbstractCard.MultiCardPreview;
+import code.cards.AbstractEasyCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -8,12 +9,9 @@ import com.megacrit.cardcrawl.cards.tempCards.Safety;
 import com.megacrit.cardcrawl.cards.tempCards.Smite;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import code.cards.AbstractEasyCard;
 
 import static code.ModFile.makeID;
-import static code.util.Wiz.actionify;
-import static code.util.Wiz.atb;
-import static code.util.Wiz.shuffleIn;
+import static code.util.Wiz.*;
 
 public class MultiCardPreviewAndDrawCallback extends AbstractEasyCard {
     public final static String ID = makeID(MultiCardPreviewAndDrawCallback.class.getSimpleName());
@@ -21,7 +19,7 @@ public class MultiCardPreviewAndDrawCallback extends AbstractEasyCard {
 
     public MultiCardPreviewAndDrawCallback() {
         super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY); // This card is a 1 cost Uncommon Attack that targets ALL enemies.
-        setDamage(10, +1);
+        baseDamage = 10;
         MultiCardPreview.add(this, new Smite(), new Safety()); // Display both Smite and Safety when you hover this card.
         isMultiDamage = true;
     }
@@ -41,7 +39,7 @@ public class MultiCardPreviewAndDrawCallback extends AbstractEasyCard {
 
     @Override
     public void upp() {
-        super.upp();
+        upgradeDamage(1);
         MultiCardPreview.multiCardPreview.get(this).forEach(c -> c.upgrade()); // here, we show upgraded smite and safeties.
     }
 }

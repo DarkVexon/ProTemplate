@@ -143,6 +143,14 @@ public class Wiz {
         shuffleIn(c, 1);
     }
 
+    public static void shuffleInTop(AbstractCard c, int i) {
+        att(new MakeTempCardInDrawPileAction(c, i, true, true));
+    }
+
+    public static void shuffleInTop(AbstractCard c) {
+        shuffleInTop(c, 1);
+    }
+
     public static void topDeck(AbstractCard c, int i) {
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(c, i, false, true));
     }

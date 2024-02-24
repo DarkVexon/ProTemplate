@@ -3,12 +3,12 @@ package code.cards.democards.complex;
 import basemod.cardmods.EtherealMod;
 import basemod.cardmods.ExhaustMod;
 import basemod.helpers.CardModifierManager;
+import code.cards.AbstractEasyCard;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.SelectCardsAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import code.cards.AbstractEasyCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +23,6 @@ public class SelectCardsPlusCardMods extends AbstractEasyCard {
 
     public SelectCardsPlusCardMods() {
         super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
-        setUpgradedCost(0);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -39,4 +38,9 @@ public class SelectCardsPlusCardMods extends AbstractEasyCard {
             att(new MakeTempCardInHandAction(cards.get(0), 1, true));
         }));
     }
-} 
+
+    @Override
+    public void upp() {
+        upgradeBaseCost(0);
+    }
+}

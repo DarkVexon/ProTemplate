@@ -1,14 +1,15 @@
 package code.cards.democards.complex;
 
+import code.actions.EasyXCostAction;
+import code.cards.AbstractEasyCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import code.actions.EasyXCostAction;
-import code.cards.AbstractEasyCard;
 
-import static code.util.Wiz.*;
 import static code.ModFile.makeID;
+import static code.util.Wiz.applyToSelfTop;
+import static code.util.Wiz.atb;
 
 public class EasyXCostDemo extends AbstractEasyCard {
     public final static String ID = makeID(EasyXCostDemo.class.getSimpleName());
@@ -16,9 +17,9 @@ public class EasyXCostDemo extends AbstractEasyCard {
 
     public EasyXCostDemo() {
         super(ID, -1, CardType.ATTACK, CardRarity.RARE, CardTarget.ENEMY);
-        setDamage(5);
-        setMagic(0, +1);
-        setExhaust(true);
+        baseDamage = 5;
+        baseMagicNumber = magicNumber = 0;
+        exhaust = true;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -28,5 +29,10 @@ public class EasyXCostDemo extends AbstractEasyCard {
                 dmgTop(m, AbstractGameAction.AttackEffect.SLASH_DIAGONAL);
             return true;
         }, magicNumber));
+    }
+
+    @Override
+    public void upp() {
+        upgradeMagicNumber(1);
     }
 }

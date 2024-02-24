@@ -19,7 +19,7 @@ public class InlinePowerDemo extends AbstractEasyCard {
 
     public InlinePowerDemo() {
         super(ID, 1, CardType.POWER, CardRarity.UNCOMMON, CardTarget.SELF);
-        setMagic(4, +2);
+        baseMagicNumber = magicNumber = 4;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -44,4 +44,9 @@ public class InlinePowerDemo extends AbstractEasyCard {
             }
         });
     }
-} 
+
+    @Override
+    public void upp() {
+        upgradeMagicNumber(2);
+    }
+}
