@@ -1,6 +1,6 @@
 Settings -> Editor -> File and Code Templates and add the following!
 
-import code.cards.AbstractEasyCard;
+import code.cards.BaseCard;
 
 import static code.ModFile.makeID;
 import static code.util.Wiz.*;

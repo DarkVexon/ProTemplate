@@ -11,14 +11,14 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import code.ModFile;
 import code.util.TexLoader;
 
-public abstract class AbstractEasyPower extends AbstractPower {
+public abstract class BasePower extends AbstractPower {
     public int amount2 = -1;
     public boolean isTwoAmount = false;
     public static Color redColor2 = Color.RED.cpy();
     public static Color greenColor2 = Color.GREEN.cpy();
     public boolean canGoNegative2 = false;
 
-    public AbstractEasyPower(String ID, String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
+    public BasePower(String ID, String NAME, PowerType powerType, boolean isTurnBased, AbstractCreature owner, int amount) {
         this.ID = ID;
         this.isTurnBased = isTurnBased;
 

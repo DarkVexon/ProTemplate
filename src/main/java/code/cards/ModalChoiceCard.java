@@ -8,13 +8,13 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import static code.ModFile.makeID;
 
 @AutoAdd.Ignore
-public class EasyModalChoiceCard extends AbstractEasyCard {
+public class ModalChoiceCard extends BaseCard {
 
     private Runnable onUseOrChosen;
     private String passedName;
     private String passedDesc;
 
-    public EasyModalChoiceCard(String name, String description, Runnable onUseOrChosen) {
+    public ModalChoiceCard(String name, String description, Runnable onUseOrChosen) {
         super(makeID(name), -2, CardType.SKILL, CardRarity.SPECIAL, CardTarget.NONE, CardColor.COLORLESS);
         this.name = this.originalName = passedName = name;
         this.rawDescription = passedDesc = description;
@@ -49,6 +49,6 @@ public class EasyModalChoiceCard extends AbstractEasyCard {
 
     @Override
     public AbstractCard makeCopy() {
-        return new EasyModalChoiceCard(passedName, passedDesc, onUseOrChosen);
+        return new ModalChoiceCard(passedName, passedDesc, onUseOrChosen);
     }
 }
