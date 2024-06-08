@@ -8,14 +8,14 @@ import code.util.TexLoader;
 import static code.ModFile.makeRelicPath;
 import static code.ModFile.modID;
 
-public abstract class AbstractEasyRelic extends CustomRelic {
+public abstract class BaseRelic extends CustomRelic {
     public AbstractCard.CardColor color;
 
-    public AbstractEasyRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx) {
+    public BaseRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx) {
         this(setId, tier, sfx, null);
     }
 
-    public AbstractEasyRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
+    public BaseRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
         super(setId, TexLoader.getTexture(makeRelicPath(setId.replace(modID + ":", "") + ".png")), tier, sfx);
         outlineImg = TexLoader.getTexture(makeRelicPath(setId.replace(modID + ":", "") + "Outline.png"));
         this.color = color;

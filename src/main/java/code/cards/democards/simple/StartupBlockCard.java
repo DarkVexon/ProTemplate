@@ -1,6 +1,6 @@
 package code.cards.democards.simple;
 
-import code.cards.AbstractEasyCard;
+import code.cards.BaseCard;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import static code.ModFile.makeID;
 import static code.util.Wiz.atb;
 
-public class StartupBlockCard extends AbstractEasyCard implements StartupCard { // This card implements StartupCard, an extra 'type' of card that adds the ability to trigger at the start of combat.
+public class StartupBlockCard extends BaseCard implements StartupCard { // This card implements StartupCard, an extra 'type' of card that adds the ability to trigger at the start of combat.
     public final static String ID = makeID(StartupBlockCard.class.getSimpleName());
     // intellij stuff skill, self, uncommon, , , , , ,
 

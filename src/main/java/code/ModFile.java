@@ -5,6 +5,7 @@ import basemod.BaseMod;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import code.cards.BaseCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
@@ -20,14 +21,10 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import code.cards.AbstractEasyCard;
-import code.cards.cardvars.AbstractEasyDynamicVariable;
-import code.cards.cardvars.SecondDamage;
-import code.cards.cardvars.SecondMagicNumber;
-import code.potions.AbstractEasyPotion;
-import code.relics.AbstractEasyRelic;
+import code.cards.cardvars.BaseDynamicVariable;
+import code.potions.BasePotion;
+import code.relics.BaseRelic;
 import code.util.ProAudio;
 import java.nio.charset.StandardCharsets;
 
@@ -122,8 +119,8 @@ public class ModFile implements
             CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
         
         new AutoAdd(modID)
-            .packageFilter(AbstractEasyPotion.class)
-            .any(AbstractEasyPotion.class, (info, potion) -> {
+            .packageFilter(BasePotion.class)
+            .any(BasePotion.class, (info, potion) -> {
                 if (potion.pool == null)
                     BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
                 else
@@ -134,8 +131,8 @@ public class ModFile implements
     @Override
     public void receiveEditRelics() {
         new AutoAdd(modID)
-                .packageFilter(AbstractEasyRelic.class)
-                .any(AbstractEasyRelic.class, (info, relic) -> {
+                .packageFilter(BaseRelic.class)
+                .any(BaseRelic.class, (info, relic) -> {
                     if (relic.color == null) {
                         BaseMod.addRelic(relic, RelicType.SHARED);
                     } else {
@@ -150,11 +147,11 @@ public class ModFile implements
     @Override
     public void receiveEditCards() {
         new AutoAdd(modID)
-            .packageFilter(AbstractEasyDynamicVariable.class)
+            .packageFilter(BaseDynamicVariable.class)
             .any(DynamicVariable.class, (info, var) -> 
                 BaseMod.addDynamicVariable(var));
         new AutoAdd(modID)
-                .packageFilter(AbstractEasyCard.class)
+                .packageFilter(BaseCard.class)
                 .setDefaultSeen(true)
                 .cards();
     }

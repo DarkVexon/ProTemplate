@@ -4,7 +4,7 @@ import code.CharacterFile;
 
 import static code.ModFile.makeID;
 
-public class TodoItem extends AbstractEasyRelic {
+public class TodoItem extends BaseRelic {
     public static final String ID = makeID("TodoItem");
 
     public TodoItem() {

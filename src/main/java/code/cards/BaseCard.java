@@ -23,7 +23,7 @@ import static code.ModFile.makeImagePath;
 import static code.ModFile.modID;
 import static code.util.Wiz.*;
 
-public abstract class AbstractEasyCard extends CustomCard {
+public abstract class BaseCard extends CustomCard {
 
     protected final CardStrings cardStrings;
 
@@ -49,11 +49,11 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     private boolean needsArtRefresh = false;
 
-    public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
+    public BaseCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target) {
         this(cardID, cost, type, rarity, target, CharacterFile.Enums.TODO_COLOR);
     }
 
-    public AbstractEasyCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
+    public BaseCard(final String cardID, final int cost, final CardType type, final CardRarity rarity, final CardTarget target, final CardColor color) {
         super(cardID, "", getCardTextureString(cardID.replace(modID + ":", ""), type),
                 cost, "", type, color, rarity, target);
         cardStrings = CardCrawlGame.languagePack.getCardStrings(this.cardID);
@@ -238,8 +238,8 @@ public abstract class AbstractEasyCard extends CustomCard {
 
     public AbstractCard makeStatEquivalentCopy() {
         AbstractCard result = super.makeStatEquivalentCopy();
-        if (result instanceof AbstractEasyCard) {
-            AbstractEasyCard c = (AbstractEasyCard) result;
+        if (result instanceof BaseCard) {
+            BaseCard c = (BaseCard) result;
             c.baseSecondDamage = c.secondDamage = baseSecondDamage;
             c.baseSecondBlock = c.secondBlock = baseSecondBlock;
             c.baseSecondMagic = c.secondMagic = baseSecondMagic;
