@@ -16,4 +16,5 @@ Setup guide:
 5. In the main mod file, change the modID to match the modID field in your `pom.xml`.
 6. Delete LICENSE (and add [your own](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) if needed).
 7. Change the author field in `resources/ModTheSpire.json` to your own name.
-8+. You'll probably want to rename your character in the `Charstrings.json` file to start off. From there, it's just making the mod of your dreams!
+8. Rename the mod's code folder. (the folder named 'yourmod' to start). Right click and refactor its name to the name of your mod, all lowercase.
+9+. You'll probably want to rename your character in the `Charstrings.json` file to start off. From there, it's just making the mod of your dreams!

@@ -1,0 +1,29 @@
+Settings -> Editor -> File and Code Templates and add the following!
+
+import yourmod.cards.AbstractEasyCard;
+
+import static yourmod.ModFile.makeID;
+import static yourmod.util.Wiz.*;
+
+public class ${NAME} extends AbstractEasyCard {
+    public final static String ID = makeID("${NAME}");
+    // intellij stuff ${TYPE}, ${TARGET}, ${RARITY}, ${DAMAGE}, ${UPGRADE_DAMAGE}, ${BLOCK}, ${UPGRADE_BLOCK}, ${MAGIC}, ${UPGRADE_MAGIC}
+
+    public ${NAME}() {
+        super(ID, ${COST},  CardType.#if ( ${TYPE.equals( "power" )} )POWER#elseif ( ${TYPE.equals( "skill" )} )SKILL#else ATTACK#end, CardRarity.#if ( ${RARITY.equals( "basic" )} )BASIC#elseif ( ${RARITY.equals( "common" )} )COMMON#elseif ( ${RARITY.equals( "uncommon" )} )UNCOMMON#elseif ( ${RARITY.equals( "rare" )} )RARE #else SPECIAL#end, CardTarget.#if ( ${TARGET.equals( "all_enemy" )} )ALL_ENEMY#elseif ( ${TARGET.equals( "self" )} )SELF#elseif ( ${TARGET.equals( "all" )} )ALL#elseif ( ${TARGET.equals( "none" )} )NONE#else  ENEMY#end);
+        #if (${DAMAGE} != "")        baseDamage = ${DAMAGE};#else#end
+        #if (${BLOCK} != "")        baseBlock = ${BLOCK};#else#end
+        #if (${MAGIC} != "")        baseMagicNumber = magicNumber = ${MAGIC};#else#end
+    }
+
+    public void use(AbstractPlayer p, AbstractMonster m) {
+
+    }
+
+    public void upp() {
+        #if (${UPGRADE_DAMAGE} != "")    upgradeDamage(${UPGRADE_DAMAGE});
+        #end#if (${UPGRADE_BLOCK} != "")    upgradeBlock(${UPGRADE_BLOCK});
+        #end#if (${UPGRADE_MAGIC} != "")    upgradeMagicNumber(${UPGRADE_MAGIC});
+        #end#if (${UPGRADED_COST} != "") upgradeBaseCost(${UPGRADED_COST});#end
+    }
+}
