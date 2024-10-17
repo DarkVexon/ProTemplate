@@ -1,9 +1,9 @@
 {
   "${ModID}:TodoItem": {
     "NAME": "Todo Item",
-    "FLAVOR": "TODO: make this a sweet relic.",
+    "FLAVOR": "TODO: make this YOUR sweet relic.",
     "DESCRIPTIONS": [
-      "Has no effect."
+      "Retain your hand on the first turn of combat."
     ]
   }
 }

@@ -160,7 +160,7 @@ public abstract class AbstractEasyCard extends CustomCard {
         upgradedSecondDamage = true;
     }
 
-    protected void uDesc() {
+    private void uDesc() {
         this.rawDescription = this.cardStrings.UPGRADE_DESCRIPTION;
         this.initializeDescription();
     }

@@ -1,10 +1,18 @@
 {
-  "${ModID}:ExampleTwoAmountPower": {
-    "NAME": "Example 2",
+  "${ModID}:CleanHousePower": {
+    "NAME": "Clean House",
     "DESCRIPTIONS": [
-      "At the start of your turn, gain #b",
-      " #yStrength and #b",
-      " #yDexterity."
+      "When you next end your turn with unused Energy, ALL enemies lose #b",
+      " HP."
+    ]
+  },
+  "${ModID}:MountSharpshardPower": {
+    "NAME": "Terrors of Cabin Sharpshard!",
+    "DESCRIPTIONS": [
+      "In #b",
+      " turn, add a #y",
+      " turns, add a #y",
+      " into your hand."
     ]
   }
 }

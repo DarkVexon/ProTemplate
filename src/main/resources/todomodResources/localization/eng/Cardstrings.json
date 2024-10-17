@@ -1,63 +1,401 @@
 {
   "${ModID}:Strike": {
     "NAME": "Strike",
-    "DESCRIPTION": "Deal !D! damage."
+    "DESCRIPTION": "Deal !D! damage.",
+    "TYPE": "a"
   },
   "${ModID}:Defend": {
     "NAME": "Defend",
-    "DESCRIPTION": "Gain !B! Block."
+    "DESCRIPTION": "Gain !B! Block.",
+    "TYPE": "s"
   },
-  "${ModID}:ExampleTwoAmountPowerCard": {
-    "NAME": "Two Amount Power",
-    "DESCRIPTION": "At the start of your turn, gain !M! Strength and !${ModID}:m2! Dexterity."
+  "${ModID}:BigMeanie": {
+    "NAME": "Big Meanie",
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! ${ModID}:Meanie_Points.",
+    "TYPE": "s"
   },
-  "${ModID}:InlinePowerDemo": {
-    "NAME": "Inline Power",
-    "DESCRIPTION": "Strikes deal !M! more damage. NL At the end of your turn, gain !M! Block.",
+  "${ModID}:Swipe": {
+    "NAME": "Swipe",
+    "DESCRIPTION": "If the enemy has Strength, steal !M! Strength and Exhaust. Otherwise, draw 2 cards.",
+    "TYPE": "s"
+  },
+  "${ModID}:Rope": {
+    "NAME": "Rope",
+    "DESCRIPTION": "Put 1 card from your draw pile into your hand. NL Startup: Costs 0 until played.",
+    "TYPE": "s"
+  },
+  "${ModID}:SecondStrike": {
+    "NAME": "Second Strike",
+    "DESCRIPTION": "Deal !D! damage twice. Whenever you play an Attack, if this is in your hand, reduce its cost by 1 this turn.",
+    "TYPE": "a"
+  },
+  "${ModID}:Dargosbane": {
+    "NAME": "Dargosbane",
+    "DESCRIPTION": "Deal !D! damage. NL Give a random card in your hand Retain.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Give a card in your hand Retain.",
     "EXTENDED_DESCRIPTION": [
-      "Strike+, Block+",
-      "#yStrikes deal #b",
-      " additional damage. At the end of your turn, gain #b",
-      " #yBlock."
-    ]
+      "to give Retain."
+    ],
+    "TYPE": "a"
   },
-  "${ModID}:SelectCardsPlusCardMods": {
-    "NAME": "Cool Card Stuff",
-    "DESCRIPTION": "Choose from 1 of 3 cost 0 cards from any class. NL Add it into your hand. NL It gains Ethereal and Exhaust.",
+  "${ModID}:Tech": {
+    "NAME": "Tech",
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you play a card with a reduced cost, return this from your discard pile to your Hand.",
+    "TYPE": "a"
+  },
+  "${ModID}:StayWinning": {
+    "NAME": "Stay Winning",
+    "DESCRIPTION": "Gain [E] for each Attack played this turn. NL Becomes Unplayable for the rest of the turn.",
+    "TYPE": "s"
+  },
+  "${ModID}:TragicBackstory": {
+    "NAME": "Tragic Backstory",
+    "DESCRIPTION": "Can only be played if 2 or more cards were Exhausted this combat. NL Deal !D! damage.",
     "EXTENDED_DESCRIPTION": [
-      "Choose a card to add into your hand with Ethereal and Exhaust."
-    ]
+      "My Exhaust pile is too small!"
+    ],
+    "TYPE": "a"
   },
-  "${ModID}:EasyXCostDemo": {
-    "NAME": "Easy X Cost",
-    "DESCRIPTION": "{@@}Deal !D! damage X{!M!|>0=+!M!} times. NL Gain X{!M!|>0=+!M!} Strength. NL Exhaust."
+  "${ModID}:CleanHouse": {
+    "NAME": "Clean House",
+    "DESCRIPTION": "Deal !D! damage. NL Next time you ${ModID}:Waste, ALL enemies lose !M! HP.",
+    "TYPE": "a"
   },
-  "${ModID}:EasyModalChoiceDemo": {
-    "NAME": "Easy Modal Choice",
-    "DESCRIPTION": "Choose one: Draw !M! cards or gain !${ModID}:m2! Strength.",
+  "${ModID}:Toothpicks": {
+    "NAME": "Toothpicks",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! damage twice.",
+    "TYPE": "a"
+  },
+  "${ModID}:Spit": {
+    "NAME": "Spit",
+    "DESCRIPTION": "Deal !D! damage. NL Discard 1 card. NL Draw 1 card.",
+    "TYPE": "a"
+  },
+  "${ModID}:Cheapen": {
+    "NAME": "Cheapen",
+    "DESCRIPTION": "Gain !B! Block. NL If you have no Energy, reduce the cost of a random card in your hand to 0 until played.",
+    "TYPE": "s"
+  },
+  "${ModID}:Flashlight": {
+    "NAME": "Flashlight",
+    "DESCRIPTION": "Gain !B! Block. NL Scry !M!. NL Exhaust discarded Status and Curse cards.",
+    "TYPE": "s"
+  },
+  "${ModID}:Hone": {
+    "NAME": "Hone",
+    "DESCRIPTION": "Apply !M! Vulnerable. NL Exhaust up to 2 cards from your draw pile.",
+    "TYPE": "s"
+  },
+  "${ModID}:SilverBullet": {
+    "NAME": "Silver Bullet",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! card. NL When you draw this, if your draw pile is empty, it costs 0 until played.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL When you draw this, if your draw pile is empty, it costs 0 until played.",
+    "TYPE": "a"
+  },
+  "${ModID}:MurderyMysteryMayhem": {
+    "NAME": "Murder Mystery Mayhem",
+    "DESCRIPTION": "Deal !D! damage twice. NL Gain Strength equal to your ${ModID}:Horror. NL ${ModID}:Horrifying 1.",
+    "TYPE": "a"
+  },
+  "${ModID}:MechanoFist": {
+    "NAME": "Mechano-Fist",
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust 1 card. NL Gain Block equal to the highest number on that card.",
+    "TYPE": "a"
+  },
+  "${ModID}:Chainsaw": {
+    "NAME": "Chainsaw",
+    "DESCRIPTION": "Deal !D! damage. NL Can only target Vulnerable foes.",
     "EXTENDED_DESCRIPTION": [
-      "Draw",
-      "Draw ",
-      " cards.",
-      "Strength",
-      "Gain ",
-      " Strength."
-    ]
+      "That foe isn't Vulnerable!"
+    ],
+    "TYPE": "a"
   },
-  "${ModID}:DrawAndShiv": {
-    "NAME": "Draw and Shiv",
-    "DESCRIPTION": "Draw 1 card. NL Add 1 *Shiv into your hand."
+  "${ModID}:Explosion": {
+    "NAME": "Explosion",
+    "DESCRIPTION": "Retain. NL Deal !D! damage to ALL enemies.",
+    "TYPE": "a"
   },
-  "${ModID}:TwoTypesOfDamage": {
-    "NAME": "Two Damage Values",
-    "DESCRIPTION": "Deal !D! damage. NL If you're Vulnerable, deal !${ModID}:sd! damage instead."
+  "${ModID}:ClutchingHands": {
+    "NAME": "Clutching Hands",
+    "DESCRIPTION": "Deal !D! damage. NL Play a cost 0 card from your hand twice.",
+    "TYPE": "a"
   },
-  "${ModID}:StartupBlockCard": {
-    "NAME": "Startup And AOE",
-    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL Startup: Gain !M! Block."
+  "${ModID}:ItsComing": {
+    "NAME": "It's Coming",
+    "DESCRIPTION": "Costs 1 less each turn. NL Deal !D! damage. NL Increase this card's cost by 3 this combat.",
+    "TYPE": "a"
   },
-  "${ModID}:MultiCardPreviewAndDrawCallback": {
-    "NAME": "Previews and Callbacks",
-    "DESCRIPTION": "{@@}Shuffle *Smite{!Upgrades!|>0=+} and *Safety{!Upgrades!|>0=+} into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
+  "${ModID}:LetsDance": {
+    "NAME": "Let's Dance",
+    "DESCRIPTION": "Deal !D! damage. NL Draw until you draw a non-Attack card.",
+    "TYPE": "a"
+  },
+  "${ModID}:CrossTheStyx": {
+    "NAME": "Cross the Styx",
+    "DESCRIPTION": "Deal !D! damage. NL Draw 1 card.",
+    "TYPE": "a"
+  },
+  "${ModID}:BargainBin": {
+    "NAME": "Bargain Bin",
+    "DESCRIPTION": "Whenever you play a card for a reduced cost, gain !M! Block.",
+    "TYPE": "p"
+  },
+  "${ModID}:HumDownTheCorridor": {
+    "NAME": "Hum Down the Corridor",
+    "DESCRIPTION": "Whenever you play an Attack, Attacks deal !M! more damage that turn.",
+    "TYPE": "p"
+  },
+  "${ModID}:Daemon": {
+    "NAME": "Daemon",
+    "DESCRIPTION": "Next turn, gain [E]. NL Whenever you Waste, gain !M! Block and deal !M! damage to a random enemy.",
+    "TYPE": "p"
+  },
+  "${ModID}:EvilLaughter": {
+    "NAME": "Evil Laughter",
+    "DESCRIPTION": "At the end of your turn, gain 1 Block for each card in your hand.",
+    "UPGRADE_DESCRIPTION": "Innate. NL At the end of your turn, gain 1 Block for each card in your hand.",
+    "TYPE": "p"
+  },
+  "${ModID}:WelcomeToHell": {
+    "NAME": "Welcome To Hell",
+    "DESCRIPTION": "Apply !M! Weak. NL Whenever you attack that enemy this turn, apply 1 Vulnerable.",
+    "TYPE": "s"
+  },
+  "${ModID}:StudyTheTapes": {
+    "NAME": "Study the Tapes",
+    "DESCRIPTION": "Draw !M! cards. NL ${ModID}:Horrifying 1.",
+    "TYPE": "s"
+  },
+  "${ModID}:FoolsGuard": {
+    "NAME": "Fool's Guard",
+    "DESCRIPTION": "Gain !B! Block. NL Next turn, discard 1 random card and gain [E].",
+    "TYPE": "s"
+  },
+  "${ModID}:SelfImproverShield": {
+    "NAME": "Self-Improver Shield",
+    "DESCRIPTION": "Gain !B! Block. NL Reduce this card's cost by 1 for the rest of combat.",
+    "TYPE": "s"
+  },
+  "${ModID}:EchoesOfFear": {
+    "NAME": "Echoes of Fear",
+    "DESCRIPTION": "Play the top card of your draw pile. NL Gain [E]. NL ${ModID}:Horrifying 1.",
+    "UPGRADE_DESCRIPTION": "Play the top card of your draw pile. NL Gain [E] [E]. NL ${ModID}:Horrifying 1.",
+    "TYPE": "s"
+  },
+  "${ModID}:GKsNightmare": {
+    "NAME": "GK's Nightmare!",
+    "DESCRIPTION": "Add X Iron Waves into your hand. NL They cost 0 this combat. NL ${ModID}:Horrifying 1.",
+    "UPGRADE_DESCRIPTION": "Add X Iron Wave+s into your hand. NL They cost 0 this combat. NL ${ModID}:Horrifying 1.",
+    "TYPE": "s"
+  },
+  "${ModID}:BackupBuddy": {
+    "NAME": "Backup Buddy!",
+    "DESCRIPTION": "Draw 1 card. NL Next time you ${ModID}:Waste, gain !B! Block.",
+    "TYPE": "s"
+  },
+  "${ModID}:Brainrot": {
+    "NAME": "Brainrot",
+    "DESCRIPTION": "Apply 1 Weak and !M! ${ModID}:Brainrot.",
+    "TYPE": "s"
+  },
+  "${ModID}:PortalPunch": {
+    "NAME": "Portal Punch",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Costs 1 less for each card with a reduced cost played this combat.",
+    "TYPE": "a"
+  },
+  "${ModID}:Boil": {
+    "NAME": "Boil",
+    "DESCRIPTION": "Deal !D! damage for each Attack played this turn.",
+    "TYPE": "a"
+  },
+  "${ModID}:NoWay": {
+    "NAME": "No Way",
+    "DESCRIPTION": "The first !M! times you play a card for a reduced cost each turn, draw 1 card.",
+    "TYPE": "p"
+  },
+  "${ModID}:VoraciousReader": {
+    "NAME": "Voracious Reader",
+    "DESCRIPTION": "Whenever you ${ModID}:Waste, play a random card from your discard pile.",
+    "TYPE": "p"
+  },
+  "${ModID}:RetreatFromReality": {
+    "NAME": "Retreat From Reality",
+    "DESCRIPTION": "Gain !M! Intangible. NL Exhaust. NL ${ModID}:Horrifying 2.",
+    "TYPE": "s"
+  },
+  "${ModID}:VeryNaturalSynergy": {
+    "NAME": "Very Natural Synergy",
+    "DESCRIPTION": "Deal !D! damage twice. NL If the last card you played was [CARD_FOR_RUN], gain !B! Block and !M! Strength.",
+    "TYPE": "a"
+  },
+  "${ModID}:NotHereNotNow": {
+    "NAME": "Not Here, Not Now",
+    "DESCRIPTION": "All enemies lose !M! Strength this turn. NL Afterwards, they gain 1 Strength.",
+    "TYPE": "s"
+  },
+  "${ModID}:DieOff": {
+    "NAME": "Die Off",
+    "DESCRIPTION": "Deal !D! damage. NL Add a *Strike into your hand. NL Exhaust.",
+    "TYPE": "a"
+  },
+  "${ModID}:BitBlast": {
+    "NAME": "Bit Blast",
+    "DESCRIPTION": "Deal !D! damage. NL If you're a ${ModID}:Gamer, gain !B! Block.",
+    "TYPE": "s"
+  },
+  "${ModID}:Jumpscare": {
+    "NAME": "Jumpscare",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies. NL ${ModID}:Delay 4: Deal !${ModID}:d2! damage to a random enemy.",
+    "TYPE": "a"
+  },
+  "${ModID}:EnterTheSlimepit": {
+    "NAME": "Enter The Slimepits",
+    "DESCRIPTION": "Gain [E] [E]. NL Add 2 *Slimed into your hand.",
+    "UPGRADE_DESCRIPTION": "Gain [E] [E] [E]. NL Add 2 *Slimed into your hand.",
+    "TYPE": "s"
+  },
+  "${ModID}:StickySituation": {
+    "NAME": "Sticky Situation",
+    "DESCRIPTION": "Gain !B! Block. NL Shuffle a *Slimed into your draw pile.",
+    "TYPE": "s"
+  },
+  "${ModID}:Waiting": {
+    "NAME": "Waiting ...",
+    "DESCRIPTION": "Gain !B! Block. NL ${ModID}:Delay 4: Gain !B! Block.",
+    "TYPE": "s"
+  },
+  "${ModID}:Wailing": {
+    "NAME": "Wailing !!!",
+    "DESCRIPTION": "The first time you Exhaust a card each turn, apply 1 Weak to ALL enemies.",
+    "UPGRADE_DESCRIPTION": "The first !M! times you Exhaust a card each turn, apply 1 Weak to ALL enemies.",
+    "TYPE": "p"
+  },
+  "${ModID}:Nextpunger": {
+    "NAME": "Nextpunger",
+    "DESCRIPTION": "Deal !D! damage. NL Hits an additional time for each time you ${ModID}:Wasted this combat.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Hits ",
+      " times.)"
+    ],
+    "TYPE": "a"
+  },
+  "${ModID}:Netdeck": {
+    "NAME": "Netdeck",
+    "DESCRIPTION": "Deal !D! damage. NL Add a random Power into your hand. NL If you're a ${ModID}:Gamer, it costs 0.",
+    "TYPE": "a"
+  },
+  "${ModID}:Naptime": {
+    "NAME": "Naptime",
+    "DESCRIPTION": "Deal !D! damage. NL Upgrade a card in your hand for the rest of combat. NL Reduce your ${ModID}:Delays by !M!.",
+    "TYPE": "a"
+  },
+  "${ModID}:EpicGamerBlaster": {
+    "NAME": "Epic Gamer Blaster",
+    "DESCRIPTION": "Deal !D! damage. NL Deals 2x damage for each card type played this turn.",
+    "TYPE": "a"
+  },
+  "${ModID}:ExtremeGayPower": {
+    "NAME": "Extreme Gay Power",
+    "DESCRIPTION": "At the start of your turn, gain [E]. NL Whenever you shuffle your draw pile, add a *Pride into your hand.",
+    "TYPE": "p"
+  },
+  "${ModID}:MadBomber": {
+    "NAME": "Mad Bomber",
+    "DESCRIPTION": "Whenever a ${ModID}:Delay triggers, deal !D! damage to ALL enemies.",
+    "TYPE": "p"
+  },
+  "${ModID}:ComputeEyes": {
+    "NAME": "Compute Eyes",
+    "DESCRIPTION": "${ModID}:Delay 5: Gain [E] [E].",
+    "UPGRADE_DESCRIPTION": "${ModID}:Delay 5: Gain [E] [E] [E].",
+    "TYPE": "s"
+  },
+  "${ModID}:Improvise": {
+    "NAME": "Improvise",
+    "DESCRIPTION": "Add !M! random Attacks into your hand, one from another color. NL When you play one, Exhaust the others.",
+    "TYPE": "s"
+  },
+  "${ModID}:Ritual": {
+    "NAME": "Ritual",
+    "DESCRIPTION": "Costs 1 less for each card Exhausted this combat. NL Gain !M! Strength.",
+    "TYPE": "s"
+  },
+  "${ModID}:ComputeFetch": {
+    "NAME": "Compute Fetch",
+    "DESCRIPTION": "Draw !M! cards. NL Delay 3: Put a card from your draw pile into your hand.",
+    "TYPE": "s"
+  },
+  "${ModID}:GlogusWrath": {
+    "NAME": "Glogus' Wrath",
+    "DESCRIPTION": "Deal !D! damage and apply !M! Weak to ALL enemies. NL Add 2 Slimed into your hand.",
+    "TYPE": "a"
+  },
+  "${ModID}:Termina": {
+    "NAME": "Termina",
+    "DESCRIPTION": "Delay 9: Deal !D! damage to ALL enemies.",
+    "TYPE": "a"
+  },
+  "${ModID}:TheGreatAndTerribleEverycard": {
+    "NAME": "The Great and Terrible Everycard",
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust your hand. NL ${ModID}:Delay 4: Add a random Attack into your hand. It costs 0. NL Gain [E].",
+    "TYPE": "a"
+  },
+  "${ModID}:MurphysLaw": {
+    "NAME": "Murphy's Law",
+    "DESCRIPTION": "Whenever you play an Attack, add a random Attack into your hand.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Whenever you play an Attack, add a random Attack into your hand.",
+    "TYPE": "p"
+  },
+  "${ModID}:OnThatGrind": {
+    "NAME": "On That Grind",
+    "DESCRIPTION": "Whenever you become a ${ModID}:Gamer, gain !M! Strength.",
+    "TYPE": "p"
+  },
+  "${ModID}:GamerGod": {
+    "NAME": "Gamer God",
+    "DESCRIPTION": "At the end of your turn, if you're a ${ModID}:Gamer, draw 2 cards next turn.",
+    "UPGRADE_DESCRIPTION": "Innate. NL At the end of your turn, if you're a ${ModID}:Gamer, draw 2 cards next turn.",
+    "TYPE": "p"
+  },
+  "${ModID}:TimeTraveler": {
+    "NAME": "Time Traveler",
+    "DESCRIPTION": "Whenever you get a ${ModID}:Delay, add a copy of it with 4 more Delay.",
+    "TYPE": "p"
+  },
+  "${ModID}:CatastropheForm": {
+    "NAME": "Catastrophe Form",
+    "DESCRIPTION": "The first !M! times you draw a cost 1 card each turn, play it and draw a card.",
+    "TYPE": "p"
+  },
+  "${ModID}:Gravesite": {
+    "NAME": "Gravesite",
+    "DESCRIPTION": "Add !M! *Memories into your hand.",
+    "TYPE": "s"
+  },
+  "${ModID}:Memory": {
+    "NAME": "Memory",
+    "DESCRIPTION": "Ethereal. NL Return a non-Gravesite card from your discard pile to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Return a non-Gravesite card from your discard pile to your hand. NL Exhaust.",
+    "TYPE": "s"
+  },
+  "${ModID}:TheAbsentMoon": {
+    "NAME": "The Absent Moon",
+    "DESCRIPTION": "Gain !B! Block. NL Apply !M! Weak and Vulnerable. NL You can play this from your draw pile.",
+    "TYPE": "s"
+  },
+  "${ModID}:Vengeance": {
+    "NAME": "Vengeance",
+    "DESCRIPTION": "Play all Attacks in your Exhaust pile. NL Exhaust.",
+    "TYPE": "s"
+  },
+  "${ModID}:HaHaHaHaHa": {
+    "NAME": "HaHahaHaHa",
+    "DESCRIPTION": "Draw 1 card, gain [E] and gain !M! ${ModID}:Meanie_Points for each card type played this turn.",
+    "TYPE": "s"
+  },
+  "${ModID}:TempCyborg": {
+    "NAME": "Temporary Cyborg",
+    "DESCRIPTION": "Delay !M!: Play an Attack in your hand 3 times, then Exhaust it.",
+    "TYPE": "s"
   }
 }

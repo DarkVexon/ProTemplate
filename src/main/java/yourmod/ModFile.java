@@ -2,6 +2,7 @@ package yourmod;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.abstracts.CustomSavable;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
@@ -12,20 +13,15 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.localization.PotionStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.StanceStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import yourmod.cards.AbstractEasyCard;
 import yourmod.cards.cardvars.AbstractEasyDynamicVariable;
 import yourmod.potions.AbstractEasyPotion;
 import yourmod.relics.AbstractEasyRelic;
+import yourmod.specialmechanics.Horror;
 import yourmod.util.ProAudio;
+
 import java.nio.charset.StandardCharsets;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -36,7 +32,8 @@ public class ModFile implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        AddAudioSubscriber {
+        AddAudioSubscriber,
+        PostInitializeSubscriber {
 
     public static final String modID = "todomod"; //TODO: Change this.
 
@@ -100,8 +97,7 @@ public class ModFile implements
         return modID + "Resources/images/powers/" + resourcePath;
     }
 
-    public static String makeCharacterPath(String resourcePath)
-    {
+    public static String makeCharacterPath(String resourcePath) {
         return modID + "Resources/images/char/" + resourcePath;
     }
 
@@ -116,16 +112,16 @@ public class ModFile implements
     @Override
     public void receiveEditCharacters() {
         BaseMod.addCharacter(new CharacterFile(CharacterFile.characterStrings.NAMES[1], CharacterFile.Enums.THE_TODO),
-            CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
-        
+                CHARSELECT_BUTTON, CHARSELECT_PORTRAIT, CharacterFile.Enums.THE_TODO);
+
         new AutoAdd(modID)
-            .packageFilter(AbstractEasyPotion.class)
-            .any(AbstractEasyPotion.class, (info, potion) -> {
-                if (potion.pool == null)
-                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
-                else
-                    BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID, potion.pool);
-            });
+                .packageFilter(AbstractEasyPotion.class)
+                .any(AbstractEasyPotion.class, (info, potion) -> {
+                    if (potion.pool == null)
+                        BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID);
+                    else
+                        BaseMod.addPotion(potion.getClass(), potion.liquidColor, potion.hybridColor, potion.spotsColor, potion.ID, potion.pool);
+                });
     }
 
     @Override
@@ -147,9 +143,9 @@ public class ModFile implements
     @Override
     public void receiveEditCards() {
         new AutoAdd(modID)
-            .packageFilter(AbstractEasyDynamicVariable.class)
-            .any(DynamicVariable.class, (info, var) -> 
-                BaseMod.addDynamicVariable(var));
+                .packageFilter(AbstractEasyDynamicVariable.class)
+                .any(DynamicVariable.class, (info, var) ->
+                        BaseMod.addDynamicVariable(var));
         new AutoAdd(modID)
                 .packageFilter(AbstractEasyCard.class)
                 .setDefaultSeen(true)
@@ -185,5 +181,24 @@ public class ModFile implements
                 BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        initializeSaveData();
+    }
+
+    private void initializeSaveData() {
+        BaseMod.addSaveField("VexingHorror", new CustomSavable<Integer>() {
+            @Override
+            public Integer onSave() {
+                return Horror.horrorAmt;
+            }
+
+            @Override
+            public void onLoad(Integer integer) {
+                Horror.addHorror(integer);
+            }
+        });
     }
 }
