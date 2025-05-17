@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>UnimportantInfo</groupId>
 
-    <artifactId>TheTodo</artifactId>
+    <artifactId>TheReptomancer</artifactId>
     <version>0.0.1</version>
-    <name>The Todo</name>
-    <description>TODO: Change this description</description>
+    <name>The Reptomancer</name>
+    <description>Reptomancer</description>
     <!-- Change the above for mod information. -->
 
     <properties>
@@ -17,11 +17,11 @@
         <ModTheSpire.version>3.18.2</ModTheSpire.version>
 
         <!-- CHANGE THIS TO MATCH YOUR MODID FIELD IN THE MAIN TodoMod CLASS FILE -->
-        <ModID>todomod</ModID>
+        <ModID>reptomod</ModID>
         <!-- CHANGE THIS TO MATCH YOUR MODID FIELD IN THE MAIN TodoMod CLASS FILE -->
 
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
-        <Steam.path>C:/Program Files (x86)/Steam/steamapps/</Steam.path>
+        <Steam.path>D:/SteamLibrary/steamapps</Steam.path>
 
     </properties>
 
@@ -83,10 +83,10 @@
 
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/ReptoResources</directory>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/ReptoResources</directory>
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>${ModID}Resources/**/*.json</exclude>
@@ -94,7 +94,7 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/ReptoResources</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>ModTheSpire.json</include>

@@ -24,7 +24,7 @@ import yourmod.relics.TodoItem;
 
 import java.util.ArrayList;
 
-import static yourmod.CharacterFile.Enums.TODO_COLOR;
+import static yourmod.CharacterFile.Enums.REPTO_COLOR;
 import static yourmod.ModFile.*;
 
 public class CharacterFile extends CustomPlayer {
@@ -107,7 +107,7 @@ public class CharacterFile extends CustomPlayer {
 
     @Override
     public AbstractCard.CardColor getCardColor() {
-        return TODO_COLOR;
+        return REPTO_COLOR;
     }
 
     @Override
@@ -172,10 +172,10 @@ public class CharacterFile extends CustomPlayer {
     public static class Enums {
         //TODO: Change these.
         @SpireEnum
-        public static AbstractPlayer.PlayerClass THE_TODO;
-        @SpireEnum(name = "TODO_COLOR")
-        public static AbstractCard.CardColor TODO_COLOR;
-        @SpireEnum(name = "TODO_COLOR")
+        public static AbstractPlayer.PlayerClass THE_REPTO;
+        @SpireEnum(name = "THE_REPTO")
+        public static AbstractCard.CardColor REPTO_COLOR;
+        @SpireEnum(name = "REPTO_COLOR")
         @SuppressWarnings("unused")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
