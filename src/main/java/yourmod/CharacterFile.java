@@ -86,7 +86,7 @@ public class CharacterFile extends CustomPlayer {
             makeCharacterPath("mainChar/orb/layer2.png"),
             makeCharacterPath("mainChar/orb/layer3.png"),
             makeCharacterPath("mainChar/orb/layer4.png"),
-            makeCharacterPath("mainChar/orb/layer4.png"),
+            makeCharacterPath("mainChar/orb/layer5.png"),
             makeCharacterPath("mainChar/orb/layer6.png"),
             makeCharacterPath("mainChar/orb/layer1d.png"),
             makeCharacterPath("mainChar/orb/layer2d.png"),
